@@ -2,60 +2,82 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Painel Admin AgroDigital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - AgroDigital</title>
   <style>
     body {
-      background-color: #1d1d1d;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 50px;
-      text-align: center;
+      font-family: 'Inter', sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
-    h2 {
-      color: #FFD700;
+    .login-box {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,255,100,0.3);
     }
-    .section {
-      margin-top: 30px;
-    }
-    .section label {
-      display: block;
-      margin: 10px 0 5px;
-    }
-    .section input, .section textarea {
-      width: 300px;
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
+    h1 {
       margin-bottom: 20px;
+      color: #a8ff60;
     }
-    .save-button {
-      background-color: #28a745;
-      color: white;
-      padding: 12px 25px;
-      border: none;
+    input[type="password"] {
+      padding: 10px;
       border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
+      border: none;
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 1em;
     }
-    .save-button:hover {
-      background-color: #218838;
+    button {
+      background: #a8ff60;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h2>Painel do Administrador - AgroDigital 5.0</h2>
-
-  <div class="section">
-    <label for="progress">Atualizar progresso (% vendido):</label>
-    <input type="number" id="progress" placeholder="Ex: 45" />
+  <div class="login-box" id="login">
+    <h1>Admin AgroDigital</h1>
+    <input type="password" id="senha" placeholder="Digite a senha de acesso" />
+    <button onclick="verificarSenha()">Entrar</button>
   </div>
 
-  <div class="section">
-    <label for="status">Mensagem de status:</label>
-    <textarea id="status" placeholder="Ex: Em breve novidades..."></textarea>
+  <div id="painel" class="hidden">
+    <h1>Bem-vindo, Aguiar Jr.</h1>
+    <p>Painel de controle do projeto AgroDigital 5.0</p>
+    <ul>
+      <li><strong>Vendas atuais:</strong> 3200 tokens</li>
+      <li><strong>Lotes ativos:</strong> Lote 2 (3 BNB máx)</li>
+      <li><strong>Meta:</strong> 2.000.000 USD</li>
+      <li><strong>Link do contrato:</strong> <a href="https://bscscan.com/token/0x5903917b626b20700f896d080f379b6b28e4bdf6" target="_blank" style="color:#a8ff60;">ver contrato</a></li>
+    </ul>
+    <button onclick="alert('Função de liberação de novo lote em desenvolvimento')">Liberar novo lote</button>
   </div>
 
-  <button class="save-button" onclick="alert('Atualizado! (simulado)')">Salvar alterações</button>
+  <script>
+    const senhaCorreta = "agro2025";
+    function verificarSenha() {
+      const senha = document.getElementById('senha').value;
+      if (senha === senhaCorreta) {
+        document.getElementById('login').classList.add('hidden');
+        document.getElementById('painel').classList.remove('hidden');
+      } else {
+        alert("Senha incorreta!");
+      }
+    }
+  </script>
 </body>
 </html>
