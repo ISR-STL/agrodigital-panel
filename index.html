@@ -1,75 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AgroDigital 5.0™ | Invest in the Future</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: 'Inter', sans-serif;
-        background: linear-gradient(to bottom right, #0b1f14, #003d1e);
-        color: #fff;
-        padding: 2rem;
-      }
-      header {
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-      header h1 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #a4f996;
-      }
-      .section {
-        background-color: #0d2618;
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 0 12px rgba(0, 255, 130, 0.15);
-      }
-      .section h2 {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
-        color: #a4f996;
-      }
-      .chart-container {
-        max-width: 100%;
-        height: 300px;
-      }
-      .lang-switcher {
-        margin-top: 2rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        font-size: 0.9rem;
-      }
-      select {
-        padding: 0.5rem;
-        background-color: #001e11;
-        color: #fff;
-        border: 1px solid #00ff94;
-        border-radius: 8px;
-      }
-      footer {
-        margin-top: 3rem;
-        text-align: center;
-        font-size: 0.8rem;
-        color: #888;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>AgroDigital 5.0™</h1>
-      <p>Strategic Investor Dashboard</p>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#004d40">
+  <title>AgroDigital 5.0™ | Global Investor Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f1f1a;
+      color: #e0f2f1;
+    }
+    header {
+      background: #00382e;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #a5f4cb;
+      border-bottom: 3px solid #00bfa5;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .section {
+      background: #122923;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 10px rgba(0,255,200,0.05);
+    }
+    .section h2 {
+      color: #80cbc4;
+      margin-bottom: 1rem;
+    }
+    canvas {
+      width: 100% !important;
+      max-height: 300px;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 1.5rem;
+      background: #00382e;
+      color: #80cbc4;
+    }
+    select {
+      background: #00382e;
+      border: 1px solid #00bfa5;
+      color: white;
+      padding: 6px;
+      border-radius: 6px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    🚀 AgroDigital 5.0™ – Investor Intelligence
+  </header>
+  <div class="container">
+    <div class="section">
+      <h2>🌍 Real-time Crypto Comparison</h2>
+      <canvas id="cryptoChart"></canvas>
+    </div>
+    <div class="section">
+      <h2>📈 CornToken Valuation Projection</h2>
+      <canvas id="projectionChart"></canvas>
+    </div>
+    <div class="section">
+      <label for="lang">🌐 Language: </label>
+      <select id="lang">
+        <option value="en">English</option>
+        <option value="pt">Português</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
+  </div>
+  <footer>
+    Strategic financial panel for investors – AgroDigital 5.0™<br>
+    Charts are for educational purposes only. Projections are simulations and not financial guarantees.
+  </footer>
 
-    <section class="section">
-      <h2>
+  <script>
+    const cryptoChart = new Chart(
+      document.getElementById('cryptoChart'), {
+        type: 'bar',
+        data: {
+          labels: ['BNB', 'USDT', 'BTC', 'ETH', 'CornToken'],
+          datasets: [{
+            label: '30-day Change (%)',
+            data: [3.8, 1.1, 6.3, 5.2, 15.3],
+            backgroundColor: ['#fbc02d', '#4dd0e1', '#fb8c00', '#64b5f6', '#00e676']
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#cfd8dc' }, grid: { color: '#37474f' } },
+            x: { ticks: { color: '#cfd8dc' }, grid: { color: '#263238' } }
+          }
+        }
+      }
+    );
+
+    const projectionChart = new Chart(
+      document.getElementById('projectionChart'), {
+        type: 'line',
+        data: {
+          labels: ['Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+          datasets: [{
+            label: 'CornToken – Price Projection (USD)',
+            data: [0.1, 0.12, 0.18, 0.24, 0.32, 0.47],
+            borderColor: '#00e676',
+            borderWidth: 2,
+            fill: false,
+            tension: 0.3
+          }]
+        },
+        options: {
+          plugins: { legend: { labels: { color: '#a5f4cb' } } },
+          scales: {
+            y: { ticks: { color: '#cfd8dc' }, grid: { color: '#37474f' } },
+            x: { ticks: { color: '#cfd8dc' }, grid: { color: '#263238' } }
+          }
+        }
+      }
+    );
+  </script>
+</body>
+</html>
