@@ -1,84 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Pré-venda oficial do AgroDigital 5.0 - Token Utility para o agro do futuro."/>
   <title>Painel AgroDigital 5.0</title>
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f1114;
+      background-color: #121212;
       color: white;
+      font-family: 'Segoe UI', sans-serif;
       text-align: center;
-      padding: 30px 20px;
+      padding: 50px;
     }
     h1 {
-      font-size: 2.5em;
       color: #FFD700;
     }
-    p {
-      font-size: 1.2em;
-      margin: 20px 0;
-    }
-    .bar-container {
-      background-color: #333;
-      border-radius: 30px;
-      width: 90%;
-      max-width: 500px;
-      margin: 30px auto;
-      padding: 5px;
-    }
     .progress-bar {
-      background-color: #00ff99;
+      background-color: #00FFAA;
       height: 30px;
       width: 32%;
-      border-radius: 30px;
-      transition: width 0.5s;
+      border-radius: 15px;
+    }
+    .bar-container {
+      background-color: #444;
+      width: 300px;
+      height: 30px;
+      margin: 20px auto;
+      border-radius: 15px;
     }
     .cta-button {
-      background: #FFD700;
-      color: #000;
-      font-size: 1.2em;
+      background-color: #FFD700;
+      color: black;
       border: none;
       padding: 15px 30px;
-      border-radius: 10px;
-      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
-      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 20px;
     }
     .cta-button:hover {
-      background: #ffe65e;
+      background-color: #e0c000;
     }
     .info-links {
-      margin-top: 40px;
-      font-size: 0.95em;
-    }
-    .info-links a {
-      color: #00ffcc;
+      color: #00ffff;
       text-decoration: none;
+      display: block;
+      margin-top: 15px;
     }
-    .info-links a:hover {
+    .info-links:hover {
       text-decoration: underline;
     }
     .emoji {
       font-size: 1.5em;
+    }
+    .admin-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+    .admin-button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
   <h1>Painel AgroDigital 5.0</h1>
   <p>🌱 Conectando o agro ao futuro digital com segurança, utilidade e alta valorização!</p>
+
   <div class="bar-container">
-    <div class="progress-bar" style="width: 32%;"></div>
+    <div class="progress-bar"></div>
   </div>
-  <p>🚀 Unidades vendidas: <strong>32%</strong> de 100%</p>
-  <a class="cta-button" href="https://t.me/Prime_Access_VendasBot" target="_blank">Comprar Token Agora</a>
-  <div class="info-links">
-    <p>🔒 Ver contrato público: <a href="https://bscscan.com/token/0x5903917b626b20700f896d080f379b6b28e4bdf6" target="_blank">BscScan</a></p>
-    <p>🤖 Acesse nosso bot de vendas no Telegram: <a href="https://t.me/Prime_Access_VendasBot" target="_blank">@Prime_Access_VendasBot</a></p>
-    <p>🌐 Site multilíngue – detecta automaticamente seu idioma.</p>
-  </div>
+
+  <p class="emoji">🚀 Unidades vendidas: <strong>32%</strong> de 100%</p>
+
+  <a href="https://pancakeswap.finance" class="cta-button" target="_blank">Comprar Token Agora</a>
+
+  <p class="info-links">🔐 Ver contrato público: <a class="info-links" href="https://bscscan.com" target="_blank">BscScan</a></p>
+
+  <p class="info-links">🤖 Acesse nosso bot de vendas no Telegram:
+    <a class="info-links" href="https://t.me/Prime_Access_VendasBot" target="_blank">@Prime_Access_VendasBot</a>
+  </p>
+
+  <p class="info-links">🌐 Site multilíngue – detecta automaticamente seu idioma.</p>
+
+  <a class="admin-button" href="admin/index.html">Entrar como administrador</a>
 </body>
 </html>
