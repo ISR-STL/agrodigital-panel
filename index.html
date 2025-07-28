@@ -1,127 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgroDigital 5.0 - Painel de Investimento</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futuro AgroDigital</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      font-family: 'Inter', sans-serif;
       margin: 0;
-      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #0c1b1f, #1f4c3c);
       color: #fff;
     }
     header {
+      background: #101d26;
       padding: 20px;
       text-align: center;
-      background: rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 2px solid #15e38a;
     }
-    header h1 {
-      font-size: 2em;
-      font-weight: 800;
-      color: #a8ff60;
+    h1 {
+      margin: 0;
+      font-size: 1.8em;
     }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 10px;
+    .section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
     }
-    nav a {
-      color: #ffffffcc;
-      text-decoration: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      background-color: #a8ff60;
-      color: #000;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 30px auto;
+    .card {
+      background: #1d2d2f;
+      border-radius: 12px;
       padding: 20px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(0,255,100,0.2);
     }
-    .status-bar {
-      background: #222;
-      border: 1px solid #a8ff60;
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 20px;
+    .highlight {
+      color: #15e38a;
     }
-    .progress {
-      background: #444;
-      border-radius: 5px;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-    .progress div {
-      width: 32%;
-      background: #a8ff60;
-      height: 20px;
-      text-align: center;
-      color: #000;
-      font-weight: bold;
-    }
-    .cta {
-      text-align: center;
-      margin-top: 30px;
-    }
-    .cta button {
-      background: #a8ff60;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .cta button:hover {
-      transform: scale(1.05);
+    canvas {
+      max-width: 100%;
     }
     footer {
+      background: #0c1b1f;
+      padding: 20px;
       text-align: center;
       font-size: 0.9em;
-      padding: 20px;
-      margin-top: 40px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #aaa;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>🌾 AgroDigital 5.0</h1>
-    <nav>
-      <a href="#invest">Investir</a>
-      <a href="#tokens">Tokens</a>
-      <a href="#contrato">Contrato</a>
-      <a href="/admin/index.html">Admin</a>
-    </nav>
+    <h1>🚀 Futuro e Projeções – AgroDigital</h1>
   </header>
 
-  <div class="container">
-    <section class="status-bar">
-      <h2>Status da Pré-Venda</h2>
-      <div class="progress"><div>32%</div></div>
-      <p>🔥 Últimas 1.200 unidades disponíveis! Não perca.</p>
-    </section>
+  <div class="section">
+    <div class="card">
+      <h2>Por que investir agora?</h2>
+      <p>Estamos em um ponto de inflexão do setor agro e digital. O <span class="highlight">CORN TOKEN</span> está posicionado para capturar valor crescente nos próximos meses com base em dados do mercado, adoção e sustentabilidade.</p>
+    </div>
 
-    <section class="cta">
-      <p><strong>Lote atual:</strong> Máximo de 3 BNB por wallet</p>
-      <button onclick="window.location.href='https://t.me/Prime_Access_Vendasbot'">Comprar Agora</button>
-      <p><a href="https://bscscan.com/token/0x5903917b626b20700f896d080f379b6b28e4bdf6" target="_blank" style="color: #a8ff60;">🔗 Ver contrato na BscScan</a></p>
-    </section>
+    <div class="card">
+      <h2>Comparativo de Criptos em Tempo Real</h2>
+      <canvas id="cryptoChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>Projeção de valorização do CornToken</h2>
+      <canvas id="cornChart"></canvas>
+    </div>
   </div>
 
   <footer>
-    &copy; 2025 AgroDigital Holdings. Todos os direitos reservados.
+    Painel estratégico exclusivo para investidores – AgroDigital 5.0
   </footer>
+
+  <script>
+    const ctx1 = document.getElementById('cryptoChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['BNB', 'USDT', 'BTC', 'ETH', 'CornToken'],
+        datasets: [{
+          label: 'Variação 30 dias (%)',
+          data: [2.5, 0.8, 6.2, 5.1, 15.3],
+          backgroundColor: [
+            '#f3ba2f', '#26a17b', '#f7931a', '#627eea', '#15e38a'
+          ]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { mode: 'index', intersect: false }
+        }
+      }
+    });
+
+    const ctx2 = document.getElementById('cornChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: ['Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        datasets: [{
+          label: 'CornToken – Projeção de preço (USD)',
+          data: [0.1, 0.13, 0.18, 0.26, 0.33, 0.45],
+          borderColor: '#15e38a',
+          backgroundColor: 'rgba(21, 227, 138, 0.1)',
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: false
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
