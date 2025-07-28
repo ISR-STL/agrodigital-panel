@@ -1,106 +1,58 @@
-<!--
-  index.html vFinal - AgroDigital 5.0™
-  Versão com layout premium, segurança máxima, integração com Web3, acesso PWA e área administrativa furtiva
-  Autor: Cael AI | Holding PulsePlay™
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#083c27" />
-  <meta name="description" content="AgroDigital5.0™ | InvestTokens™ | Plataforma global para investidores com segurança, inovação e acesso VIP." />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="/assets/investtokens-icon.png" type="image/png" />
-  <title>AgroDigital 5.0™ - Investimentos e Governança Digital</title>
+  <title>AgroDigital 5.0™</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
   <script defer src="app.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
 </head>
 <body>
-  <!-- HEADER E LOGO -->
-  <header class="header">
-    <div class="logo-container">
-      <img src="/assets/investtokens-logo.png" alt="InvestTokens Logo" class="logo" />
-      <span class="title">AgroDigital 5.0™</span>
-    </div>
-    <div class="language-selector">
-      <select id="lang-switch">
-        <option value="en">English</option>
+  <header>
+    <img src="assets/investtokens-logo.png" alt="InvestTokens Logo" class="logo" />
+    <nav>
+      <select id="language-switcher">
+        <option value="en" selected>English</option>
         <option value="pt">Português</option>
         <option value="es">Español</option>
       </select>
-    </div>
+    </nav>
   </header>
 
-  <!-- HERO / SLOGAN -->
-  <section class="hero">
-    <h1>Where Agri meets Future.</h1>
-    <p>Secure. Smart. Sustainable. Join the digital agro-investment revolution.</p>
-  </section>
+  <main>
+    <section class="hero">
+      <h1>Where Agri meets Future.</h1>
+      <p>Secure. Smart. Sustainable. Join the digital agro-investment revolution.</p>
+    </section>
 
-  <!-- GRÁFICO COMPARATIVO + PROJEÇÕES (com disclaimer jurídico) -->
-  <section class="charts-section">
-    <h2>📊 CornToken Market Trends</h2>
-    <div class="chart-wrapper">
-      <canvas id="comparativeChart"></canvas>
-      <canvas id="projectionChart"></canvas>
-    </div>
-    <small class="disclaimer">
-      *The values presented here are projections based on historical and simulated market behavior. No investment is guaranteed.
-    </small>
-  </section>
+    <section class="dashboard">
+      <h2>CornToken Market Trends</h2>
+      <canvas id="cornChart"></canvas>
+    </section>
 
-  <!-- ABAS NAVEGAÇÃO PRINCIPAL -->
-  <nav class="tabs">
-    <a href="#future" class="tab-btn">Future & Projections</a>
-    <a href="#partners" class="tab-btn">Marketplace</a>
-    <a href="#esg" class="tab-btn">Governance & ESG</a>
-    <a href="#vip" class="tab-btn">VIP Access</a>
-  </nav>
+    <section class="sections">
+      <div class="section-card">
+        <h3>📈 Projected Valuation</h3>
+        <p>Projections based on simulated market behavior. No investment is guaranteed.</p>
+      </div>
+      <div class="section-card">
+        <h3>🤝 Partner Marketplace</h3>
+        <p>Apply to promote your certified ESG/AgTech service to our investors. Token-based royalties apply.</p>
+      </div>
+      <div class="section-card">
+        <h3>🌱 Governance & ESG</h3>
+        <p>In alignment with UN/ISO14001. Blockchain traceability and regenerative farming incentives.</p>
+      </div>
+      <div class="section-card">
+        <h3>👑 VIP Pre-Sale Access</h3>
+        <p>Join our club. Priority access, early entry, and exclusive voting rights.</p>
+      </div>
+    </section>
 
-  <!-- ABA: FUTURO E PROJEÇÕES -->
-  <section id="future" class="section-block">
-    <h3>📈 Projected Valuation</h3>
-    <p>We are at a key inflection point for digital agri-assets. CornToken aims to lead growth in decentralized agrotech through real-world adoption, data-driven governance and carbon accountability.</p>
-  </section>
-
-  <!-- ABA: MARKETPLACE DE PARCEIROS -->
-  <section id="partners" class="section-block">
-    <h3>🤝 Partner Marketplace</h3>
-    <p>Promote your business or service to our investor base. Token-based royalties and access fees apply. Select slots are available for certified ESG/Carbon/AgTech partners only.</p>
-  </section>
-
-  <!-- ABA: GOVERNANÇA ESG -->
-  <section id="esg" class="section-block">
-    <h3>♻️ Governance & ESG</h3>
-    <p>We actively seek alignment with UN Global Compact, ISO 14001 and ESG sustainability standards. Our platform prioritizes transparency, regenerative farming, and blockchain traceability.</p>
-  </section>
-
-  <!-- VIP ACCESS FORMULÁRIO -->
-  <section id="vip" class="section-block vip-area">
-    <h3>🎯 VIP Pre-Sale Access</h3>
-    <p>Join our private investor club and unlock premium opportunities, early access and priority governance rights.</p>
-    <button onclick="connectWallet()" class="wallet-btn">Connect Wallet</button>
-    <p class="note">Metamask or Web3-compatible wallet required for verification.</p>
-  </section>
-
-  <!-- ÁREA FURTIVA ADMIN -->
-  <footer class="footer">
-    <a href="/adm-panel.html" class="admin-link" title="Restricted Access">Admin</a>
-    <p>© 2025 AgroDigital5.0™ & InvestTokens™ – All rights reserved.</p>
-  </footer>
-
-  <!-- SCRIPTS E CONEXÃO METAMASK -->
-  <script>
-    async function connectWallet() {
-      if (window.ethereum) {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        alert('Wallet connected: ' + accounts[0]);
-      } else {
-        alert('Please install MetaMask or a compatible wallet to proceed.');
-      }
-    }
-  </script>
+    <footer>
+      <p>AgroDigital 5.0™ | All rights reserved</p>
+    </footer>
+  </main>
 </body>
 </html>
