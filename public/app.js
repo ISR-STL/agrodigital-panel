@@ -1,13 +1,20 @@
-// Função de login admin
+// ============================
+// PAINEL ADMIN - AGRODIGITAL5.0™
+// ============================
+
+// Lista de senhas de administradores
+const adminPasswords = ["Agro@2025!", "OutroAdmin123"]; // Pode adicionar mais senhas
+
 function openAdmin() {
   const senha = prompt("Digite a senha de acesso:");
-  // Lista de senhas de administradores (permite múltiplos admins)
-  const adminPasswords = ["Agro@2025!", "OutroAdmin123"]; // Inclua outras senhas se quiser
+  if (!senha) return; // Usuário cancelou
 
-  // Check sem espaços e case sensitive
-  if (adminPasswords.includes(senha)) {
-    // Sucesso: redireciona para o painel admin (ajuste o caminho se necessário)
-    window.location.href = "/admin-panel.html";
+  // Remove espaços extras e faz comparação segura
+  const senhaLimpa = senha.trim();
+
+  if (adminPasswords.includes(senhaLimpa)) {
+    // Sucesso: redireciona para o painel admin
+    window.location.href = "admin-panel.html";
   } else {
     alert("Acesso negado.");
   }
