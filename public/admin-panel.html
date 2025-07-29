@@ -1,31 +1,183 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin - AgroDigital5.0™</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <title>AgroDigital5.0™ – Painel ADM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#002233">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    body {
+      background: #001a33;
+      color: #f0f4f8;
+    }
+    .card { border-radius: 18px; box-shadow: 0 2px 16px 0 #0004; }
+    .navbar { border-radius: 0 0 22px 22px; }
+    .ai-support { position: fixed; bottom: 25px; right: 25px; z-index: 99; }
+    .modal-content { background: #15223a; color: #eaf2fb; border-radius: 16px; }
+    .furtivo-btn { opacity: 0; width: 180px; height: 38px; position: absolute; top: 4px; left: 12px; cursor: pointer; z-index: 99;}
+    .form-control { border-radius: 10px; }
+    .btn { border-radius: 10px; }
+    .bg-dark { background: #0e1d31!important; }
+    .flag-btn { background: none; border: none; padding: 0 2px; }
+    .flag-btn img { width: 30px; border-radius: 6px; }
+    #loginArea, #forgotArea { display: none; }
+    .admin-title { font-size: 2.2rem; font-weight: 700; letter-spacing: 0.4px; }
+    .small-stat { font-size: 1.1rem; font-weight: 600; }
+  </style>
 </head>
-<body style="background:#101c2c;color:#fff;">
-  <header style="padding:14px 22px;background:#0e2238;">
-    <span style="font-weight:bold;font-size:1.3em;">Painel do Administrador – AgroDigital5.0™</span>
-    <button onclick="window.location.href='index.html'" style="float:right;padding:6px 18px;border-radius:6px;border:none;background:#16f7ba;color:#002233;font-weight:600;">Dashboard Público</button>
-  </header>
-  <main style="max-width:900px;margin:40px auto 0;">
-    <h2 style="color:#19f7c6;">Operações e Gestão Executiva</h2>
-    <ul>
-      <li>Monitoramento de vendas de tokens (realtime)</li>
-      <li>Gestão de vaults, tesouraria, fundos</li>
-      <li>Governança, listagem de parceiros, auditorias</li>
-      <li>Automação de campanhas com Bot Cael</li>
-      <li>Configuração de contratos/token/NFT/marketplace</li>
-      <li>API Key, OpenAI, integração Telegram</li>
-    </ul>
-    <!-- Custom fields, status, relatórios dinâmicos aqui... -->
-    <section>
-      <h3 style="color:#fa9;">Central de Controle ADM</h3>
-      <!-- ... conteúdo -->
+<body>
+  <!-- NAVBAR EXECUTIVO -->
+  <nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between align-items-center position-relative">
+    <div style="position: relative;">
+      <span class="navbar-brand mb-0 h1" id="logoTitle">AgroDigital5.0™ ADM</span>
+      <!-- Botão Furtivo Invisível -->
+      <button class="furtivo-btn" ondblclick="showLoginPanel()"></button>
+    </div>
+    <div>
+      <button class="flag-btn" onclick="changeLang('en')" title="English"><span class="fi fi-us fis"></span></button>
+      <button class="flag-btn" onclick="changeLang('pt')" title="Português"><span class="fi fi-br fis"></span></button>
+      <button class="flag-btn" onclick="changeLang('es')" title="Español"><span class="fi fi-es fis"></span></button>
+      <span class="badge bg-primary" id="currentLang">EN</span>
+    </div>
+  </nav>
+
+  <!-- PAINEL ADMIN PRINCIPAL -->
+  <main class="container py-5">
+    <section class="text-center mb-4">
+      <h1 class="admin-title" id="mainTitle">Painel Administrativo – AgroDigital5.0™</h1>
+      <p id="mainDesc">Gestão, BI, Vendas, Saques e Governança Global</p>
     </section>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card p-3 text-center">
+          <h5><i class="bi bi-bar-chart-fill"></i> Vendas 24h</h5>
+          <div id="statSalesDay" class="small-stat text-success">0</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 text-center">
+          <h5><i class="bi bi-wallet2"></i> Volume (USD)</h5>
+          <div id="statVolume" class="small-stat text-info">$0.00</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 text-center">
+          <h5><i class="bi bi-people-fill"></i> Novos Investidores</h5>
+          <div id="statInvestors" class="small-stat text-warning">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mt-3">
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h5><i class="bi bi-bar-chart-steps"></i> Progresso de Captação</h5>
+          <div class="progress" style="height:22px;">
+            <div id="progressBar" class="progress-bar progress-bar-striped bg-success" style="width:10%;font-weight:700;">10%</div>
+          </div>
+          <div class="mt-2 text-muted small">
+            <span id="capNow">US$ 10.000</span> arrecadados de <b id="capGoal">US$ 100.000</b>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h5><i class="bi bi-cash-stack"></i> Controle de Saques</h5>
+          <button class="btn btn-outline-warning w-100 mb-2" onclick="alert('Função em desenvolvimento.')"><i class="bi bi-arrow-up-circle"></i> Ver Saques/Vaults</button>
+          <button class="btn btn-outline-success w-100" onclick="alert('Função em desenvolvimento.')"><i class="bi bi-currency-exchange"></i> Relatório Financeiro</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mt-3">
+      <div class="col-md-12">
+        <div class="card p-3">
+          <h5><i class="bi bi-tools"></i> Ações Rápidas</h5>
+          <button class="btn btn-info me-2" onclick="alert('Painel de clientes em desenvolvimento.')"><i class="bi bi-people"></i> Ver Clientes</button>
+          <button class="btn btn-primary me-2" onclick="alert('Módulo IA ativado!')"><i class="bi bi-robot"></i> Ativar IA Cael</button>
+          <button class="btn btn-dark" onclick="alert('Integração API Key OpenAI!')"><i class="bi bi-key"></i> API OpenAI</button>
+        </div>
+      </div>
+    </div>
   </main>
+
+  <!-- MODAL LOGIN ADM (Furtivo) -->
+  <div id="loginArea" class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex justify-content-center align-items-center" style="z-index:1999;">
+    <div class="modal-content" style="max-width:340px;margin:auto;">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100 text-center">Login ADM</h5>
+        <button type="button" class="btn-close btn-close-white" onclick="closeLoginPanel()"></button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="event.preventDefault(); loginAdmin();">
+          <input id="admEmail" class="form-control mb-2" type="email" placeholder="E-mail administrativo" required>
+          <input id="admSenha" class="form-control mb-2" type="password" placeholder="Senha de acesso" required>
+          <div class="d-flex justify-content-between align-items-center">
+            <button class="btn btn-success" type="submit"><i class="bi bi-person-check"></i> Entrar</button>
+            <a href="#" onclick="showForgotPanel();return false;" class="small text-info">Recuperar senha</a>
+          </div>
+        </form>
+        <div id="admLoginMsg" class="text-danger small mt-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ESQUECEU SENHA ADM -->
+  <div id="forgotArea" class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex justify-content-center align-items-center" style="z-index:2999;">
+    <div class="modal-content" style="max-width:340px;margin:auto;">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100 text-center">Recuperar Senha ADM</h5>
+        <button type="button" class="btn-close btn-close-white" onclick="closeForgotPanel()"></button>
+      </div>
+      <div class="modal-body">
+        <input id="forgotEmail" class="form-control mb-2" type="email" placeholder="Digite seu e-mail" required>
+        <button class="btn btn-primary w-100" onclick="recoverPassword()">Enviar link de recuperação</button>
+        <div id="forgotMsg" class="text-success small mt-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center mt-5 mb-2 small">
+    <hr>
+    <span>©️ 2025 AgroDigital5.0™ – Painel ADM. All Rights Reserved.</span>
+    <br><span class="text-danger">Anti-plagiarism: All content digitally protected.</span>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Botão Furtivo ADM - Duplo clique ativa login
+    function showLoginPanel() { document.getElementById('loginArea').style.display = 'flex'; }
+    function closeLoginPanel() { document.getElementById('loginArea').style.display = 'none'; }
+    function showForgotPanel() { closeLoginPanel(); document.getElementById('forgotArea').style.display = 'flex'; }
+    function closeForgotPanel() { document.getElementById('forgotArea').style.display = 'none'; showLoginPanel();}
+    function loginAdmin() {
+      document.getElementById('admLoginMsg').innerText = "Acesso restrito – login ADM liberado para fundadores.";
+    }
+    function recoverPassword() {
+      document.getElementById('forgotMsg').innerText = "Se este e-mail estiver cadastrado, enviaremos o link de recuperação.";
+    }
+
+    // Simulação de estatísticas (use integração Airtable, API, etc)
+    document.getElementById('statSalesDay').innerText = '312';
+    document.getElementById('statVolume').innerText = '$98,650.00';
+    document.getElementById('statInvestors').innerText = '79';
+    document.getElementById('progressBar').style.width = '60%';
+    document.getElementById('progressBar').innerText = '60%';
+    document.getElementById('capNow').innerText = 'US$ 60.000';
+
+    // Multi-idioma (EN/PT/ES) só para títulos/padrão, pode expandir para todos os labels
+    const translations = {
+      en:{mainTitle:"Admin Panel – AgroDigital5.0™",mainDesc:"Management, BI, Sales, Withdrawals and Global Governance"},
+      pt:{mainTitle:"Painel Administrativo – AgroDigital5.0™",mainDesc:"Gestão, BI, Vendas, Saques e Governança Global"},
+      es:{mainTitle:"Panel Administrativo – AgroDigital5.0™",mainDesc:"Gestión, BI, Ventas, Retiros y Gobernanza Global"}
+    };
+    function setLang(lang){const t=translations[lang]||translations['en'];for(const key in t){const el=document.getElementById(key);if(el)el.innerText=t[key];}if(document.getElementById("currentLang"))document.getElementById("currentLang").innerText=lang.toUpperCase();localStorage.setItem('lang',lang);}
+    function changeLang(lang){setLang(lang);}
+    document.addEventListener('DOMContentLoaded',()=>{let lang=localStorage.getItem('lang')||'en';setLang(lang);});
+  </script>
 </body>
 </html>
