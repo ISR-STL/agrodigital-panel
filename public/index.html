@@ -1,49 +1,98 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgroDigital 5.0 | InvestTokens</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="admin-style.css">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="logo-3d.png" type="image/png">
+  <title>Painel Administrativo | AgroDigital 5.0™</title>
+  <link rel="stylesheet" href="/assets/css/admin-style.css" />
+  <script src="/assets/js/cael-inteligencia.js" defer></script>
 </head>
 <body>
   <header class="topbar">
-    <img src="investtokens-logo.png" alt="InvestTokens Logo" height="50">
-    <h1>AgroDigital 5.0 - Intelligence & Investment Panel</h1>
+    <h1>🌿 AgroDigital 5.0™ - Intelligence & Investment</h1>
+    <div class="lang-switch">
+      <button onclick="switchLang('pt')">🇧🇷</button>
+      <button onclick="switchLang('en')">🇺🇸</button>
+    </div>
   </header>
 
-  <main>
-    <section class="intro">
-      <h2>Bem-vindo ao Painel Oficial AgroDigital 5.0</h2>
-      <p>Gerencie seus investimentos com inteligência, transparência e automação em tempo real.</p>
+  <nav class="sidebar">
+    <ul>
+      <li><a href="#bi">📊 Painel BI</a></li>
+      <li><a href="#vaults">🔐 Vaults</a></li>
+      <li><a href="#market">📈 Inteligência de Mercado</a></li>
+      <li><a href="#funds">💼 Estratégia de Fundos</a></li>
+      <li><a href="#leads">🤝 Leads & Investidores</a></li>
+      <li><a href="#security">🔒 Segurança & Autenticação</a></li>
+      <li><a href="#config">⚙️ Configurações</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+    <section id="bi">
+      <h2>Visão Geral e Inteligência de Dados</h2>
+      <div id="bi-dashboard">
+        <!-- Lucro líquido, previsão, entradas e saídas, ganhos por hora -->
+      </div>
     </section>
 
-    <section class="painel">
-      <div id="cael-inteligente"></div>
-      <script src="cael-inteligencia.js"></script>
+    <section id="vaults">
+      <h2>Controle de Vaults</h2>
+      <div id="vault-status">
+        <!-- Leitura em tempo real + retirada automática -->
+      </div>
     </section>
 
-    <section class="vaults">
-      <h3>Status dos Vaults</h3>
-      <pre id="vaults-container"></pre>
-      <script src="vaults.json" type="application/json"></script>
+    <section id="market">
+      <h2>Insights de Mercado & Commodities</h2>
+      <canvas id="chart-market"></canvas>
+      <div id="suggestions">
+        <!-- Sugestões da IA de onde aplicar, baseado no comportamento de mercado -->
+      </div>
     </section>
 
-    <section class="bi">
-      <h3>Dados de Inteligência de Mercado</h3>
-      <pre id="bi-container"></pre>
-      <script src="bi.json" type="application/json"></script>
+    <section id="funds">
+      <h2>Gestão de Fundos & Aplicações</h2>
+      <p><strong>IA Cael:</strong> Divisão recomendada em staking, stablecoins, reinvestimento e segurança.</p>
+      <p>💡 Onde aplicar os lucros? IA analisa automaticamente e sugere baseado nos dados do BI.</p>
+    </section>
+
+    <section id="leads">
+      <h2>Leads & Parceiros Estratégicos</h2>
+      <div id="leads-data">
+        <!-- Airtable + IA Cael análise preditiva e mapeamento de oportunidades -->
+      </div>
+    </section>
+
+    <section id="security">
+      <h2>Autenticação & Segurança</h2>
+      <ul>
+        <li>🔐 Autenticação por senha personalizada</li>
+        <li>🔍 Planejado: Face ID via Apple (Safari)</li>
+        <li>📍 Geolocalização dos acessos (para análise de expansão)</li>
+        <li>🧠 IA identifica comportamento dos usuários e alerta oportunidades</li>
+      </ul>
+    </section>
+
+    <section id="config">
+      <h2>Configurações do Sistema</h2>
+      <form>
+        <label>Senha do Administrador:</label>
+        <input type="password" value="admin123" />
+        <button>Salvar</button>
+      </form>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 AgroDigital 5.0 • Powered by InvestTokens & Cael AI</p>
-  </footer>
+  <div id="cael-assistente">
+    <button onclick="toggleCael()">🤖 Ativar IA Cael</button>
+    <div class="cael-box" style="display: none;">
+      <p>Bem-vindo Aguiar Jr. Deseja previsão de investimento ou relatório de leads?</p>
+    </div>
+  </div>
 
-  <script src="app.js"></script>
+  <footer>
+    <p>AgroDigital5.0™ | ESG | Inovação | IA de Impacto Global 🌎</p>
+  </footer>
 </body>
 </html>
