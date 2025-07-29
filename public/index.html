@@ -2,95 +2,163 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgroDigital 5.0™ – Global ESG Panel</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="admin-style.css">
-  <script src="cael-inteligencia.js" defer></script>
-  <script src="app.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroDigital 5.0™ – Intelligence & Global ESG</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <style>
+    body {
+      background-color: #0a192f;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .lang-switch button {
+      margin: 5px;
+      background-color: transparent;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    section {
+      margin-top: 2rem;
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    #adminChat {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <h1 data-lang-en="AgroDigital 5.0™ – Intelligence & Investment" data-lang-pt="AgroDigital 5.0™ – Inteligência & Investimento" data-lang-es="AgroDigital 5.0™ – Inteligencia e Inversión">
-      AgroDigital 5.0™ – Intelligence & Investment
-    </h1>
+  <header>
+    <h1 data-lang-en="🌿 AgroDigital 5.0™ – Global ESG & AI Panel">🌿 AgroDigital 5.0™ – Global ESG & AI Panel</h1>
     <div class="lang-switch">
-      <button onclick="switchLang('en')">🇺🇸 EN</button>
-      <button onclick="switchLang('pt')">🇧🇷 PT</button>
-      <button onclick="switchLang('es')">🇪🇸 ES</button>
+      <button onclick="switchLang('en')">EN 🇺🇸</button>
+      <button onclick="switchLang('pt')">PT 🇧🇷</button>
+      <button onclick="switchLang('es')">ES 🇪🇸</button>
+      <button onclick="switchLang('fr')">FR 🇫🇷</button>
+      <button onclick="switchLang('zh')">ZH 🇨🇳</button>
+      <button onclick="switchLang('ja')">JA 🇯🇵</button>
     </div>
   </header>
 
-  <nav class="sidebar">
-    <ul>
-      <li><a href="#bi" data-lang-en="📊 BI Dashboard" data-lang-pt="📊 Painel BI" data-lang-es="📊 Panel BI">📊 BI Dashboard</a></li>
-      <li><a href="#vaults" data-lang-en="🔐 Vaults" data-lang-pt="🔐 Cofres" data-lang-es="🔐 Bóvedas">🔐 Vaults</a></li>
-      <li><a href="#market" data-lang-en="📈 Market Intelligence" data-lang-pt="📈 Inteligência de Mercado" data-lang-es="📈 Inteligencia de Mercado">📈 Market Intelligence</a></li>
-      <li><a href="#funds" data-lang-en="💼 Fund Strategy" data-lang-pt="💼 Estratégia de Fundos" data-lang-es="💼 Estrategia de Fondos">💼 Fund Strategy</a></li>
-      <li><a href="#nft" data-lang-en="🎨 NFT Contracts" data-lang-pt="🎨 Contratos NFT" data-lang-es="🎨 Contratos NFT">🎨 NFT Contracts</a></li>
-      <li><a href="#donate" data-lang-en="🌱 Amazon Donations" data-lang-pt="🌱 Doações Amazônia" data-lang-es="🌱 Donaciones Amazonía">🌱 Amazon Donations</a></li>
-      <li><a href="#chat" data-lang-en="💬 Admin Chat" data-lang-pt="💬 Chat com Admin" data-lang-es="💬 Chat con Admin">💬 Admin Chat</a></li>
-    </ul>
-  </nav>
+  <section id="dashboard">
+    <h2>📈 Real-Time Intelligence & ESG Metrics</h2>
+    <canvas id="esgChart"></canvas>
+  </section>
 
-  <main class="content">
-    <section id="bi">
-      <h2>📊 Overview & Data Intelligence</h2>
-      <p>Real-time performance indicators and forecasts driven by Cael AI.</p>
-    </section>
+  <section id="vaults">
+    <h2>🔐 Smart Vaults & Fund Management</h2>
+    <p>AI-driven automatic allocation and security with multisig authentication.</p>
+    <button onclick="connectWallet()">🔗 Connect Wallet</button>
+    <p id="walletStatus"></p>
+  </section>
 
-    <section id="vaults">
-      <h2>🔐 Vault Management</h2>
-      <p>Secure, automated, and auditable vaults with smart AI-based fund reallocation.</p>
-    </section>
+  <section id="nfts">
+    <h2>🖼️ ESG & Impact NFTs</h2>
+    <button onclick="mintNFT()">Mint ESG NFT</button>
+  </section>
 
-    <section id="market">
-      <h2>📈 Market & Commodity Insights</h2>
-      <p>Live feed on soy, corn, cotton, carbon credits, and ESG token prices.</p>
-    </section>
+  <section id="donations">
+    <h2>🌱 Amazon Rainforest Donations</h2>
+    <button onclick="donate()">Donate & Receive NFT</button>
+  </section>
 
-    <section id="funds">
-      <h2>💼 Fund Strategy & Multichain</h2>
-      <p>Unit-based token sales, AI investment paths, auto-allocation by risk level, and multichain NFT/token launcher.</p>
-    </section>
+  <section id="tokens">
+    <h2>💰 Token Sales & Real-Time Tracker</h2>
+    <p>Units Sold: <span id="unitsSold">0</span></p>
+    <button onclick="buyToken()">Buy Token Now</button>
+  </section>
 
-    <section id="nft">
-      <h2>🎨 NFT & Asset Contracts</h2>
-      <p>Upload ABI, launch NFTs, monitor rarity, and enable global traceability.</p>
-    </section>
+  <section id="domain">
+    <h2>🌐 Domain Rental for Global Investors</h2>
+    <button onclick="rentDomain()">Rent Domain</button>
+  </section>
 
-    <section id="donate">
-      <h2>🌱 Amazon Donations + Impact Fund</h2>
-      <p>Support sustainable farms and rain forest preservation. Donations transparently tracked and managed by IA.</p>
-    </section>
-
-    <section id="chat">
-      <h2>💬 Admin AI Chat</h2>
-      <p>Issue commands, request tasks, and control the dashboard via live interaction with Cael (with push notifications).</p>
-      <button onclick="startCaelChat()">Start Chat</button>
-    </section>
-  </main>
-
-  <footer>
-    <p>© AgroDigital 5.0™ | ESG | AI | DAO | Protected by TM & Cael SecurityBot</p>
-    <p><small>Remote update active | PWA ready | Web3 login (MetaMask, Binance, Crypto.com)</small></p>
-  </footer>
+  <img id="adminChat" src="https://img.icons8.com/color/48/chatbot.png" alt="Cael AI Chat" onclick="openAdminChat()"/>
 
   <script>
     function switchLang(lang) {
-      const elements = document.querySelectorAll('[data-lang-' + lang + ']');
-      elements.forEach(el => {
-        const content = el.getAttribute(`data-lang-${lang}`);
-        if (content) el.textContent = content;
-      });
+      alert('Language switched to: ' + lang);
     }
 
-    function startCaelChat() {
-      alert("🧠 Cael AI is connecting... Please wait.");
-      // Aqui você pode acionar a IA com WebSocket ou chamada REST
+    async function connectWallet() {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          document.getElementById('walletStatus').innerText = 'Connected: ' + accounts[0];
+        } catch (error) {
+          alert('Connection rejected!');
+        }
+      } else {
+        alert('MetaMask is not installed.');
+      }
     }
+
+    function mintNFT() {
+      alert('ESG Impact NFT minted successfully!');
+    }
+
+    function donate() {
+      alert('Thank you for your donation! Your NFT is on its way.');
+    }
+
+    let units = 0;
+    function buyToken() {
+      units += 1;
+      document.getElementById('unitsSold').innerText = units;
+      alert('Token purchased successfully!');
+    }
+
+    function rentDomain() {
+      alert('Domain rented successfully to global partner!');
+    }
+
+    function openAdminChat() {
+      alert('Admin stealth mode activated.');
+    }
+
+    const ctx = document.getElementById('esgChart').getContext('2d');
+    const esgChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'ESG Impact',
+          data: [12, 19, 3, 5, 2, 3],
+          borderColor: '#4caf50',
+          backgroundColor: 'rgba(76, 175, 80, 0.1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   </script>
 </body>
 
