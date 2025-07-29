@@ -2,27 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Panel - AgroDigital5.0™</title>
+  <title>Admin Panel – AgroDigital5.0™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101f33">
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="admin-style.css">
+  <style>
+    body { background: #101f33; color: #fff; }
+    .admin-header { text-align: center; margin-top: 40px; }
+    .admin-card { background: #182844; border-radius: 15px; padding: 32px 24px; margin-bottom: 32px; }
+    .nav-btn { margin-bottom: 20px; }
+    .admin-section { margin-top: 35px; }
+    .footer { text-align: center; color: #aaa; margin-top: 60px; font-size: 13px;}
+    .back-btn { position: absolute; top: 25px; left: 25px; }
+    .logout-btn { position: absolute; top: 25px; right: 25px; }
+    .faceid-btn { margin: 20px 0; display: block; width: 100%; }
+    @media (max-width: 600px) {
+      .admin-card { padding: 16px 6px; }
+    }
+  </style>
 </head>
-<body class="bg-dark text-white">
-  <div class="container mt-5">
-    <h1>Painel do Administrador</h1>
-    <p>Bem-vindo ao cockpit da AgroDigital5.0™</p>
-    <hr>
-    <button class="btn btn-primary" onclick="window.location.href='index.html'">Voltar para Home</button>
-    <!-- Aqui você pode adicionar as funções administrativas, gráficos, dashboards, gestão de leads, vaults etc. -->
-    <div class="mt-4">
-      <h3>Funções Administrativas</h3>
-      <ul>
-        <li>Visualizar vendas e leads</li>
-        <li>Controle de pré-venda e tokens</li>
-        <li>Gerenciar vaults e fluxos financeiros</li>
-        <li>Painel de analytics e relatórios</li>
-        <li>(Personalize este painel com suas necessidades)</li>
-      </ul>
+<body>
+  <button class="btn btn-outline-light back-btn" onclick="window.location.href='index.html'"><i class="bi bi-arrow-left"></i> Dashboard</button>
+  <button class="btn btn-outline-danger logout-btn" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</button>
+
+  <div class="container">
+    <div class="admin-header">
+      <h1><i class="bi bi-person-lock"></i> Painel do Administrador</h1>
+      <p>Bem-vindo ao cockpit global da <strong>AgroDigital5.0™</strong></p>
+      <button class="btn btn-secondary faceid-btn" onclick="faceIDLogin()"><i class="bi bi-person-bounding-box"></i> Login com Face ID</button>
+    </div>
+    <div class="admin-card mt-4">
+      <h4><i class="bi bi-bar-chart-steps"></i> Visão Geral</h4>
+      <div class="row text-center mt-4 mb-2">
+        <div class="col-md-4 mb-3">
+          <div class="card bg-dark text-success p-3">
+            <h5><i class="bi bi-currency-bitcoin"></i> Tokens Vendidos</h5>
+            <span id="tokensSold" style="font-size:2rem;">0</span>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card bg-dark text-info p-3">
+            <h5><i class="bi bi-cash-coin"></i> Volume Financeiro</h5>
+            <span id="volumeTotal" style="font-size:2rem;">$0.00</span>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card bg-dark text-warning p-3">
+            <h5><i class="bi bi-person-lines-fill"></i> Novos Leads</h5>
+            <span id="leadsCount" style="font-size:2rem;">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-card admin-section">
+      <h4><i class="bi bi-gear"></i> Operações & Acesso Rápido</h4>
+      <div class="d-grid gap-3">
+        <button class="btn btn-outline-primary" onclick="window.location.href='index.html'"><i class="bi bi-house"></i> Painel do Cliente</button>
+        <button class="btn btn-outline-success" onclick="window.location.href='pre-sale.html'"><i class="bi bi-coin"></i> Pré-venda de Tokens</button>
+        <button class="btn btn-outline-info" onclick="window.location.href='marketplace.html'"><i class="bi bi-people"></i> Marketplace de Parceiros</button>
+        <button class="btn btn-outline-warning" onclick="window.location.href='governance.html'"><i class="bi bi-bank2"></i> Governança & ESG</button>
+        <button class="btn btn-outline-light" onclick="window.location.href='analytics.html'"><i class="bi bi-graph-up"></i> Analytics & Relatórios</button>
+        <button class="btn btn-outline-secondary" onclick="window.location.href='vaults.html'"><i class="bi bi-safe"></i> Vaults & Fluxos Financeiros</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <hr>
+      <span>©️ 2025 AgroDigital5.0™ – Admin Panel | All Rights Reserved.</span>
+      <br>
+      <span>PWA Ready • Multi-admin • Secure • Futuristic</span>
     </div>
   </div>
+  <script>
+    // Multi-admin: configure até 2 admins!
+    const adminUsers = [
+      { user: "admin1", pass: "Agro@2025!" },
+      { user: "admin2", pass: "Digital#2026" }
+    ];
+    // Simulação dos indicadores – Substitua pelos dados reais via API
+    document.getElementById('tokensSold').innerText = "312";
+    document.getElementById('volumeTotal').innerText = "$98,650.00";
+    document.getElementById('leadsCount').innerText = "47";
+
+    function logout() {
+      alert("Sessão encerrada.");
+      window.location.href = "index.html";
+    }
+    // Face ID (simulado - placeholder, pronto para integrar Face API)
+    function faceIDLogin() {
+      alert("Face ID disponível para integração via API/biometria! Entre em contato com o suporte técnico para ativar.");
+    }
+    // Instalação como PWA (App)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
 </body>
 </html>
