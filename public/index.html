@@ -4,159 +4,49 @@
   <meta charset="UTF-8">
   <title>AgroDigital5.0™ – Global Token Panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- PWA -->
+  <!-- PWA & ICONS -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
   <meta name="theme-color" content="#002233">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    body { background: #0f2233; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; }
-    .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; background: #002233; }
-    #brandName { font-weight: 700; font-size: 1.6rem; letter-spacing: 1px; color: #5fd865; cursor: pointer; }
-    .btn-login, .btn-panel { padding: 7px 20px; font-size: 1rem; border-radius: 6px; margin-left: 8px; }
-    .btn-login { background: #3fc1ff; border: none; color: #222; }
-    .btn-panel { background: #fff; color: #224; border: none; }
-    #admBtn { display: none; background: #e94560; color: #fff; border: none; margin-left: 15px; border-radius: 5px; padding: 7px 16px; }
-    .container { max-width: 1080px; margin: 40px auto; padding: 24px; background: #14344b; border-radius: 18px; box-shadow: 0 8px 32px #001d2a50; }
-    .row-flex { display: flex; gap: 24px; margin-bottom: 36px; }
-    .col { flex: 1; background: #152d41; padding: 18px; border-radius: 12px; box-shadow: 0 4px 16px #00131b40; }
-    .actions { margin-bottom: 16px; }
-    .actions button { width: 100%; margin-bottom: 12px; }
-    .metrics { text-align: center; }
-    .live-metrics { height: 120px; margin-top: 20px; }
-    .info-cards { display: flex; gap: 18px; margin-top: 25px; }
-    .info-card { flex: 1; background: #122839; padding: 16px; border-radius: 10px; font-size: 1rem; min-height: 70px; }
-    #contractInput { width: 270px; padding: 7px; border-radius: 6px; border: none; margin-right: 8px; }
-    #bscBtn { background: #15eab7; color: #022; padding: 7px 16px; border-radius: 6px; border: none; }
-    /* Responsivo */
-    @media (max-width: 900px) { .row-flex, .info-cards { flex-direction: column; } .container { padding: 12px; } }
-  </style>
 </head>
 <body>
-
-  <div class="header">
-    <div id="brand-area">
-      <span id="brandName"><b>AgroDigital5.0™</b></span>
-      <button id="admBtn" onclick="window.location.href='admin-panel.html'">Painel ADM</button>
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:#001a33;">
+    <!-- Botão furtivo ADM -->
+    <div id="brand-area" style="cursor:pointer;">
+      <span id="brandName" style="font-weight:bold;color:#fff;font-size:1.4em;">AgroDigital5.0™</span>
+      <button id="admBtn" style="display:none; margin-left:12px;" onclick="window.location.href='admin-panel.html'">Painel ADM</button>
     </div>
+    <!-- Botão painel cliente -->
     <div>
-      <button class="btn-panel" onclick="window.location.href='client-panel.html'">Acessar Meu Painel</button>
-      <button class="btn-login" onclick="alert('Em breve: login via carteira, e-mail ou biometria!')">Login</button>
+      <button class="btn btn-outline-light" style="padding:7px 18px;border-radius:8px;border:1px solid #13e2c9;color:#13e2c9;background:none;font-weight:600;font-size:1em;margin-right:8px;"
+        onclick="window.location.href='client-panel.html'">Acessar Meu Painel</button>
     </div>
-  </div>
+  </header>
 
-  <div class="container">
-    <h1 style="text-align:center; margin-bottom: 12px;">Bem-vindo ao AgroDigital5.0™</h1>
-    <p style="text-align:center; color:#b0ffdf; margin-bottom:30px; font-size:1.25rem;">
-      Venda global e segura de tokens e commodities digitais, 100% ESG e integradas à blockchain.
+  <!-- Conteúdo do seu painel público e venda de tokens aqui -->
+  <main style="max-width:980px;margin:30px auto;padding:30px;background:#0a2741;border-radius:18px;box-shadow:0 2px 20px #0004;">
+    <h1 style="text-align:center;color:#19f7c6;margin-bottom:25px;">Bem-vindo à AgroDigital5.0™</h1>
+    <p style="text-align:center;color:#fff;font-size:1.2em;">
+      Tokenização, ESG, vendas globais, impacto real. Invista com transparência.
     </p>
+    <!-- Seus botões/metas gráficos/etc... -->
+    <!-- ... -->
+  </main>
 
-    <div class="row-flex">
-      <div class="col">
-        <h2 style="font-size:1.2rem;">Comprar Tokens</h2>
-        <div class="actions">
-          <button style="background:#33e17b; color:#003c1c;" onclick="connectWallet()">Conectar Carteira</button>
-          <button style="background:#287bff; color:#fff;" onclick="buyToken()">Comprar</button>
-          <button style="background:#ffdb3c; color:#664200;" onclick="alert('Função em breve!')">Doar & Obter NFT</button>
-        </div>
-        <small>Transação 100% auditada – proteção total.</small>
-      </div>
-      <div class="col metrics">
-        <h2 style="font-size:1.2rem;">Métricas em tempo real</h2>
-        <canvas id="metricsChart" class="live-metrics"></canvas>
-      </div>
-    </div>
-
-    <div class="info-cards">
-      <div class="info-card">
-        <b>Impacto ESG</b>
-        <br>Doação automática a causas verdes em cada venda
-      </div>
-      <div class="info-card">
-        <b>Governança</b>
-        <br>DAO on-chain, votação e auditoria em tempo real
-      </div>
-      <div class="info-card">
-        <b>Sócios & VIP</b>
-        <br>Área VIP e benefícios exclusivos para grandes investidores
-      </div>
-    </div>
-
-    <div style="text-align:center; margin-top: 40px;">
-      <input id="contractInput" type="text" placeholder="Cole o contrato BNB (0x...)">
-      <button id="bscBtn" onclick="vincularContrato()">Vincular Contrato</button>
-      <br><br>
-      <button style="background:#032b4e; color:#fff; margin-top:7px; border:none; border-radius:6px; padding:8px 20px;" onclick="abrirBscScan()">Verificar no BscScan</button>
-    </div>
-
-    <div style="text-align:right; margin-top:30px;">
-      <button style="background:#14173f; color:#fff; border:none; border-radius:8px; padding:7px 16px;" onclick="window.location.href='ai-support.html'">
-        <b>🤖 AI Support</b>
-      </button>
-    </div>
-  </div>
-
-  <!-- SCRIPTS: ADM FURTIVO + CHART + CONTRATO -->
   <script>
-    // Botão ADM furtivo (aparece só após 2 cliques rápidos no nome)
+    // Botão ADM furtivo (2 cliques no nome)
     let clickCount = 0;
     document.getElementById('brand-area').addEventListener('click', function() {
       clickCount++;
       if (clickCount === 2) {
         document.getElementById('admBtn').style.display = 'inline-block';
-        setTimeout(()=>{ document.getElementById('admBtn').style.display = 'none'; clickCount=0; }, 7000);
+        setTimeout(()=>{
+          document.getElementById('admBtn').style.display = 'none'; clickCount=0;
+        }, 7000); // Botão ADM some após 7s
       }
-      setTimeout(()=>{ clickCount=0; }, 2500);
+      setTimeout(()=>{ clickCount=0; }, 2200); // reseta se demorar mais que 2,2s
     });
-
-    // Chart.js - gráfico dinâmico, minimalista, colorido
-    window.onload = function() {
-      var ctx = document.getElementById('metricsChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['CornToken', 'BNB', 'ETH', 'BTC'],
-          datasets: [{
-            label: 'Cotação (USD)',
-            data: [15.3, 6, 5.1, 7.8],
-            borderColor: '#3fc1ff',
-            backgroundColor: '#3fc1ff10',
-            tension: 0.45,
-            pointBackgroundColor: ['#6bffa2','#fff200','#ff6e6e','#6ebfff'],
-            pointRadius: 6,
-            fill: true
-          }]
-        },
-        options: {
-          plugins: { legend: { display: false }},
-          scales: { y: { beginAtZero: true } }
-        }
-      });
-    }
-
-    // Contrato: Vincular + Verificar no BscScan
-    function vincularContrato() {
-      const contrato = document.getElementById('contractInput').value.trim();
-      if (!contrato.startsWith('0x') || contrato.length < 40) { alert('Endereço inválido!'); return; }
-      localStorage.setItem('contratoBNB', contrato);
-      alert('Contrato vinculado! Pronto para consulta BscScan.');
-    }
-    function abrirBscScan() {
-      const contrato = localStorage.getItem('contratoBNB');
-      if (contrato) window.open('https://bscscan.com/address/' + contrato, '_blank');
-      else alert('Cole e vincule um contrato BNB válido primeiro.');
-    }
-
-    // Conectar carteira (exemplo simples)
-    function connectWallet() {
-      if (window.ethereum) window.ethereum.request({ method: 'eth_requestAccounts' });
-      else alert('Por favor, instale a MetaMask!');
-    }
-    function buyToken() {
-      alert('Função de compra ativada. Integração com smart contract via Web3!');
-    }
   </script>
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
