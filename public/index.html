@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgroDigital 5.0™ – Intelligence & Global ESG</title>
+  <title>AgroDigital 5.0™ – Painel Estratégico ESG</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@openai/chatgpt@latest/dist/chatgpt.min.js"></script>
+
   <style>
     body {
-      background-color: #0a192f;
+      background-color: #002233;
       color: #ffffff;
       font-family: 'Segoe UI', sans-serif;
       padding: 20px;
@@ -20,38 +23,52 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid #00a86b;
+      padding-bottom: 10px;
     }
 
     .lang-switch button {
       margin: 5px;
-      background-color: transparent;
-      border: 1px solid #ffffff;
+      background-color: #00a86b;
+      border: none;
       color: #ffffff;
       border-radius: 5px;
       cursor: pointer;
+      padding: 5px 10px;
     }
 
     section {
       margin-top: 2rem;
-      background: rgba(255,255,255,0.05);
+      background: rgba(0, 168, 107, 0.1);
       padding: 20px;
       border-radius: 10px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 10px rgba(0, 168, 107, 0.2);
     }
 
-    #adminChat {
+    #adminPanel {
       position: fixed;
-      bottom: 10px;
+      top: 10px;
       right: 10px;
-      opacity: 0.7;
-      cursor: pointer;
+      background: rgba(0,0,0,0.9);
+      padding: 15px;
+      border-radius: 10px;
+      z-index: 1000;
+      width: 300px;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00a86b;
+      text-shadow: 0 0 10px #005533;
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1 data-lang-en="🌿 AgroDigital 5.0™ – Global ESG & AI Panel">🌿 AgroDigital 5.0™ – Global ESG & AI Panel</h1>
+    <div class="logo">🌿 AgroDigital 5.0™</div>
     <div class="lang-switch">
       <button onclick="switchLang('en')">EN 🇺🇸</button>
       <button onclick="switchLang('pt')">PT 🇧🇷</button>
@@ -63,100 +80,98 @@
   </header>
 
   <section id="dashboard">
-    <h2>📈 Real-Time Intelligence & ESG Metrics</h2>
+    <h2>📈 Inteligência em Tempo Real & Métricas ESG</h2>
     <canvas id="esgChart"></canvas>
   </section>
 
   <section id="vaults">
-    <h2>🔐 Smart Vaults & Fund Management</h2>
-    <p>AI-driven automatic allocation and security with multisig authentication.</p>
-    <button onclick="connectWallet()">🔗 Connect Wallet</button>
+    <h2>🔐 Gestão Inteligente de Vaults & Fundos</h2>
+    <button onclick="connectWallet()">🔗 Conectar Carteira</button>
     <p id="walletStatus"></p>
   </section>
 
   <section id="nfts">
-    <h2>🖼️ ESG & Impact NFTs</h2>
-    <button onclick="mintNFT()">Mint ESG NFT</button>
+    <h2>🖼️ NFTs ESG & Impacto</h2>
+    <button onclick="mintNFT()">Criar NFT ESG</button>
   </section>
 
   <section id="donations">
-    <h2>🌱 Amazon Rainforest Donations</h2>
-    <button onclick="donate()">Donate & Receive NFT</button>
+    <h2>🌱 Doações para Amazônia</h2>
+    <button onclick="donate()">Doar & Receber NFT</button>
   </section>
 
   <section id="tokens">
-    <h2>💰 Token Sales & Real-Time Tracker</h2>
-    <p>Units Sold: <span id="unitsSold">0</span></p>
-    <button onclick="buyToken()">Buy Token Now</button>
+    <h2>💰 Venda de Tokens & Rastreador em Tempo Real</h2>
+    <p>Unidades Vendidas: <span id="unitsSold">0</span></p>
+    <button onclick="buyToken()">Comprar Token Agora</button>
   </section>
 
   <section id="domain">
-    <h2>🌐 Domain Rental for Global Investors</h2>
-    <button onclick="rentDomain()">Rent Domain</button>
+    <h2>🌐 Aluguel de Domínio para Investidores Globais</h2>
+    <button onclick="rentDomain()">Alugar Domínio</button>
   </section>
 
-  <img id="adminChat" src="https://img.icons8.com/color/48/chatbot.png" alt="Cael AI Chat" onclick="openAdminChat()"/>
+  <div id="adminPanel">
+    <h4>Administrador IA Avançada</h4>
+    <textarea id="adminCommand" placeholder="Comando para IA avançada..."></textarea>
+    <button onclick="sendAdminCommand()">Enviar</button>
+    <p id="adminResponse"></p>
+  </div>
 
   <script>
     function switchLang(lang) {
-      alert('Language switched to: ' + lang);
+      alert('Idioma alterado para: ' + lang);
     }
 
     async function connectWallet() {
       if (window.ethereum) {
         try {
           const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          document.getElementById('walletStatus').innerText = 'Connected: ' + accounts[0];
+          document.getElementById('walletStatus').innerText = 'Conectado: ' + accounts[0];
         } catch (error) {
-          alert('Connection rejected!');
+          alert('Conexão rejeitada!');
         }
       } else {
-        alert('MetaMask is not installed.');
+        alert('MetaMask não instalada.');
       }
     }
 
     function mintNFT() {
-      alert('ESG Impact NFT minted successfully!');
+      alert('NFT ESG criado com sucesso!');
     }
 
     function donate() {
-      alert('Thank you for your donation! Your NFT is on its way.');
+      alert('Obrigado pela doação! Seu NFT está sendo enviado.');
     }
 
     let units = 0;
     function buyToken() {
       units += 1;
       document.getElementById('unitsSold').innerText = units;
-      alert('Token purchased successfully!');
+      alert('Token comprado com sucesso!');
     }
 
     function rentDomain() {
-      alert('Domain rented successfully to global partner!');
+      alert('Domínio alugado com sucesso!');
     }
 
-    function openAdminChat() {
-      alert('Admin stealth mode activated.');
+    async function sendAdminCommand() {
+      const command = document.getElementById('adminCommand').value;
+      const response = await ChatGPT.send({message: command});
+      document.getElementById('adminResponse').innerText = response;
     }
 
     const ctx = document.getElementById('esgChart').getContext('2d');
-    const esgChart = new Chart(ctx, {
+    new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
         datasets: [{
-          label: 'ESG Impact',
+          label: 'Impacto ESG',
           data: [12, 19, 3, 5, 2, 3],
-          borderColor: '#4caf50',
-          backgroundColor: 'rgba(76, 175, 80, 0.1)'
+          borderColor: '#00a86b',
+          backgroundColor: 'rgba(0, 168, 107, 0.1)'
         }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
       }
     });
   </script>
