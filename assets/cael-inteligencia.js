@@ -1,0 +1,1 @@
+// Conteúdo simulado para js/cael-inteligencia.js
