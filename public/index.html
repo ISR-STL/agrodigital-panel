@@ -4,272 +4,216 @@
   <meta charset="UTF-8">
   <title>AgroDigital5.0™ – Global Token Panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- PWA / APP SETTINGS -->
+  <!-- PWA & Icons -->
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" sizes="192x192" href="assets/icon-192.png">
-  <link rel="apple-touch-icon" sizes="512x512" href="assets/icon-512.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
   <meta name="theme-color" content="#002233">
-
-  <!-- BOOTSTRAP & ICONS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- SEU CSS PRINCIPAL -->
+  <!-- CSS Principal -->
   <link rel="stylesheet" href="styles.css">
-
-  <!-- JS LIBS ESSENCIAIS -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.3/i18next.min.js"></script>
-  <meta name="description" content="AgroDigital 5.0™ – The global ESG-certified token panel for agricultural value.">
-  <link rel="icon" type="image/png" href="assets/icon-192.png">
-  <link rel="apple-touch-startup-image" href="assets/icon-512.png">
+  <style>
+    /* Adicione ajustes rápidos aqui se precisar */
+    body { background: #0a2239; color: #fff; }
+    .topbar { background: #141d26; display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; }
+    .logo { font-size: 2rem; font-weight: bold; cursor: pointer; }
+    .flags { display: flex; gap: 8px; }
+    .lang-btn { border: none; background: none; cursor: pointer; }
+    .card { background: #132c47; border-radius: 16px; padding: 24px; margin: 16px; box-shadow: 0 2px 12px #0003; }
+    .btn { border-radius: 8px; padding: 12px 0; margin: 6px 0; width: 100%; font-size: 1.1rem; font-weight: 600; border: none; cursor: pointer; }
+    .btn-green { background: #28a745; color: #fff; }
+    .btn-blue { background: #1976d2; color: #fff; }
+    .btn-yellow { background: #ffc107; color: #222; }
+    .btn-outline { border: 2px solid #4fc3f7; background: transparent; color: #4fc3f7; }
+    .hidden { display: none !important; }
+    .section { display: flex; gap: 24px; flex-wrap: wrap; }
+    .box { flex: 1 1 300px; min-width: 260px; }
+    .admin-modal, .client-modal { background: #09131d; border-radius: 16px; box-shadow: 0 2px 24px #000a; padding: 32px; position: fixed; top: 50px; left: 50%; transform: translateX(-50%); z-index: 10000; min-width: 320px; max-width: 96vw; }
+    .close-btn { float: right; color: #fff; background: #c00; border-radius: 8px; padding: 2px 10px; cursor: pointer; border: none; }
+    .forgot-link { font-size: 0.98rem; color: #88e; text-decoration: underline; margin-left: 10px; cursor: pointer; }
+    @media (max-width: 700px) {
+      .section { flex-direction: column; }
+      .card { margin: 8px 0; }
+      .topbar { padding: 8px 12px; font-size: 1.1rem; }
+      .admin-modal, .client-modal { padding: 20px; min-width: 85vw; }
+    }
+  </style>
 </head>
 <body>
-  <!-- NAVBAR EXECUTIVO -->
-  <nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between align-items-center">
-    <span class="navbar-brand mb-0 h1">AgroDigital5.0™</span>
-    <div>
-      <button class="btn btn-link p-0 me-2" onclick="changeLang('en')" title="English">
-        <span class="fi fi-us fis" style="font-size:1.6em;"></span>
-      </button>
-      <button class="btn btn-link p-0 me-2" onclick="changeLang('pt')" title="Português">
-        <span class="fi fi-br fis" style="font-size:1.6em;"></span>
-      </button>
-      <button class="btn btn-link p-0 me-2" onclick="changeLang('es')" title="Español">
-        <span class="fi fi-es fis" style="font-size:1.6em;"></span>
-      </button>
-      <span class="badge bg-primary" id="currentLang">EN</span>
-    </div>
-  </nav>
-
-  <main class="container py-5">
-    <!-- Título e descrição -->
-    <section class="text-center mb-4">
-      <h1 id="mainTitle">Welcome to AgroDigital5.0™</h1>
-      <p id="mainDesc">Secure, Global & ESG Certified Token Sales</p>
-    </section>
-    <div class="row g-3">
-      <div class="col-md-6">
-        <div class="card p-3">
-          <h5 id="tokenSaleTitle">Buy Tokens</h5>
-          <button class="btn btn-success mb-2" onclick="connectWallet()" id="walletBtn">Connect Wallet</button>
-          <button class="btn btn-primary mb-2" onclick="buyToken()" id="buyTokenBtn">Buy</button>
-          <button class="btn btn-warning mb-2" onclick="donateAmazonNFT()" id="donateNFTBtn">Donate & Get NFT</button>
-          <div id="walletAddress" class="small text-muted"></div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card p-3">
-          <h5 id="metricsTitle">Live Metrics</h5>
-          <canvas id="cryptoChart" height="100"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <!-- ESG, Governança, Parceiros -->
-    <div class="row g-3 mt-3">
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5 id="esgTitle">ESG Impact</h5>
-          <p id="esgDesc">Automatic donation to green causes for every sale</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5 id="governanceTitle">Governance</h5>
-          <p id="governanceDesc">On-chain DAO, voting and real-time auditing</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5 id="partnersTitle">Partners & VIP</h5>
-          <p id="partnersDesc">VIP area and exclusive perks for major investors</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- VINCULAR CONTRATO DINAMICAMENTE -->
-    <div class="row justify-content-center mt-4">
-      <div class="col-auto">
-        <input type="text" id="inputContract" class="form-control" style="width:300px" placeholder="Cole o endereço do contrato (0x...)">
-      </div>
-      <div class="col-auto">
-        <button class="btn btn-info" onclick="setContractAddress()">Vincular Contrato</button>
-      </div>
-    </div>
-    <!-- LINK BscScan -->
-    <div class="mt-3 text-center">
-      <a id="bscscanLink" href="https://bscscan.com/address/0x0000000000000000000000000000000000000000" class="btn btn-outline-info" target="_blank">
-        <i class="bi bi-link-45deg"></i> <span id="bscscanBtn">Verify on BscScan</span>
-      </a>
-    </div>
-  </main>
-
-  <!-- IA ASSISTENTE -->
-  <div class="cael-ai position-fixed bottom-0 end-0 p-3" style="z-index:999;">
-    <button class="btn btn-dark" onclick="toggleIA()"><i class="bi bi-robot"></i> AI Support</button>
-    <div id="iaBox" class="card p-2 mt-2" style="display:none; width:300px;">
-      <input type="text" id="iaCommand" class="form-control mb-2" placeholder="Ask anything...">
-      <button class="btn btn-success w-100" onclick="sendIACommand()"><i class="bi bi-send"></i> Send</button>
-      <div id="iaResponse" class="mt-2 small text-muted"></div>
+  <!-- Topbar -->
+  <div class="topbar">
+    <span id="logo" class="logo">AgroDigital5.0™</span>
+    <div class="flags">
+      <button class="lang-btn" onclick="changeLang('en')"><img src="assets/usa.png" width="28"></button>
+      <button class="lang-btn" onclick="changeLang('pt')"><img src="assets/brazil.png" width="28"></button>
+      <button class="lang-btn" onclick="changeLang('es')"><img src="assets/spain.png" width="28"></button>
+      <button id="clientAreaBtn" class="lang-btn" style="background:#005; color:#fff; border-radius: 6px; padding: 5px 12px; margin-left:18px">Client Area</button>
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer class="text-center mt-5 mb-2 small">
-    <hr>
-    <span>©️ 2025 AgroDigital5.0™ – All Rights Reserved.</span>
-    <br>
-    <span class="text-danger">Anti-plagiarism: All content digitally protected.</span>
-  </footer>
-
-  <!-- FUNÇÕES EXECUTIVAS DO PAINEL -->
+  
+  <!-- Título -->
+  <h1 style="text-align:center; margin-top:28px; font-size:2.5rem;">Welcome to AgroDigital5.0™</h1>
+  <p style="text-align:center; margin-bottom:32px;">Secure, Global & ESG Certified Token Sales</p>
+  
+  <!-- Conteúdo principal -->
+  <div style="display: flex; flex-wrap:wrap; justify-content:center; gap:40px;">
+    <!-- Comprar Tokens -->
+    <div class="card" style="flex:1; min-width:330px;">
+      <h2>Buy Tokens</h2>
+      <button class="btn btn-green">Connect Wallet</button>
+      <button class="btn btn-blue">Buy</button>
+      <button class="btn btn-yellow">Donate & Get NFT</button>
+    </div>
+    <!-- Métricas em tempo real -->
+    <div class="card" style="flex:1; min-width:320px;">
+      <h2>Live Metrics</h2>
+      <canvas id="liveChart" height="80"></canvas>
+    </div>
+  </div>
+  <!-- Cards secundários -->
+  <div class="section" style="margin-top:20px;">
+    <div class="box card">
+      <h3>ESG Impact</h3>
+      <p>Automatic donation to green causes for every sale</p>
+    </div>
+    <div class="box card">
+      <h3>Governance</h3>
+      <p>On-chain DAO, voting and real-time auditing</p>
+    </div>
+    <div class="box card">
+      <h3>Partners & VIP</h3>
+      <p>VIP area and exclusive perks for major investors</p>
+    </div>
+  </div>
+  <!-- Vincular contrato -->
+  <div style="text-align:center; margin: 32px 0;">
+    <input type="text" id="contractInput" placeholder="Paste contract address (0x...)" style="padding:10px; width:280px; border-radius:8px; border:none;">
+    <button class="btn btn-blue" onclick="linkContract()">Link Contract</button>
+    <button class="btn btn-outline" onclick="openBscScan()">Verify on BscScan</button>
+  </div>
+  <!-- Suporte AI -->
+  <div style="position:fixed; bottom:30px; right:30px;">
+    <button class="btn btn-blue" onclick="openCael()">🤖 AI Support</button>
+  </div>
+  
+  <!-- MODAL ADM FURTIVO -->
+  <div id="adminModal" class="admin-modal hidden">
+    <button class="close-btn" onclick="closeAdmin()">×</button>
+    <h2>Admin Panel</h2>
+    <p>Full access to advanced dashboards, analytics, contract & token management.<br>
+      <span style="font-size: 0.92em;">(Double-click on the logo for furtive access)</span>
+    </p>
+    <ul>
+      <li>Dashboard Analytics</li>
+      <li>Token Sales & Management</li>
+      <li>Vaults & Funds</li>
+      <li>Investor Leads</li>
+      <li>Update Market Data</li>
+      <li>Automated Payouts</li>
+    </ul>
+    <button class="btn btn-blue" onclick="closeAdmin()">Close</button>
+  </div>
+  
+  <!-- MODAL ÁREA DO CLIENTE -->
+  <div id="clientModal" class="client-modal hidden">
+    <button class="close-btn" onclick="closeClient()">×</button>
+    <h2>Client Area</h2>
+    <form onsubmit="loginClient(event)">
+      <input type="email" id="clientEmail" required placeholder="E-mail" style="padding:10px; border-radius:8px; width:88%; margin:10px 0;">
+      <input type="password" id="clientToken" required placeholder="Token/Password" style="padding:10px; border-radius:8px; width:88%; margin:10px 0;">
+      <span class="forgot-link" onclick="forgotPassword()">Forgot password?</span>
+      <button class="btn btn-green" type="submit">Login</button>
+    </form>
+    <div id="clientLinks" class="hidden" style="margin-top:24px;">
+      <button class="btn btn-blue" onclick="location.href='dashboard.html'">My Dashboard</button>
+      <button class="btn btn-yellow" onclick="location.href='buy.html'">Buy Tokens</button>
+      <button class="btn btn-outline" onclick="location.href='nft.html'">My NFTs</button>
+      <button class="btn btn-blue" onclick="location.href='vip.html'">VIP Area</button>
+      <button class="btn btn-green" onclick="location.href='support.html'">Support</button>
+    </div>
+  </div>
+  
+  <!-- MODAL SUPORTE CAEL AI -->
+  <div id="caelModal" class="admin-modal hidden">
+    <button class="close-btn" onclick="closeCael()">×</button>
+    <h2>Cael AI Support</h2>
+    <textarea id="caelInput" placeholder="Type your question..." style="width:100%;min-height:70px;border-radius:8px;padding:10px;"></textarea>
+    <button class="btn btn-blue" onclick="askCael()">Send</button>
+    <div id="caelResp" style="margin-top:20px;color:#fff;"></div>
+  </div>
+  
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // ========== Gráfico Minimalista ==========
-    document.addEventListener('DOMContentLoaded', function () {
-      const ctx = document.getElementById('cryptoChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['CornToken', 'BNB', 'ETH', 'BTC'],
-          datasets: [{
-            label: 'Crypto Prices',
-            data: [15.3, 5, 3, 9],
-            borderColor: '#00a86b',
-            borderWidth: 2,
-            fill: true,
-            backgroundColor: 'rgba(0,168,107,0.12)'
-          }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } }
-      });
+    // Exemplo de gráfico dinâmico
+    const ctx = document.getElementById('liveChart').getContext('2d');
+    const liveChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['CornToken', 'BNB', 'ETH', 'BTC'],
+        datasets: [{
+          label: 'Units Sold',
+          data: [15, 6, 4, 8],
+          borderColor: '#45ff9e',
+          borderWidth: 3,
+          tension: 0.3,
+          pointRadius: 4
+        }]
+      },
+      options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
     });
 
-    // ========== MetaMask e Wallet ==========
-    function connectWallet() {
-      if (window.ethereum) {
-        window.ethereum.request({ method: 'eth_requestAccounts' })
-          .then(accounts => {
-            document.getElementById('walletAddress').innerText = accounts[0];
-          });
-      } else {
-        alert("Please install MetaMask to continue!");
+    // BOTÃO FURTIVO ADM: Double click logo
+    let lastClick = 0;
+    document.getElementById('logo').addEventListener('click', function() {
+      let now = Date.now();
+      if (now - lastClick < 400) { // double click
+        document.getElementById('adminModal').classList.remove('hidden');
       }
+      lastClick = now;
+    });
+    function closeAdmin() { document.getElementById('adminModal').classList.add('hidden'); }
+    
+    // CLIENTE: Abrir área do cliente
+    document.getElementById('clientAreaBtn').onclick = () => {
+      document.getElementById('clientModal').classList.remove('hidden');
+    };
+    function closeClient() { document.getElementById('clientModal').classList.add('hidden'); }
+
+    // Login fake para demo
+    function loginClient(e) {
+      e.preventDefault();
+      document.getElementById('clientLinks').classList.remove('hidden');
     }
-    function buyToken() {
-      alert("Token purchased successfully! (Integre seu smart contract real aqui)");
-    }
-    function donateAmazonNFT() {
-      alert("NFT ESG created/donated! (Integre seu smart contract real aqui)");
+    function forgotPassword() { alert("Link de recuperação de senha enviado para seu e-mail!"); }
+
+    // Suporte Cael AI (placeholder, conecte sua API depois)
+    function openCael() { document.getElementById('caelModal').classList.remove('hidden'); }
+    function closeCael() { document.getElementById('caelModal').classList.add('hidden'); }
+    function askCael() {
+      document.getElementById('caelResp').innerHTML = "<i>Thinking...</i>";
+      // Chamada OpenAI pode ser plugada aqui
+      setTimeout(()=>{ document.getElementById('caelResp').innerHTML = "Simulação de resposta da Cael AI. (Plugue sua API)"; }, 1200);
     }
 
-    // ========== IA Minimalista (simulada) ==========
-    function toggleIA() {
-      const box = document.getElementById('iaBox');
-      box.style.display = box.style.display === 'none' ? 'block' : 'none';
-    }
-    function sendIACommand() {
-      const command = document.getElementById('iaCommand').value;
-      document.getElementById('iaResponse').innerText = 'Aguardando resposta da IA (integre GPT ou Cael API aqui).';
-      setTimeout(() => {
-        document.getElementById('iaResponse').innerText = 'Comando "'+command+'" processado.';
-      }, 1000);
-      document.getElementById('iaCommand').value = "";
-    }
-
-    // ========== MULTI-IDIOMA (exemplo simples) ==========
+    // Idiomas (front-end demo, adicione seu i18n.js para global)
     function changeLang(lang) {
-      const texts = {
-        en: {
-          mainTitle: "Welcome to AgroDigital5.0™",
-          mainDesc: "Secure, Global & ESG Certified Token Sales",
-          tokenSaleTitle: "Buy Tokens",
-          walletBtn: "Connect Wallet",
-          buyTokenBtn: "Buy",
-          donateNFTBtn: "Donate & Get NFT",
-          metricsTitle: "Live Metrics",
-          esgTitle: "ESG Impact",
-          esgDesc: "Automatic donation to green causes for every sale",
-          governanceTitle: "Governance",
-          governanceDesc: "On-chain DAO, voting and real-time auditing",
-          partnersTitle: "Partners & VIP",
-          partnersDesc: "VIP area and exclusive perks for major investors",
-          bscscanBtn: "Verify on BscScan"
-        },
-        pt: {
-          mainTitle: "Bem-vindo à AgroDigital5.0™",
-          mainDesc: "Venda de Tokens Segura, Global e Certificada ESG",
-          tokenSaleTitle: "Comprar Tokens",
-          walletBtn: "Conectar Carteira",
-          buyTokenBtn: "Comprar",
-          donateNFTBtn: "Doar & Receber NFT",
-          metricsTitle: "Métricas em Tempo Real",
-          esgTitle: "Impacto ESG",
-          esgDesc: "Doação automática a causas verdes a cada venda",
-          governanceTitle: "Governança",
-          governanceDesc: "DAO on-chain, votação e auditoria em tempo real",
-          partnersTitle: "Parceiros & VIP",
-          partnersDesc: "Área VIP e benefícios exclusivos para grandes investidores",
-          bscscanBtn: "Verificar no BscScan"
-        },
-        es: {
-          mainTitle: "Bienvenido a AgroDigital5.0™",
-          mainDesc: "Ventas de tokens seguras, globales y certificadas ESG",
-          tokenSaleTitle: "Comprar Tokens",
-          walletBtn: "Conectar Cartera",
-          buyTokenBtn: "Comprar",
-          donateNFTBtn: "Donar y Obtener NFT",
-          metricsTitle: "Métricas en Vivo",
-          esgTitle: "Impacto ESG",
-          esgDesc: "Donación automática a causas verdes en cada venta",
-          governanceTitle: "Gobernanza",
-          governanceDesc: "DAO on-chain, votación y auditoría en tiempo real",
-          partnersTitle: "Socios & VIP",
-          partnersDesc: "Área VIP y beneficios exclusivos para grandes inversores",
-          bscscanBtn: "Verificar en BscScan"
-        }
-      };
-      let t = texts[lang];
-      for (let k in t) {
-        let el = document.getElementById(k);
-        if (el) el.innerText = t[k];
-      }
-      document.getElementById('currentLang').innerText = lang.toUpperCase();
+      alert("Language changed to: "+lang+" (Ajuste integração no i18n.js)");
+      // Aqui você pode chamar sua função i18n.js para tradução global.
     }
 
-    // ========== VINCULAR CONTRATO BscScan DINAMICAMENTE ==========
-    let contractAddress = localStorage.getItem('bscContract') || '0x0000000000000000000000000000000000000000';
-    function updateBscScanLink() {
-      const bscscanLink = document.getElementById('bscscanLink');
-      bscscanLink.href = `https://bscscan.com/address/${contractAddress}`;
+    // Vincular contrato e abrir BscScan
+    function linkContract() {
+      let val = document.getElementById('contractInput').value;
+      if(val.length > 10) {
+        window.open('https://bscscan.com/address/' + val, '_blank');
+      }
     }
-    function setContractAddress() {
-      const input = document.getElementById('inputContract').value.trim();
-      if (/^0x[a-fA-F0-9]{40}$/.test(input)) {
-        contractAddress = input;
-        localStorage.setItem('bscContract', contractAddress);
-        updateBscScanLink();
-        alert('Contrato vinculado com sucesso!');
+    function openBscScan() {
+      let val = document.getElementById('contractInput').value;
+      if(val.length > 10) {
+        window.open('https://bscscan.com/address/' + val, '_blank');
       } else {
-        alert('Endereço inválido. Certifique-se de que começa com 0x e tem 42 caracteres.');
+        window.open('https://bscscan.com/', '_blank');
       }
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      updateBscScanLink();
-      changeLang('en'); // idioma padrão ao abrir
-    });
-
-  </script>
-
-  <!-- PWA Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('sw.js');
-      });
     }
   </script>
 </body>
