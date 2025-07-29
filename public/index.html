@@ -1,118 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Administrativo | AgroDigital 5.0™</title>
-  <link rel="stylesheet" href="admin-style.css" />
-  <script defer src="cael-inteligencia.js"></script>
-  <script defer>
-    document.addEventListener("DOMContentLoaded", () => {
-      const userLang = navigator.language.startsWith("pt") ? "pt" : "en";
-      switchLang(userLang);
-      ativarNotificacoes();
-      IA_Cael.iniciarInteligencia();
-    });
+  <title>AgroDigital 5.0™ – Global ESG Panel</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="admin-style.css">
+  <script src="cael-inteligencia.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
 
+<body>
+  <header class="topbar">
+    <h1 data-lang-en="AgroDigital 5.0™ – Intelligence & Investment" data-lang-pt="AgroDigital 5.0™ – Inteligência & Investimento" data-lang-es="AgroDigital 5.0™ – Inteligencia e Inversión">
+      AgroDigital 5.0™ – Intelligence & Investment
+    </h1>
+    <div class="lang-switch">
+      <button onclick="switchLang('en')">🇺🇸 EN</button>
+      <button onclick="switchLang('pt')">🇧🇷 PT</button>
+      <button onclick="switchLang('es')">🇪🇸 ES</button>
+    </div>
+  </header>
+
+  <nav class="sidebar">
+    <ul>
+      <li><a href="#bi" data-lang-en="📊 BI Dashboard" data-lang-pt="📊 Painel BI" data-lang-es="📊 Panel BI">📊 BI Dashboard</a></li>
+      <li><a href="#vaults" data-lang-en="🔐 Vaults" data-lang-pt="🔐 Cofres" data-lang-es="🔐 Bóvedas">🔐 Vaults</a></li>
+      <li><a href="#market" data-lang-en="📈 Market Intelligence" data-lang-pt="📈 Inteligência de Mercado" data-lang-es="📈 Inteligencia de Mercado">📈 Market Intelligence</a></li>
+      <li><a href="#funds" data-lang-en="💼 Fund Strategy" data-lang-pt="💼 Estratégia de Fundos" data-lang-es="💼 Estrategia de Fondos">💼 Fund Strategy</a></li>
+      <li><a href="#nft" data-lang-en="🎨 NFT Contracts" data-lang-pt="🎨 Contratos NFT" data-lang-es="🎨 Contratos NFT">🎨 NFT Contracts</a></li>
+      <li><a href="#donate" data-lang-en="🌱 Amazon Donations" data-lang-pt="🌱 Doações Amazônia" data-lang-es="🌱 Donaciones Amazonía">🌱 Amazon Donations</a></li>
+      <li><a href="#chat" data-lang-en="💬 Admin Chat" data-lang-pt="💬 Chat com Admin" data-lang-es="💬 Chat con Admin">💬 Admin Chat</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+    <section id="bi">
+      <h2>📊 Overview & Data Intelligence</h2>
+      <p>Real-time performance indicators and forecasts driven by Cael AI.</p>
+    </section>
+
+    <section id="vaults">
+      <h2>🔐 Vault Management</h2>
+      <p>Secure, automated, and auditable vaults with smart AI-based fund reallocation.</p>
+    </section>
+
+    <section id="market">
+      <h2>📈 Market & Commodity Insights</h2>
+      <p>Live feed on soy, corn, cotton, carbon credits, and ESG token prices.</p>
+    </section>
+
+    <section id="funds">
+      <h2>💼 Fund Strategy & Multichain</h2>
+      <p>Unit-based token sales, AI investment paths, auto-allocation by risk level, and multichain NFT/token launcher.</p>
+    </section>
+
+    <section id="nft">
+      <h2>🎨 NFT & Asset Contracts</h2>
+      <p>Upload ABI, launch NFTs, monitor rarity, and enable global traceability.</p>
+    </section>
+
+    <section id="donate">
+      <h2>🌱 Amazon Donations + Impact Fund</h2>
+      <p>Support sustainable farms and rain forest preservation. Donations transparently tracked and managed by IA.</p>
+    </section>
+
+    <section id="chat">
+      <h2>💬 Admin AI Chat</h2>
+      <p>Issue commands, request tasks, and control the dashboard via live interaction with Cael (with push notifications).</p>
+      <button onclick="startCaelChat()">Start Chat</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© AgroDigital 5.0™ | ESG | AI | DAO | Protected by TM & Cael SecurityBot</p>
+    <p><small>Remote update active | PWA ready | Web3 login (MetaMask, Binance, Crypto.com)</small></p>
+  </footer>
+
+  <script>
     function switchLang(lang) {
-      const elements = document.querySelectorAll('[data-lang-pt]');
+      const elements = document.querySelectorAll('[data-lang-' + lang + ']');
       elements.forEach(el => {
         const content = el.getAttribute(`data-lang-${lang}`);
         if (content) el.textContent = content;
       });
     }
 
-    function ativarNotificacoes() {
-      console.log("🔔 Notificações ativadas via Cael Bot + WhatsApp + Email.");
-      // Aqui vai a integração real no backend com Telegram e APIs externas
-    }
-
-    const IA_Cael = {
-      iniciarInteligencia: () => {
-        console.log("🤖 IA Cael operando com visão estratégica 360º");
-        IA_Cael.gerarPitch();
-        IA_Cael.executarSeguranca();
-        IA_Cael.conectarAirtable();
-      },
-      gerarPitch: () => {
-        console.log("📊 Pitch automático gerado para investidores com foco ESG + ROI.");
-      },
-      executarSeguranca: () => {
-        console.log("🛡️ SecurityBot ativo. Proteção total contra acessos e manipulações.");
-      },
-      conectarAirtable: () => {
-        console.log("🔗 Airtable sincronizado. Leads, vaults, captação e BI em tempo real.");
-      }
+    function startCaelChat() {
+      alert("🧠 Cael AI is connecting... Please wait.");
+      // Aqui você pode acionar a IA com WebSocket ou chamada REST
     }
   </script>
-</head>
-
-<body>
-  <header class="topbar">
-    <h1 data-lang-pt="🌿 AgroDigital 5.0™ – Inteligência & Investimento" data-lang-en="🌿 AgroDigital 5.0™ – Intelligence & Investment">
-      🌿 AgroDigital 5.0™ – Inteligência & Investimento
-    </h1>
-    <div class="lang-switch">
-      <button onclick="switchLang('pt')">BR 🇧🇷</button>
-      <button onclick="switchLang('en')">US 🇺🇸</button>
-    </div>
-  </header>
-
-  <nav class="sidebar">
-    <ul>
-      <li><a href="#bi" data-lang-pt="📊 Painel BI" data-lang-en="📊 BI Dashboard">📊 Painel BI</a></li>
-      <li><a href="#vaults" data-lang-pt="🔐 Vaults" data-lang-en="🔐 Vaults">🔐 Vaults</a></li>
-      <li><a href="#market" data-lang-pt="📈 Inteligência de Mercado" data-lang-en="📈 Market Intelligence">📈 Inteligência de Mercado</a></li>
-      <li><a href="#funds" data-lang-pt="💼 Estratégia de Fundos" data-lang-en="💼 Fund Strategy">💼 Estratégia de Fundos</a></li>
-      <li><a href="#leads" data-lang-pt="📣 Leads & Investidores" data-lang-en="📣 Leads & Investors">📣 Leads & Investidores</a></li>
-      <li><a href="#security" data-lang-pt="🔒 Segurança & Autenticação" data-lang-en="🔒 Security & Authentication">🔒 Segurança & Autenticação</a></li>
-      <li><a href="#config" data-lang-pt="⚙️ Configurações" data-lang-en="⚙️ Settings">⚙️ Configurações</a></li>
-    </ul>
-  </nav>
-
-  <main class="content">
-    <section id="bi">
-      <h2 data-lang-pt="🧠 Visão Geral e Inteligência de Dados" data-lang-en="🧠 Overview & Data Intelligence">
-        🧠 Visão Geral e Inteligência de Dados
-      </h2>
-      <p data-lang-pt="Controle e monitoramento avançado dos indicadores de performance."
-         data-lang-en="Advanced monitoring of performance indicators.">
-         Controle e monitoramento avançado dos indicadores de performance.
-      </p>
-    </section>
-
-    <section id="vaults">
-      <h2 data-lang-pt="🔐 Controle de Vaults" data-lang-en="🔐 Vault Control">🔐 Controle de Vaults</h2>
-      <p data-lang-pt="Relatórios em tempo real e segurança multichave para os fundos."
-         data-lang-en="Real-time reports and multisig security for funds.">
-         Relatórios em tempo real e segurança multichave para os fundos.
-      </p>
-    </section>
-
-    <section id="market">
-      <h2 data-lang-pt="📈 Insights de Mercado & Commodities" data-lang-en="📈 Market & Commodity Insights">
-        📈 Insights de Mercado & Commodities
-      </h2>
-      <p data-lang-pt="Análise de ativos agrícolas, preços internacionais e previsões futuras."
-         data-lang-en="Agricultural asset analysis, international prices, and forecasts.">
-         Análise de ativos agrícolas, preços internacionais e previsões futuras.
-      </p>
-    </section>
-
-    <section id="funds">
-      <h2 data-lang-pt="💼 Gestão de Fundos & Aplicações" data-lang-en="💼 Fund Management & Applications">
-        💼 Gestão de Fundos & Aplicações
-      </h2>
-      <p data-lang-pt="IA Cael: Divisão recomendada em staking, stablecoins, reinvestimento e segurança."
-         data-lang-en="Cael AI: Recommended division in staking, stablecoins, reinvestment, and security.">
-         IA Cael: Divisão recomendada em staking, stablecoins, reinvestimento e segurança.
-      </p>
-      <p data-lang-pt="⚡ Onde aplicar os lucros? IA analisa automaticamente e sugere baseado nos dados do BI."
-         data-lang-en="⚡ Where to apply profits? AI analyzes and suggests automatically based on BI data.">
-         ⚡ Onde aplicar os lucros? IA analisa automaticamente e sugere baseado nos dados do BI.
-      </p>
-    </section>
-  </main>
 </body>
+
 </html>
