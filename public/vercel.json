@@ -1,15 +1,15 @@
 {
-  "version": 2,
-  "builds": [
+  "redirects": [
     {
-      "src": "index.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "agrodigital5ponto0.com"
+        }
+      ],
+      "destination": "https://www.agrodigital5ponto0.com/$1",
+      "permanent": true
     }
   ]
 }
