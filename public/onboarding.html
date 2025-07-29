@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>AgroDigital5.0™ – Onboarding Parceiro/Investidor</title>
+  <title>Onboarding – AgroDigital5.0™ VIP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#002233">
   <link rel="stylesheet" href="styles.css">
@@ -11,59 +11,53 @@
 <body>
   <nav class="navbar navbar-dark bg-dark px-3">
     <span class="navbar-brand mb-0 h1">AgroDigital5.0™</span>
-    <span class="text-white small">Onboarding & Investidores</span>
+    <span class="text-white small">Pré-cadastro VIP</span>
   </nav>
   <main class="container py-5">
-    <div class="row justify-content-center mb-4">
-      <div class="col-lg-6 col-md-8">
-        <div class="card shadow p-4">
-          <h2 class="mb-3 text-success"><i class="bi bi-person-plus"></i> Cadastro Institucional</h2>
-          <p class="lead mb-3 text-secondary">
-            Preencha seus dados para liberar acesso prioritário ao painel de investimentos AgroDigital5.0™. 
-            <br>
-            <span class="text-warning fw-bold">Investidores VIP têm prioridade na captação!</span>
-          </p>
-          <form id="onboardingForm">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card shadow-lg p-4">
+          <h3 class="mb-4 text-primary"><i class="bi bi-clipboard-check"></i> Cadastro VIP / Investidor</h3>
+          <form id="onboardingForm" class="text-start">
             <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Nome completo ou Nome da Empresa" required>
+              <label for="nome" class="form-label">Nome completo</label>
+              <input type="text" class="form-control" id="nome" required>
             </div>
             <div class="mb-3">
-              <input type="email" class="form-control" placeholder="E-mail corporativo" required>
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="email" required>
             </div>
             <div class="mb-3">
-              <input type="tel" class="form-control" placeholder="WhatsApp com DDD" required>
+              <label for="whatsapp" class="form-label">WhatsApp</label>
+              <input type="tel" class="form-control" id="whatsapp" required>
             </div>
             <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Cargo/Função ou Área de Investimento">
-            </div>
-            <div class="mb-3">
-              <select class="form-select" required>
-                <option selected disabled value="">Interesse de Investimento</option>
-                <option value="Tokens">Tokens Digitais</option>
-                <option value="ESG/NFT">ESG / NFTs</option>
-                <option value="Participação Societária">Sociedade / Partnership</option>
-                <option value="Mercado Global">Investimento Global</option>
-                <option value="Outro">Outro (especifique abaixo)</option>
+              <label for="perfil" class="form-label">Perfil</label>
+              <select class="form-select" id="perfil" required>
+                <option value="">Selecione</option>
+                <option>Investidor</option>
+                <option>Parceiro de negócios</option>
+                <option>Family Office</option>
+                <option>Fundo de investimento</option>
+                <option>VIP Club</option>
+                <option>Outros</option>
               </select>
             </div>
             <div class="mb-3">
-              <textarea class="form-control" placeholder="Mensagem, dúvida ou proposta..." rows="2"></textarea>
+              <label for="mensagem" class="form-label">Mensagem / Interesse</label>
+              <textarea class="form-control" id="mensagem" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn btn-success w-100 fw-bold">
-              <i class="bi bi-send"></i> Cadastrar & Solicitar Acesso
-            </button>
+            <button type="submit" class="btn btn-success w-100 fw-bold"><i class="bi bi-send-check"></i> Enviar Cadastro</button>
           </form>
-          <div id="formSuccess" class="alert alert-success mt-3 d-none">Cadastro enviado! Nossa equipe entrará em contato.</div>
+          <div id="formMsg" class="alert alert-success mt-4 d-none"></div>
         </div>
-        <div class="text-center mt-4">
-          <a href="index.html" class="btn btn-outline-primary"><i class="bi bi-bar-chart"></i> Acesse sua área exclusiva</a>
+        <div class="text-center mt-5">
+          <span class="fst-italic small text-muted">
+            Investir com propósito, segurança e visão global.<br>
+            AgroDigital5.0™ Brand protected ™
+          </span>
         </div>
       </div>
-    </div>
-    <div class="text-center mt-5">
-      <span class="fst-italic small text-muted">
-        “Você não precisa nascer em berço de ouro para criar um império. Só precisa de visão, propósito… e coragem para começar.”
-      </span>
     </div>
   </main>
   <footer class="text-center mt-5 mb-2 small">
@@ -73,15 +67,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Simulação de envio (para produção: integrar com API, CRM, WhatsApp, etc)
+    // Simulação de envio (pode integrar com Airtable, API, ou Google Forms)
     document.getElementById('onboardingForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      document.getElementById('formSuccess').classList.remove('d-none');
-      // Aqui pode-se adicionar integração real, como envio via webhook, Zapier, Airtable, etc.
-      setTimeout(() => {
-        document.getElementById('formSuccess').classList.add('d-none');
-        document.getElementById('onboardingForm').reset();
-      }, 4000);
+      document.getElementById('formMsg').innerText = 'Cadastro recebido! Em breve um consultor fará contato VIP com você.';
+      document.getElementById('formMsg').classList.remove('d-none');
+      setTimeout(() => { document.getElementById('formMsg').classList.add('d-none'); }, 6000);
+      this.reset();
     });
   </script>
 </body>
