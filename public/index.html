@@ -1,98 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Administrativo | AgroDigital 5.0™</title>
-  <link rel="stylesheet" href="/assets/css/admin-style.css" />
-  <script src="/assets/js/cael-inteligencia.js" defer></script>
-</head>
-<body>
-  <header class="topbar">
-    <h1>🌿 AgroDigital 5.0™ - Intelligence & Investment</h1>
-    <div class="lang-switch">
-      <button onclick="switchLang('pt')">🇧🇷</button>
-      <button onclick="switchLang('en')">🇺🇸</button>
-    </div>
-  </header>
-
-  <nav class="sidebar">
-    <ul>
-      <li><a href="#bi">📊 Painel BI</a></li>
-      <li><a href="#vaults">🔐 Vaults</a></li>
-      <li><a href="#market">📈 Inteligência de Mercado</a></li>
-      <li><a href="#funds">💼 Estratégia de Fundos</a></li>
-      <li><a href="#leads">🤝 Leads & Investidores</a></li>
-      <li><a href="#security">🔒 Segurança & Autenticação</a></li>
-      <li><a href="#config">⚙️ Configurações</a></li>
-    </ul>
-  </nav>
-
-  <main class="content">
-    <section id="bi">
-      <h2>Visão Geral e Inteligência de Dados</h2>
-      <div id="bi-dashboard">
-        <!-- Lucro líquido, previsão, entradas e saídas, ganhos por hora -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Administrativo | AgroDigital 5.0™</title>
+    <link rel="stylesheet" href="admin-style.css" />
+    <script src="cael-inteligencia.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>🌿 AgroDigital 5.0™ - Intelligence & Investment</h1>
+      <div class="lang-switch">
+        <button onclick="switchLang('pt')">🇧🇷 BR</button>
+        <button onclick="switchLang('en')">🇺🇸 US</button>
       </div>
-    </section>
+    </header>
 
-    <section id="vaults">
-      <h2>Controle de Vaults</h2>
-      <div id="vault-status">
-        <!-- Leitura em tempo real + retirada automática -->
-      </div>
-    </section>
-
-    <section id="market">
-      <h2>Insights de Mercado & Commodities</h2>
-      <canvas id="chart-market"></canvas>
-      <div id="suggestions">
-        <!-- Sugestões da IA de onde aplicar, baseado no comportamento de mercado -->
-      </div>
-    </section>
-
-    <section id="funds">
-      <h2>Gestão de Fundos & Aplicações</h2>
-      <p><strong>IA Cael:</strong> Divisão recomendada em staking, stablecoins, reinvestimento e segurança.</p>
-      <p>💡 Onde aplicar os lucros? IA analisa automaticamente e sugere baseado nos dados do BI.</p>
-    </section>
-
-    <section id="leads">
-      <h2>Leads & Parceiros Estratégicos</h2>
-      <div id="leads-data">
-        <!-- Airtable + IA Cael análise preditiva e mapeamento de oportunidades -->
-      </div>
-    </section>
-
-    <section id="security">
-      <h2>Autenticação & Segurança</h2>
+    <nav class="sidebar">
       <ul>
-        <li>🔐 Autenticação por senha personalizada</li>
-        <li>🔍 Planejado: Face ID via Apple (Safari)</li>
-        <li>📍 Geolocalização dos acessos (para análise de expansão)</li>
-        <li>🧠 IA identifica comportamento dos usuários e alerta oportunidades</li>
+        <li><a href="#bi">📊 Painel BI</a></li>
+        <li><a href="#vaults">🔐 Vaults</a></li>
+        <li><a href="#market">📈 Inteligência de Mercado</a></li>
+        <li><a href="#funds">💰 Estratégia de Fundos</a></li>
+        <li><a href="#leads">📞 Leads & Investidores</a></li>
+        <li><a href="#security">🛡 Segurança & Autenticação</a></li>
+        <li><a href="#config">⚙️ Configurações</a></li>
       </ul>
-    </section>
+    </nav>
 
-    <section id="config">
-      <h2>Configurações do Sistema</h2>
-      <form>
-        <label>Senha do Administrador:</label>
-        <input type="password" value="admin123" />
-        <button>Salvar</button>
-      </form>
-    </section>
-  </main>
+    <main class="container">
+      <section id="bi">
+        <h2>Visão Geral e Inteligência de Dados</h2>
+        <p>Controle e monitoramento avançado dos indicadores de performance.</p>
+      </section>
 
-  <div id="cael-assistente">
-    <button onclick="toggleCael()">🤖 Ativar IA Cael</button>
-    <div class="cael-box" style="display: none;">
-      <p>Bem-vindo Aguiar Jr. Deseja previsão de investimento ou relatório de leads?</p>
-    </div>
-  </div>
+      <section id="vaults">
+        <h2>Controle de Vaults</h2>
+        <p>Relatórios em tempo real e segurança multichave para os fundos.</p>
+      </section>
 
-  <footer>
-    <p>AgroDigital5.0™ | ESG | Inovação | IA de Impacto Global 🌎</p>
-  </footer>
-</body>
+      <section id="market">
+        <h2>Insights de Mercado & Commodities</h2>
+        <p>Análise de ativos agrícolas, preços internacionais e previsões futuras.</p>
+      </section>
+
+      <section id="funds">
+        <h2>Gestão de Fundos & Aplicações</h2>
+        <p><strong>IA Cael:</strong> Divisão recomendada em staking, stablecoins, reinvestimento e segurança.</p>
+        <p>⚡ Onde aplicar os lucros? IA analisa automaticamente e sugere baseado nos dados do BI.</p>
+      </section>
+
+      <section id="leads">
+        <h2>Leads & Investidores</h2>
+        <p>Cadastro, comportamento e sugestão automatizada de oportunidades.</p>
+      </section>
+
+      <section id="security">
+        <h2>Segurança & Autenticação</h2>
+        <p>Proteção com autenticação 2FA, biometria e face ID (em breve).</p>
+      </section>
+
+      <section id="config">
+        <h2>Configurações</h2>
+        <p>Parâmetros do painel, preferências de idioma e integrações externas.</p>
+      </section>
+    </main>
+  </body>
 </html>
