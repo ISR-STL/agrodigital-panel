@@ -2,66 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AgroDigital5.0™ | Connecting the real value of agriculture</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#002233">
-  <link rel="manifest" href="manifest.json">
+  <title>AgroDigital5.0™ – Global Token Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap, Flag Icons, Estilos -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.2/web3.min.js"></script>
-  <script src="app.js" defer></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="assets/logo.png" alt="Logo" width="32" height="32" class="me-2"> AgroDigital5.0™
-      </a>
-      <div>
-        <button class="btn btn-light me-2" onclick="changeLang()"><i class="bi bi-translate"></i></button>
-        <button class="btn btn-success" onclick="window.location.href='admin-panel.html'"><i class="bi bi-person-lock"></i> Admin</button>
-      </div>
+  <!-- NAVBAR EXECUTIVO -->
+  <nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between align-items-center">
+    <span class="navbar-brand mb-0 h1">AgroDigital5.0™</span>
+    <div>
+      <button class="btn btn-link p-0 me-2" onclick="changeLang('en')" title="English">
+        <span class="fi fi-us fis" style="font-size:1.6em;"></span>
+      </button>
+      <button class="btn btn-link p-0 me-2" onclick="changeLang('pt')" title="Português">
+        <span class="fi fi-br fis" style="font-size:1.6em;"></span>
+      </button>
+      <button class="btn btn-link p-0 me-2" onclick="changeLang('es')" title="Español">
+        <span class="fi fi-es fis" style="font-size:1.6em;"></span>
+      </button>
+      <span class="badge bg-primary" id="currentLang">EN</span>
     </div>
   </nav>
-  <main class="container py-4">
+
+  <!-- PAINEL PRINCIPAL -->
+  <main class="container py-5">
+    <section class="text-center mb-4">
+      <h1 id="mainTitle">Welcome to AgroDigital5.0™</h1>
+      <p id="mainDesc">Secure, Global & ESG Certified Token Sales</p>
+    </section>
     <div class="row g-3">
-      <div class="col-md-7">
-        <div class="card shadow p-4">
-          <h2 class="mb-3 text-primary"><i class="bi bi-currency-bitcoin"></i> Buy Tokens</h2>
-          <button class="btn btn-outline-primary mb-2 w-100" onclick="connectWallet()"><i class="bi bi-wallet2"></i> Connect Wallet</button>
-          <button class="btn btn-success mb-2 w-100" onclick="buyToken()"><i class="bi bi-cart"></i> Buy</button>
-          <button class="btn btn-warning mb-2 w-100" onclick="donateAmazonNFT()"><i class="bi bi-tree"></i> Donate & Get NFT</button>
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h5 id="tokenSaleTitle">Buy Tokens</h5>
+          <button class="btn btn-success mb-2" onclick="connectWallet()" id="walletBtn">Connect Wallet</button>
+          <button class="btn btn-primary mb-2" onclick="buyToken()" id="buyTokenBtn">Buy</button>
+          <button class="btn btn-warning mb-2" onclick="donateAmazonNFT()" id="donateNFTBtn">Donate & Get NFT</button>
           <div id="walletAddress" class="small text-muted"></div>
         </div>
-        <div class="card shadow p-3 mt-3">
-          <h5 class="text-secondary mb-3"><i class="bi bi-bar-chart"></i> Live Metrics</h5>
-          <canvas id="cryptoChart" height="100"></canvas>
-          <div id="realTimeStatus" class="mt-2 small"></div>
-        </div>
       </div>
-      <div class="col-md-5">
-        <div class="card shadow p-3 mb-3">
-          <h5 class="mb-2"><i class="bi bi-globe"></i> ESG Impact</h5>
-          <p>Automatic donation to green causes for every sale.</p>
-        </div>
-        <div class="card shadow p-3 mb-3">
-          <h5 class="mb-2"><i class="bi bi-bank"></i> Governance</h5>
-          <p>On-chain DAO, voting, and real-time auditing.</p>
-        </div>
-        <div class="card shadow p-3">
-          <h5 class="mb-2"><i class="bi bi-person-lines-fill"></i> Partners & VIP</h5>
-          <p>VIP area and exclusive perks for major investors.</p>
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h5 id="metricsTitle">Live Metrics</h5>
+          <canvas id="cryptoChart" height="120"></canvas>
         </div>
       </div>
     </div>
-    <div class="text-center mt-4">
-      <a id="bscscanLink" href="#" class="btn btn-outline-info" target="_blank"><i class="bi bi-link-45deg"></i> Verify on BscScan</a>
+
+    <!-- ESG, Governança, Parceiros -->
+    <div class="row g-3 mt-3">
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h5 id="esgTitle">ESG Impact</h5>
+          <p id="esgDesc">Automatic donation to green causes for every sale</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h5 id="governanceTitle">Governance</h5>
+          <p id="governanceDesc">On-chain DAO, voting and real-time auditing</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h5 id="partnersTitle">Partners & VIP</h5>
+          <p id="partnersDesc">VIP area and exclusive perks for major investors</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link BscScan -->
+    <div class="mt-4 text-center">
+      <a id="bscscanLink" href="https://bscscan.com/address/SEU_CONTRATO_AQUI" class="btn btn-outline-info" target="_blank">
+        <i class="bi bi-link-45deg"></i> <span id="bscscanBtn">Verify on BscScan</span>
+      </a>
     </div>
   </main>
 
-  <!-- Assistente IA Cael -->
+  <!-- IA ASSISTENTE -->
   <div class="cael-ai position-fixed bottom-0 end-0 p-3" style="z-index:999;">
     <button class="btn btn-dark" onclick="toggleIA()"><i class="bi bi-robot"></i> AI Support</button>
     <div id="iaBox" class="card p-2 mt-2" style="display:none; width:300px;">
@@ -71,10 +91,19 @@
     </div>
   </div>
 
+  <!-- FOOTER -->
   <footer class="text-center mt-5 mb-2 small">
     <hr>
-    <span>©️ 2025 AgroDigital5.0™ – All Rights Reserved.</span><br>
+    <span>©️ 2025 AgroDigital5.0™ – All Rights Reserved.</span>
+    <br>
     <span class="text-danger">Anti-plagiarism: All content digitally protected.</span>
   </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+  <script src="cael-inteligencia.js"></script>
+  <script src="i18n.js"></script>
 </body>
 </html>
