@@ -6,7 +6,6 @@ function toggleIA() {
 function sendIACommand() {
   const input = document.getElementById('iaCommand').value.trim();
   if (!input) return;
-
   // Mensagem de processamento e resposta simulada
   document.getElementById('iaResponse').innerText = "Processing request...";
   setTimeout(() => {
@@ -14,3 +13,7 @@ function sendIACommand() {
     document.getElementById('iaResponse').innerText = output;
   }, 800);
 }
+
+// Torna a função acessível globalmente para funcionar no onclick do HTML
+window.sendIACommand = sendIACommand;
+window.toggleIA = toggleIA;
