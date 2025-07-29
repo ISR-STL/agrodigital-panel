@@ -1,10 +1,12 @@
 {
-  "name": "AgroDigital 5.0",
+  "name": "AgroDigital 5.0™",
   "short_name": "AgroDigital",
+  "description": "Connecting the real value of agriculture to the global digital economy.",
   "start_url": ".",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#002233",
-  "description": "Painel AgroDigital 5.0™️ – Connecting the real value of agriculture.",
+  "theme_color": "#002233",
   "icons": [
     {
       "src": "assets/icon-192.png",
@@ -16,5 +18,7 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "scope": "/",
+  "lang": "en"
 }
