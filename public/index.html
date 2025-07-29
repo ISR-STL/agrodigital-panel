@@ -1,51 +1,116 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>AgroDigital5.0™ – Global Token Panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- PWA & ICONS -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
   <meta name="theme-color" content="#002233">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.2/web3.min.js"></script>
+  <style>
+    body { background: #0b2239; color: #fff; }
+    .container { margin-top: 60px; }
+    .furtivo-btn { position: absolute; top: 12px; left: 12px; opacity: 0.01; width: 180px; height: 32px; z-index: 999; cursor: pointer; }
+    .client-btn { position: absolute; top: 12px; right: 95px; }
+    .lang-flags { position: absolute; top: 10px; right: 20px; }
+    .adm-menu { display:none; }
+  </style>
 </head>
 <body>
-  <header style="display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:#001a33;">
-    <!-- Botão furtivo ADM -->
-    <div id="brand-area" style="cursor:pointer;">
-      <span id="brandName" style="font-weight:bold;color:#fff;font-size:1.4em;">AgroDigital5.0™</span>
-      <button id="admBtn" style="display:none; margin-left:12px;" onclick="window.location.href='admin-panel.html'">Painel ADM</button>
-    </div>
-    <!-- Botão painel cliente -->
-    <div>
-      <button class="btn btn-outline-light" style="padding:7px 18px;border-radius:8px;border:1px solid #13e2c9;color:#13e2c9;background:none;font-weight:600;font-size:1em;margin-right:8px;"
-        onclick="window.location.href='client-panel.html'">Acessar Meu Painel</button>
-    </div>
-  </header>
+  <!-- BOTÃO FURTIVO (área superior esquerda sobre o nome) -->
+  <div class="furtivo-btn" title="Admin Access" ondblclick="goAdmin()"></div>
 
-  <!-- Conteúdo do seu painel público e venda de tokens aqui -->
-  <main style="max-width:980px;margin:30px auto;padding:30px;background:#0a2741;border-radius:18px;box-shadow:0 2px 20px #0004;">
-    <h1 style="text-align:center;color:#19f7c6;margin-bottom:25px;">Bem-vindo à AgroDigital5.0™</h1>
-    <p style="text-align:center;color:#fff;font-size:1.2em;">
-      Tokenização, ESG, vendas globais, impacto real. Invista com transparência.
-    </p>
-    <!-- Seus botões/metas gráficos/etc... -->
-    <!-- ... -->
-  </main>
+  <!-- HEADER -->
+  <div style="padding:18px 0 0 30px; font-size: 1.8em; font-weight:700;">
+    <span id="logo">AgroDigital5.0™</span>
+    <!-- Botão Área do Cliente -->
+    <button class="client-btn btn btn-outline-light" onclick="window.location.href='client-dashboard.html'">Área do Cliente</button>
+    <!-- Flags Idioma -->
+    <span class="lang-flags">
+      <img src="https://flagcdn.com/us.svg" width="24" onclick="changeLang('en')" style="cursor:pointer;">
+      <img src="https://flagcdn.com/br.svg" width="24" onclick="changeLang('pt')" style="cursor:pointer;">
+      <img src="https://flagcdn.com/es.svg" width="24" onclick="changeLang('es')" style="cursor:pointer;">
+    </span>
+  </div>
+  <div class="container">
+    <h1 class="text-center">Welcome to AgroDigital5.0™</h1>
+    <h4 class="text-center">Secure, Global & ESG Certified Token Sales</h4>
+    <div class="row mt-4 mb-4 justify-content-center">
+      <div class="col-md-5">
+        <div class="card p-3 mb-4">
+          <h4>Buy Tokens</h4>
+          <button class="btn btn-success w-100 mb-2" onclick="connectWallet()">Connect Wallet</button>
+          <button class="btn btn-primary w-100 mb-2" onclick="buyToken()">Buy</button>
+          <button class="btn btn-warning w-100" onclick="window.location.href='nft.html'">Donate & Get NFT</button>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="card p-3 mb-4">
+          <h4>Live Metrics</h4>
+          <canvas id="cryptoChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3 justify-content-center">
+      <div class="col-md-3"><div class="card p-3"> <b>ESG Impact</b><br>Automatic donation to green causes for every sale</div></div>
+      <div class="col-md-3"><div class="card p-3"> <b>Governance</b><br>On-chain DAO, voting and real-time auditing</div></div>
+      <div class="col-md-3"><div class="card p-3"> <b>Partners & VIP</b><br>VIP area and exclusive perks for major investors</div></div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <input type="text" id="contractAddress" class="form-control mb-2" placeholder="Paste contract address (0x...)">
+        <button class="btn btn-info mb-2" onclick="linkContract()">Vincular Contrato</button>
+        <button class="btn btn-outline-info mb-2" onclick="verifyBscScan()">Verify on BscScan</button>
+      </div>
+    </div>
+  </div>
 
+  <div style="position:fixed; bottom:18px; right:22px; z-index:1100;">
+    <button class="btn btn-dark" onclick="window.location.href='ai-support.html'">
+      <i class="bi bi-robot"></i> AI Support
+    </button>
+  </div>
+
+  <!-- Chart.js Criptos -->
   <script>
-    // Botão ADM furtivo (2 cliques no nome)
-    let clickCount = 0;
-    document.getElementById('brand-area').addEventListener('click', function() {
-      clickCount++;
-      if (clickCount === 2) {
-        document.getElementById('admBtn').style.display = 'inline-block';
-        setTimeout(()=>{
-          document.getElementById('admBtn').style.display = 'none'; clickCount=0;
-        }, 7000); // Botão ADM some após 7s
+    function goAdmin() {
+      // Admin Furtivo — pode ser senha/token, agora só redireciona
+      window.location.href='admin-panel.html';
+    }
+    function changeLang(lang) { alert('Idioma alterado para: ' + lang); /* Aqui pode integrar com i18n.js */ }
+    function connectWallet() { alert('Wallet connected!'); }
+    function buyToken() { alert('Buy process initiated.'); }
+    function linkContract() {
+      let addr = document.getElementById('contractAddress').value;
+      if(addr.startsWith("0x") && addr.length === 42) {
+        window.open("https://bscscan.com/address/"+addr, "_blank");
+      } else {
+        alert('Invalid contract address');
       }
-      setTimeout(()=>{ clickCount=0; }, 2200); // reseta se demorar mais que 2,2s
+    }
+    function verifyBscScan() {
+      let addr = document.getElementById('contractAddress').value;
+      if(addr.startsWith("0x") && addr.length === 42) {
+        window.open("https://bscscan.com/address/"+addr, "_blank");
+      } else {
+        alert('Paste a valid contract address first.');
+      }
+    }
+    // Exemplo de gráfico minimalista
+    new Chart(document.getElementById('cryptoChart'), {
+      type: 'line',
+      data: {
+        labels: ['CornToken', 'BNB', 'ETH', 'BTC'],
+        datasets: [{
+          label: 'Prices',
+          data: [15.3, 5, 3, 9],
+          borderColor: '#28ef8f', borderWidth: 2, fill: false
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { display:false } } }
     });
   </script>
 </body>
