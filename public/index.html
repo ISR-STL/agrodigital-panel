@@ -1,1 +1,49 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroDigital 5.0 | InvestTokens</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin-style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="logo-3d.png" type="image/png">
+</head>
+<body>
+  <header class="topbar">
+    <img src="investtokens-logo.png" alt="InvestTokens Logo" height="50">
+    <h1>AgroDigital 5.0 - Intelligence & Investment Panel</h1>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h2>Bem-vindo ao Painel Oficial AgroDigital 5.0</h2>
+      <p>Gerencie seus investimentos com inteligência, transparência e automação em tempo real.</p>
+    </section>
+
+    <section class="painel">
+      <div id="cael-inteligente"></div>
+      <script src="cael-inteligencia.js"></script>
+    </section>
+
+    <section class="vaults">
+      <h3>Status dos Vaults</h3>
+      <pre id="vaults-container"></pre>
+      <script src="vaults.json" type="application/json"></script>
+    </section>
+
+    <section class="bi">
+      <h3>Dados de Inteligência de Mercado</h3>
+      <pre id="bi-container"></pre>
+      <script src="bi.json" type="application/json"></script>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 AgroDigital 5.0 • Powered by InvestTokens & Cael AI</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
