@@ -1,2 +1,2 @@
 # agrodigital-panel
-Painel oficial AgroDigital 5.0 — gerenciamento, monitoramento e integrações do ecossistema de tokens CornToken, SoByen e PulseX.
+AgroDigital5.0™ connects real agribusiness to the global blockchain, with automated ESG token sales, recurring profitability, and transparency through AI. Invest now and be a protagonist in the revolution that is redefining the future of digital agriculture—those who are first reap the greatest rewards..
