@@ -1,1 +1,1 @@
-// Conteúdo simulado para js/cael-inteligencia.js
+// IA Cael integration script
