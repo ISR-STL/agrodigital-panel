@@ -217,3 +217,17 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 });
+/
+|-- index.html
+|-- admin-panel.html
+|-- landing-institucional.html
+|-- styles.css
+|-- app.js
+|-- cael-inteligencia.js
+|-- i18n.js
+|-- manifest.json
+|-- sw.js
+|-- /assets/
+     |-- icon-192.png
+     |-- icon-512.png
+     |-- logo.png
