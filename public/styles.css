@@ -1,121 +1,18 @@
-body {
-  background: #001a33 url('https://i.imgur.com/sPUr8I6.png') no-repeat center center fixed;
-  background-size: cover;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #f0f4f8;
-}
-
-.card, .navbar, .modal-content {
-  border-radius: 16px !important;
-  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.16);
-}
-
-.navbar-brand img {
-  border-radius: 8px;
-  background: #fff;
-  padding: 2px;
-}
-
-.navbar, .navbar-brand, .navbar-dark {
-  font-weight: 600;
-  letter-spacing: .5px;
-}
-
-.btn, button {
-  border-radius: 10px !important;
-  font-weight: 600;
-  letter-spacing: .5px;
-}
-/
-|-- index.html
-|-- admin-panel.html
-|-- landing-institucional.html
-|-- styles.css
-|-- app.js
-|-- cael-inteligencia.js
-|-- i18n.js
-|-- manifest.json
-|-- sw.js
-|-- /assets/
-     |-- icon-192.png
-     |-- icon-512.png
-     |-- logo.png
-
-.table th, .table td {
-  vertical-align: middle !important;
-}
-
-input[type="text"], input[type="number"], input[type="password"], .form-control, textarea {
-  border-radius: 8px !important;
-  background: #0f2537 !important;
-  color: #e4f0fa !important;
-  border: 1px solid #003366 !important;
-}
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: #00c6ff !important;
-  box-shadow: 0 0 0 2px #005bea33;
-}
-
 footer {
-  color: #b4c4d9;
-  letter-spacing: .2px;
+  background: #fff !important;
+  color: #222 !important;
+  border-top: 2px solid #09c2e6;
+  box-shadow: none !important;
+  padding: 22px 0 16px 0 !important;
+  margin-top: 40px;
+  font-size: 1.05em;
+  letter-spacing: .1px;
+  text-align: center;
 }
-
-.cael-ai, #adminIABox, #iaBox, .modal-content {
-  background: rgba(18,30,47,0.98) !important;
-  border: 1px solid #00c6ff1a !important;
-  color: #f4fafc !important;
-}
-
-hr {
-  border-color: #00336666 !important;
-}
-
-::-webkit-scrollbar {
-  width: 7px;
-  background: #00336622;
-}
-::-webkit-scrollbar-thumb {
-  background: #004888;
-  border-radius: 5px;
-}
-
-.list-group-item {
-  background: #0e253a !important;
-  color: #d2f6fd;
-  border: none !important;
-}
-
-.badge {
-  font-size: .8em;
+.tm-badge {
+  font-size: 0.7em;
+  vertical-align: super;
+  color: #002233;
   font-weight: 700;
-  padding: .4em .8em;
-}
-
-.btn-success, .btn-primary, .btn-warning, .btn-info, .btn-dark, .btn-outline-success, .btn-outline-primary {
-  transition: background 0.12s;
-}
-
-.btn-success:hover { background: #0dc143 !important; }
-.btn-primary:hover { background: #002288 !important; }
-.btn-warning:hover { background: #f6a100 !important; }
-.btn-info:hover { background: #09c2e6 !important; }
-.btn-dark:hover { background: #223355 !important; }
-.btn-outline-primary:hover, .btn-outline-success:hover {
-  background: #003366 !important;
-  color: #fff !important;
-}
-
-a, a:visited {
-  color: #09c2e6;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-.shadow {
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.12) !important;
+  margin-left: 2px;
 }
