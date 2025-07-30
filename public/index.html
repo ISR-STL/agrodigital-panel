@@ -2,284 +2,111 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AgroDigital5.0™ – Institutional Landing</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#002233">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
-  <style>
-    body { background: linear-gradient(120deg,#002233 70%,#00e5ff 180%); color: #eafffa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    .cover { background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; min-height: 380px; border-radius: 0 0 32px 32px; box-shadow: 0 8px 48px #00e5ff29; position: relative; text-align: center; }
-    .cover-content { background: rgba(0,34,51,0.72); padding: 70px 30px 40px 30px; border-radius: 0 0 40px 40px; display: flex; flex-direction: column; align-items: center; min-height: 380px; }
-    .inst-title { font-size: 2.2em; font-weight: 800; color: #00e7c6; text-shadow: 0 2px 20px #02595280; margin-bottom: 10px; }
-    .inst-legend { color: #ffd95d; font-weight: 700; font-size: 1.13em; margin-bottom: 30px; }
-    .about-card, .values-card { background: rgba(0,34,51,0.92); border-radius: 16px; box-shadow: 0 2px 20px #00e5ff12; padding: 24px 32px; margin-bottom: 20px; }
-    .selo-tm { background: #00e7c6; color: #002233; font-weight: 900; font-size: 1.2em; border-radius: 10px; padding: 2px 12px; margin-left: 7px; letter-spacing: 1.2px; box-shadow: 0 1px 8px #00e5ff29; display: inline-block; }
-    .section-title { color: #00e7c6; font-size: 1.55em; font-weight: 800; margin-bottom: 16px; letter-spacing: 0.5px; }
-    .timeline { border-left: 4px solid #00e7c6; padding-left: 18px; margin-bottom: 24px; }
-    .timeline li { margin-bottom: 12px; font-size: 1.1em; }
-    .depo-card { background: #011c2d; color: #ffe; border-radius: 12px; margin-bottom: 16px; padding: 20px 18px 10px 18px; box-shadow: 0 2px 12px #00e5ff16; font-style: italic; }
-    .pdf-btn { background: #00e7c6; color: #002233; font-weight: 700; border-radius: 10px; padding: 11px 36px; margin: 24px 0; font-size: 1.12em; transition: background 0.18s; }
-    .pdf-btn:hover { background: #00c2a3; color: #fff; }
-    .contato-rapido { background: #00e7c6; color: #002233; padding: 18px 20px; border-radius: 14px; box-shadow: 0 2px 18px #00e5ff13; margin-top: 28px; font-weight: 700; text-align: center; font-size: 1.16em; }
-    .footer-tm { color: #00e7c6; font-size: 1.03em; margin-top: 44px; text-align: center; letter-spacing: 1px; font-weight: 700; }
-    @media (max-width: 600px) { .cover-content { padding: 32px 8px 18px 8px; } .about-card, .values-card { padding: 16px 7px; } .inst-title { font-size: 1.25em; } }
-    .lang-btns { position: absolute; right: 30px; top: 25px; z-index: 20; }
-    .lang-btns .btn { border: none; background: transparent; }
-    .lang-btns .fi { font-size: 1.7em; transition: opacity .16s; opacity: .75; }
-    .lang-btns .fi.active, .lang-btns .btn:focus .fi, .lang-btns .btn:hover .fi { opacity: 1; filter: drop-shadow(0 0 5px #fff); }
-  </style>
+  <title>AgroDigital5.0™ – Global Token Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap, Flag Icons, CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="cover">
-    <!-- BOTÕES DE IDIOMA -->
-    <div class="lang-btns">
-      <button class="btn" onclick="changeLang('en')" id="btnEN"><span class="fi fi-us"></span></button>
-      <button class="btn" onclick="changeLang('pt')" id="btnPT"><span class="fi fi-br"></span></button>
-      <button class="btn" onclick="changeLang('es')" id="btnES"><span class="fi fi-es"></span></button>
+  <!-- NAVBAR EXECUTIVO -->
+  <nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between align-items-center">
+    <span class="navbar-brand mb-0 h1">
+      AgroDigital5.0<sup style="font-size:.55em;top:-0.7em;position:relative;">TM</sup>
+    </span>
+    <div>
+      <button class="btn btn-link p-0 me-1" onclick="changeLang('en')" title="English">
+        <span class="fi fi-us fis" style="font-size:1.5em;"></span>
+      </button>
+      <button class="btn btn-link p-0 me-1" onclick="changeLang('pt')" title="Português">
+        <span class="fi fi-br fis" style="font-size:1.5em;"></span>
+      </button>
+      <button class="btn btn-link p-0 me-1" onclick="changeLang('es')" title="Español">
+        <span class="fi fi-es fis" style="font-size:1.5em;"></span>
+      </button>
+      <span class="badge bg-primary" id="currentLang">EN</span>
     </div>
-    <div class="cover-content">
-      <div class="inst-title" id="mainTitle">AgroDigital5.0™ <span class="selo-tm">™</span></div>
-      <div class="inst-legend" id="instLegend">The future of agriculture and global investment. ESG. Multinational. Real Innovation.</div>
-      <div><b style="font-size:1.15em;color:#fff;" id="legacyPhrase">"You don't need to be born rich to build an empire. You just need vision, purpose… and the courage to start."</b></div>
-      <div class="mt-4">
-        <a href="index.html" class="btn btn-outline-info btn-lg me-2" id="panelBtn"><i class="bi bi-bar-chart"></i> Global Panel</a>
-        <a href="landing-whatsapp.html" class="btn btn-success btn-lg" id="whatsBtn"><i class="bi bi-whatsapp"></i> Board Contact</a>
-      </div>
-    </div>
-  </div>
-  <div class="container py-5">
-    <div class="about-card mb-4">
-      <div class="section-title" id="aboutTitle">About the Ecosystem</div>
-      <p id="aboutDesc">
-        AgroDigital5.0™ connects real agribusiness assets, digital tokens, automation, ESG and a 100% global fundraising model. With an AI + Human board, it is the first multinational holding to unite liquidity, governance, impact and legacy for generations.
-      </p>
-    </div>
-    <div class="row">
+  </nav>
+
+  <main class="container py-5">
+    <section class="text-center mb-4">
+      <h1 id="mainTitle">Welcome to AgroDigital5.0™</h1>
+      <p id="mainDesc">Secure, Global & ESG Certified Token Sales</p>
+    </section>
+    <div class="row g-3">
       <div class="col-md-6">
-        <div class="values-card">
-          <div class="section-title" id="missionTitle">Mission</div>
-          <div id="missionDesc">To transform Brazilian agribusiness into a global benchmark for liquidity, transparency and social/environmental impact.</div>
-        </div>
-        <div class="values-card">
-          <div class="section-title" id="visionTitle">Vision</div>
-          <div id="visionDesc">To be the leading holding company in innovation, ethics and growth, founding the world's first AI + Human empire in digital agriculture.</div>
+        <div class="card p-3">
+          <h5 id="tokenSaleTitle">Buy Tokens</h5>
+          <button class="btn btn-success mb-2" onclick="connectWallet()" id="walletBtn">Connect Wallet</button>
+          <button class="btn btn-primary mb-2" onclick="buyToken()" id="buyTokenBtn">Buy</button>
+          <button class="btn btn-warning mb-2" onclick="donateAmazonNFT()" id="donateNFTBtn">Donate & Get NFT</button>
+          <div id="walletAddress" class="small text-muted"></div>
         </div>
       </div>
       <div class="col-md-6">
-        <div class="values-card">
-          <div class="section-title" id="valuesTitle">Values</div>
-          <ul id="valuesList">
-            <li>Ethics, purpose and transparency</li>
-            <li>On-chain governance (DAO)</li>
-            <li>ESG sustainability</li>
-            <li>Real liquidity and security</li>
-            <li>Meritocracy and legacy vision</li>
-          </ul>
+        <div class="card p-3">
+          <h5 id="metricsTitle">Live Metrics</h5>
+          <canvas id="cryptoChart" height="120"></canvas>
         </div>
       </div>
     </div>
-    <div class="about-card">
-      <div class="section-title" id="roadmapTitle">Executive Roadmap</div>
-      <ul class="timeline" id="roadmapList">
-        <li>2024: Founded and launched MVP AgroDigital5.0™</li>
-        <li>2025: Global fundraising of US$100M, investor rounds</li>
-        <li>2026: Consolidation as the world's largest ESG agro panel</li>
-        <li>2027+: IPO/expansion, full AI & PulsePlay integration</li>
-      </ul>
-    </div>
-    <div class="about-card">
-      <div class="section-title" id="howTitle">How it works?</div>
-      <ol id="howList">
-        <li>Investor registers interest and validates via board WhatsApp</li>
-        <li>Buys ESG token or joins the round</li>
-        <li>Receives exclusive panel, real-time metrics and opportunities</li>
-        <li>Gains access to DAO governance and VIP multinational area</li>
-      </ol>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="depo-card" id="depo1">"The AgroDigital5.0 team brings together the best in intelligence and innovation. Investing here means joining a new world!"<br><b>— CEO AgroGlobal Fund</b></div>
+
+    <!-- ESG, Governança, Parceiros -->
+    <div class="row g-3 mt-3">
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h5 id="esgTitle">ESG Impact</h5>
+          <p id="esgDesc">Automatic donation to green causes for every sale</p>
+        </div>
       </div>
-      <div class="col-md-6">
-        <div class="depo-card" id="depo2">"PulsePlay™ is the future of agribusiness, with real impact for investors and for the planet."<br><b>— Board Partner</b></div>
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h5 id="governanceTitle">Governance</h5>
+          <p id="governanceDesc">On-chain DAO, voting and real-time auditing</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h5 id="partnersTitle">Partners & VIP</h5>
+          <p id="partnersDesc">VIP area and exclusive perks for major investors</p>
+        </div>
       </div>
     </div>
-    <div class="text-center">
-      <a href="docs/agrodigital5_institucional.pdf" target="_blank" class="pdf-btn" id="pdfBtn">
-        <i class="bi bi-file-earmark-pdf"></i> Download Institutional PDF
+
+    <!-- Link BscScan -->
+    <div class="mt-4 text-center">
+      <a id="bscscanLink" href="https://bscscan.com/address/0x3BaB93f95697eCc8673dffE21897325A33a74858" class="btn btn-outline-info" target="_blank">
+        <i class="bi bi-link-45deg"></i> <span id="bscscanBtn">Verify on BscScan</span>
       </a>
     </div>
-    <div class="contato-rapido" id="contactFast">
-      Questions? Contact the board on WhatsApp <i class="bi bi-whatsapp"></i> or by e-mail <b>contato@agrodigital5ponto0.com</b>
+  </main>
+
+  <!-- IA ASSISTENTE (opcional) -->
+  <div class="cael-ai position-fixed bottom-0 end-0 p-3" style="z-index:999;">
+    <button class="btn btn-dark" onclick="toggleIA()"><i class="bi bi-robot"></i> AI Support</button>
+    <div id="iaBox" class="card p-2 mt-2" style="display:none; width:300px;">
+      <input type="text" id="iaCommand" class="form-control mb-2" placeholder="Ask anything...">
+      <button class="btn btn-success w-100" onclick="sendIACommand()"><i class="bi bi-send"></i> Send</button>
+      <div id="iaResponse" class="mt-2 small text-muted"></div>
     </div>
   </div>
-  <footer class="footer-tm" id="footerTM">
-    AgroDigital5.0™ – Registered Trademark <b>™</b> – All rights reserved. PulsePlay™ Board 2025
+
+  <!-- FOOTER -->
+  <footer class="text-center mt-5 mb-2 small">
+    <hr>
+    <span>©️ 2025 AgroDigital5.0™<sup style="font-size:.6em;top:-0.6em;position:relative;">TM</sup>. All Rights Reserved.</span>
+    <br>
+    <span class="text-danger">Anti-plagiarism: All content digitally protected.</span>
+    <br>
+    <span>Board: AJ. & IA Cael.</span>
   </footer>
-  <script>
-    // Traduções multinacionais
-    const i18nData = {
-      en: {
-        mainTitle: 'AgroDigital5.0™ <span class="selo-tm">™</span>',
-        instLegend: 'The future of agriculture and global investment. ESG. Multinational. Real Innovation.',
-        legacyPhrase: `"You don't need to be born rich to build an empire. You just need vision, purpose… and the courage to start."`,
-        panelBtn: 'Global Panel',
-        whatsBtn: 'Board Contact',
-        aboutTitle: 'About the Ecosystem',
-        aboutDesc: 'AgroDigital5.0™ connects real agribusiness assets, digital tokens, automation, ESG and a 100% global fundraising model. With an AI + Human board, it is the first multinational holding to unite liquidity, governance, impact and legacy for generations.',
-        missionTitle: 'Mission',
-        missionDesc: 'To transform Brazilian agribusiness into a global benchmark for liquidity, transparency and social/environmental impact.',
-        visionTitle: 'Vision',
-        visionDesc: 'To be the leading holding company in innovation, ethics and growth, founding the world\'s first AI + Human empire in digital agriculture.',
-        valuesTitle: 'Values',
-        valuesList: [
-          'Ethics, purpose and transparency',
-          'On-chain governance (DAO)',
-          'ESG sustainability',
-          'Real liquidity and security',
-          'Meritocracy and legacy vision'
-        ],
-        roadmapTitle: 'Executive Roadmap',
-        roadmapList: [
-          '2024: Founded and launched MVP AgroDigital5.0™',
-          '2025: Global fundraising of US$100M, investor rounds',
-          "2026: Consolidation as the world's largest ESG agro panel",
-          '2027+: IPO/expansion, full AI & PulsePlay integration'
-        ],
-        howTitle: 'How it works?',
-        howList: [
-          'Investor registers interest and validates via board WhatsApp',
-          'Buys ESG token or joins the round',
-          'Receives exclusive panel, real-time metrics and opportunities',
-          'Gains access to DAO governance and VIP multinational area'
-        ],
-        depo1: '"The AgroDigital5.0 team brings together the best in intelligence and innovation. Investing here means joining a new world!"<br><b>— CEO AgroGlobal Fund</b>',
-        depo2: '"PulsePlay™ is the future of agribusiness, with real impact for investors and for the planet."<br><b>— Board Partner</b>',
-        pdfBtn: '<i class="bi bi-file-earmark-pdf"></i> Download Institutional PDF',
-        contactFast: 'Questions? Contact the board on WhatsApp <i class="bi bi-whatsapp"></i> or by e-mail <b>contato@agrodigital5ponto0.com</b>',
-        footerTM: 'AgroDigital5.0™ – Registered Trademark <b>™</b> – All rights reserved. PulsePlay™ Board 2025'
-      },
-      pt: {
-        mainTitle: 'AgroDigital5.0™ <span class="selo-tm">™</span>',
-        instLegend: 'O futuro do agro e do investimento global. ESG. Multinacional. Inovação real.',
-        legacyPhrase: '"Você não precisa nascer em berço de ouro para criar um império. Só precisa de visão, propósito… e coragem para começar."',
-        panelBtn: 'Painel Global',
-        whatsBtn: 'Fale com o Board',
-        aboutTitle: 'Sobre o Ecossistema',
-        aboutDesc: 'AgroDigital5.0™ conecta ativos reais do agronegócio, tokens digitais, automação, ESG e um modelo de captação 100% global. Com board IA + Humano, é a primeira holding multinacional a unir liquidez, governança, impacto e legado para gerações.',
-        missionTitle: 'Missão',
-        missionDesc: 'Transformar o agro brasileiro em referência mundial de liquidez, transparência e impacto social/ambiental.',
-        visionTitle: 'Visão',
-        visionDesc: 'Ser a holding líder em inovação, ética e crescimento, fundando o primeiro império IA + Humano do agro digital.',
-        valuesTitle: 'Valores',
-        valuesList: [
-          'Ética, propósito e transparência',
-          'Governança on-chain (DAO)',
-          'Sustentabilidade ESG',
-          'Liquidez e segurança real',
-          'Meritocracia e visão de legado'
-        ],
-        roadmapTitle: 'Roadmap Executivo',
-        roadmapList: [
-          '2024: Fundado e lançado MVP AgroDigital5.0™',
-          '2025: Captação global de US$ 100M, rodadas de investidores',
-          '2026: Consolidação como maior painel agro ESG do mundo',
-          '2027+: IPO/expansão, integração completa IA & PulsePlay'
-        ],
-        howTitle: 'Como funciona?',
-        howList: [
-          'Investidor cadastra interesse e valida via board WhatsApp',
-          'Compra token ESG ou participa de rodada',
-          'Recebe painel exclusivo, métricas e oportunidades em tempo real',
-          'Ganha acesso à governança DAO e área VIP multinacional'
-        ],
-        depo1: '"A equipe AgroDigital5.0 une o que há de melhor em inteligência e inovação. Investir aqui é participar de um novo mundo!"<br><b>— CEO AgroGlobal Fund</b>',
-        depo2: '"PulsePlay™ é o futuro do agronegócio, com impacto real para investidores e para o planeta."<br><b>— Board Partner</b>',
-        pdfBtn: '<i class="bi bi-file-earmark-pdf"></i> Baixar PDF Institucional',
-        contactFast: 'Dúvidas? Fale com o board pelo WhatsApp <i class="bi bi-whatsapp"></i> ou pelo e-mail <b>contato@agrodigital5ponto0.com</b>',
-        footerTM: 'AgroDigital5.0™ – Marca registrada <b>™</b> – Todos os direitos reservados. PulsePlay™ Board 2025'
-      },
-      es: {
-        mainTitle: 'AgroDigital5.0™ <span class="selo-tm">™</span>',
-        instLegend: 'El futuro del agro y la inversión global. ESG. Multinacional. Innovación real.',
-        legacyPhrase: '"No necesitas nacer en cuna de oro para crear un imperio. Solo necesitas visión, propósito… y coraje para comenzar."',
-        panelBtn: 'Panel Global',
-        whatsBtn: 'Contacto Board',
-        aboutTitle: 'Sobre el Ecosistema',
-        aboutDesc: 'AgroDigital5.0™ conecta activos reales del agro, tokens digitales, automatización, ESG y un modelo de captación 100% global. Con board IA + Humano, es la primera holding multinacional en unir liquidez, gobernanza, impacto y legado para generaciones.',
-        missionTitle: 'Misión',
-        missionDesc: 'Transformar el agro brasileño en referencia mundial de liquidez, transparencia e impacto social/ambiental.',
-        visionTitle: 'Visión',
-        visionDesc: 'Ser la holding líder en innovación, ética y crecimiento, fundando el primer imperio IA + Humano del agro digital.',
-        valuesTitle: 'Valores',
-        valuesList: [
-          'Ética, propósito y transparencia',
-          'Gobernanza on-chain (DAO)',
-          'Sustentabilidad ESG',
-          'Liquidez y seguridad real',
-          'Meritocracia y visión de legado'
-        ],
-        roadmapTitle: 'Roadmap Ejecutivo',
-        roadmapList: [
-          '2024: Fundado y lanzado MVP AgroDigital5.0™',
-          '2025: Captación global de US$ 100M, rondas de inversores',
-          '2026: Consolidación como mayor panel agro ESG del mundo',
-          '2027+: IPO/expansión, integración completa IA & PulsePlay'
-        ],
-        howTitle: '¿Cómo funciona?',
-        howList: [
-          'El inversor registra interés y valida vía board WhatsApp',
-          'Compra token ESG o participa de la ronda',
-          'Recibe panel exclusivo, métricas y oportunidades en tiempo real',
-          'Obtiene acceso a gobernanza DAO y área VIP multinacional'
-        ],
-        depo1: '"El equipo AgroDigital5.0 reúne lo mejor en inteligencia e innovación. ¡Invertir aquí es participar de un nuevo mundo!"<br><b>— CEO AgroGlobal Fund</b>',
-        depo2: '"PulsePlay™ es el futuro del agro, con impacto real para inversores y para el planeta."<br><b>— Board Partner</b>',
-        pdfBtn: '<i class="bi bi-file-earmark-pdf"></i> Descargar PDF Institucional',
-        contactFast: '¿Dudas? Hable con el board por WhatsApp <i class="bi bi-whatsapp"></i> o por e-mail <b>contato@agrodigital5ponto0.com</b>',
-        footerTM: 'AgroDigital5.0™ – Marca registrada <b>™</b> – Todos los derechos reservados. PulsePlay™ Board 2025'
-      }
-    };
 
-    function changeLang(lang) {
-      // Marca flag ativa
-      ['btnEN', 'btnPT', 'btnES'].forEach(id => document.getElementById(id).querySelector('.fi').classList.remove('active'));
-      if (lang === 'en') document.getElementById('btnEN').querySelector('.fi').classList.add('active');
-      if (lang === 'pt') document.getElementById('btnPT').querySelector('.fi').classList.add('active');
-      if (lang === 'es') document.getElementById('btnES').querySelector('.fi').classList.add('active');
-      localStorage.setItem('lang', lang);
-
-      const t = i18nData[lang] || i18nData['en'];
-      document.getElementById('mainTitle').innerHTML = t.mainTitle;
-      document.getElementById('instLegend').innerText = t.instLegend;
-      document.getElementById('legacyPhrase').innerText = t.legacyPhrase;
-      document.getElementById('panelBtn').innerText = t.panelBtn;
-      document.getElementById('whatsBtn').innerText = t.whatsBtn;
-      document.getElementById('aboutTitle').innerText = t.aboutTitle;
-      document.getElementById('aboutDesc').innerText = t.aboutDesc;
-      document.getElementById('missionTitle').innerText = t.missionTitle;
-      document.getElementById('missionDesc').innerText = t.missionDesc;
-      document.getElementById('visionTitle').innerText = t.visionTitle;
-      document.getElementById('visionDesc').innerText = t.visionDesc;
-      document.getElementById('valuesTitle').innerText = t.valuesTitle;
-      document.getElementById('valuesList').innerHTML = t.valuesList.map(v=>`<li>${v}</li>`).join('');
-      document.getElementById('roadmapTitle').innerText = t.roadmapTitle;
-      document.getElementById('roadmapList').innerHTML = t.roadmapList.map(r=>`<li>${r}</li>`).join('');
-      document.getElementById('howTitle').innerText = t.howTitle;
-      document.getElementById('howList').innerHTML = t.howList.map(h=>`<li>${h}</li>`).join('');
-      document.getElementById('depo1').innerHTML = t.depo1;
-      document.getElementById('depo2').innerHTML = t.depo2;
-      document.getElementById('pdfBtn').innerHTML = t.pdfBtn;
-      document.getElementById('contactFast').innerHTML = t.contactFast;
-      document.getElementById('footerTM').innerHTML = t.footerTM;
-    }
-    // Idioma inicial: inglês, ou o último escolhido
-    document.addEventListener('DOMContentLoaded', ()=>{
-      let lang = localStorage.getItem('lang')||'en';
-      changeLang(lang);
-    });
-  </script>
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+  <script src="cael-inteligencia.js"></script>
+  <script src="i18n.js"></script>
 </body>
 </html>
