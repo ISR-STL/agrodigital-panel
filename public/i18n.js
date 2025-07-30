@@ -1,4 +1,4 @@
-// ==== Multi-idioma (EN/PT/ES) AgroDigital 5.0 ====
+// ==== Multi-idioma (EN/PT/ES) AgroDigital 5.0™ ====
 
 const translations = {
   en: {
@@ -51,27 +51,26 @@ const translations = {
   }
 };
 
+// Define o idioma (EN como padrão) e salva no localStorage
 function setLang(lang) {
   const t = translations[lang] || translations['en'];
   for (const key in t) {
     const el = document.getElementById(key);
     if (el) el.innerText = t[key];
   }
-  // Atualizar botão/label (caso tenha customização)
   if (document.getElementById("currentLang")) {
     document.getElementById("currentLang").innerText = lang.toUpperCase();
   }
   localStorage.setItem('lang', lang);
 }
 
+// Troca idioma pelo botão
 function changeLang(lang) {
   setLang(lang);
 }
 
+// Carrega idioma ao abrir página (sempre EN por padrão)
 document.addEventListener('DOMContentLoaded', () => {
   let lang = localStorage.getItem('lang') || 'en';
   setLang(lang);
 });
-
-// Exemplo de chamada no botão:
-// <button onclick="changeLang('pt')">PT</button>
