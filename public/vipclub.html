@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AgroDigital5.0™ VIP Club</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: linear-gradient(160deg, #1e215d, #03c988 90%) no-repeat center/cover; }
+    .vip-banner { background: url('assets/vip-bg.jpg') no-repeat center/cover; min-height: 350px; color: #fff; }
+    .cta-btn { font-size: 1.1em; padding: 16px 36px; }
+    .floating-wpp { position:fixed; bottom:25px; right:20px; z-index:10000; }
+  </style>
+</head>
+<body>
+  <div class="vip-banner d-flex align-items-center justify-content-center flex-column text-center">
+    <h1 class="display-5 fw-bold">VIP Investor Club</h1>
+    <p class="lead">Acesso restrito, benefícios exclusivos. Junte-se ao seleto grupo AgroDigital5.0™.</p>
+    <a href="#cadastroVIP" class="btn btn-warning cta-btn mt-4 shadow">Solicitar Acesso VIP</a>
+  </div>
+
+  <main class="container py-5" id="cadastroVIP">
+    <h2 class="mb-3 text-center">Pré-cadastro VIP</h2>
+    <form id="formVIP" class="mx-auto" style="max-width:400px;">
+      <input type="text" name="name" class="form-control mb-2" placeholder="Nome completo" required>
+      <input type="email" name="email" class="form-control mb-2" placeholder="E-mail" required>
+      <input type="text" name="linkedin" class="form-control mb-2" placeholder="LinkedIn/Empresa">
+      <button class="btn btn-warning w-100" type="submit">Solicitar VIP</button>
+    </form>
+    <div id="msgVIP" class="mt-3 text-center text-success fw-bold"></div>
+    <div class="text-center mt-5">
+      <span class="text-light small">AgroDigital5.0™ VIP &copy; 2025 – All rights reserved</span>
+    </div>
+  </main>
+
+  <a href="https://wa.me/5511999999999?text=Quero%20acesso%20VIP%20no%20AgroDigital5.0" class="floating-wpp btn btn-success shadow-lg" target="_blank" title="Fale com Board"><i class="bi bi-whatsapp"></i> VIP Board</a>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('formVIP').addEventListener('submit', function(e){
+      e.preventDefault();
+      let data = Object.fromEntries(new FormData(this).entries());
+      fetch('https://YOUR-API-ENDPOINT/vip', { method: 'POST', body: JSON.stringify(data), headers:{'Content-Type':'application/json'} })
+      .then(res => res.ok ? "Pedido VIP enviado! Board retornará em breve." : "Falha ao enviar. Tente novamente.")
+      .then(msg => document.getElementById('msgVIP').innerText = msg);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
