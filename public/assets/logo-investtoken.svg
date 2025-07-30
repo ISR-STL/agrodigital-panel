@@ -1,0 +1,13 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="24" cy="24" r="22" fill="url(#gold)" stroke="#fff7c1" stroke-width="3"/>
+  <text x="13" y="32" font-size="19" font-family="Montserrat,Segoe UI" font-weight="bold" fill="#ffef80">IT</text>
+  <g opacity="0.5">
+    <circle cx="24" cy="24" r="20" fill="none" stroke="#a5c98d" stroke-dasharray="3,5" stroke-width="1"/>
+  </g>
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffdb70"/>
+      <stop offset="1" stop-color="#ceb02d"/>
+    </linearGradient>
+  </defs>
+</svg>
