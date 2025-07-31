@@ -31,9 +31,31 @@
     .tm-badge { font-size: .55em; color: #9bd484; vertical-align: super; }
     .esg-badge { font-size: .6em; color: #27d07e; margin-left: 6px; vertical-align: super;}
     .small-link { color: #8ec1f7; text-decoration: underline; font-size: 0.95em;}
+    /* Login modal styles */
+    #loginModal .modal-content { background: #232f44; border-radius: 18px; color: #fff;}
+    #loginModal input { background: #172535; color: #fff; border: 1px solid #39495a;}
+    #loginModal .btn { min-width: 120px;}
   </style>
 </head>
 <body>
+  <!-- LOGIN MODAL -->
+  <div class="modal" id="loginModal" tabindex="-1" style="display:block; background:#06111dE6;" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow">
+        <div class="modal-header border-0">
+          <h5 class="modal-title"><i class="bi bi-lock"></i> Secure Board Login</h5>
+        </div>
+        <div class="modal-body">
+          <label class="mb-2">Enter Access Password</label>
+          <input type="password" class="form-control mb-3" id="adminPassInput" placeholder="Password" autocomplete="off">
+          <div id="loginError" class="text-danger small mb-2" style="display:none;">Invalid password!</div>
+        </div>
+        <div class="modal-footer border-0">
+          <button class="btn btn-success" onclick="checkLogin()">Enter</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- TOP NAV -->
   <nav class="navbar px-4 py-2 align-items-center">
     <span class="brand-minimal">
@@ -59,7 +81,6 @@
         <a href="#" class="nav-link"><i class="bi bi-globe"></i> Marketplace</a>
         <a href="#" class="nav-link"><i class="bi bi-shield-lock"></i> Security & LGPD</a>
       </div>
-
       <!-- MAIN DASHBOARD -->
       <div class="col-12 col-md-9 col-lg-10 py-4">
         <div class="row g-4">
@@ -123,5 +144,24 @@
   </div>
   <!-- SCRIPTS ESSENCIAIS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // SENHA DE ACESSO AO PAINEL ADM
+    const ADMIN_PASS = 'AgroBoard2025!';
+    document.getElementById('adminPassInput').addEventListener('keyup', function(e) {
+      if (e.key === 'Enter') checkLogin();
+    });
+    function checkLogin() {
+      var input = document.getElementById('adminPassInput').value;
+      if (input === ADMIN_PASS) {
+        document.getElementById('loginModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        setTimeout(() => document.getElementById('loginError').style.display = 'none', 2000);
+      }
+    }
+    // Bloqueia scroll até login
+    document.body.style.overflow = 'hidden';
+  </script>
 </body>
 </html>
