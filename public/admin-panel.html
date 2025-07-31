@@ -2,166 +2,151 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AgroDigital5.0™ – Admin Panel</title>
+  <title>AgroDigital5.0™ | Board Admin Panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- BOOTSTRAP & ICONS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin-style.css">
   <style>
-    body { background: #111d2b; color: #e3e3e3; }
-    .navbar { background: #07111e !important; }
+    body {
+      background: #151e28;
+      color: #d1e3f6;
+    }
     .sidebar {
-      min-height: 100vh; background: #192a38; padding-top: 2rem;
-      box-shadow: 2px 0 20px 0 #0002;
+      min-height: 100vh;
+      background: #192331;
+      color: #87b0de;
+      padding: 0;
+      border-right: 1px solid #27344a;
     }
-    .sidebar .nav-link { color: #b7c3cc; }
-    .sidebar .nav-link.active, .sidebar .nav-link:hover {
-      background: #232f44; color: #fff; border-radius: 10px;
-    }
-    .dashboard-card {
-      background: #232f44;
+    .sidebar a, .sidebar .nav-link { color: #87b0de; font-weight: 500;}
+    .sidebar .nav-link.active, .sidebar .nav-link:hover { color: #fff; background: #22314b;}
+    .brand-bar {
+      background: #101820;
+      padding: 10px 24px;
+      font-size: 1.2em;
+      font-weight: bold;
+      letter-spacing: 1px;
       color: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 24px #0002;
-      padding: 2rem 2.5rem 1.2rem 2.5rem;
-      margin-bottom: 2rem;
-      min-height: 180px;
+      border-bottom: 1px solid #27344a;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .brand-minimal { font-weight: 600; letter-spacing: 1px; }
-    .tm-badge { font-size: .55em; color: #9bd484; vertical-align: super; }
-    .esg-badge { font-size: .6em; color: #27d07e; margin-left: 6px; vertical-align: super;}
-    .small-link { color: #8ec1f7; text-decoration: underline; font-size: 0.95em;}
-    /* Login modal styles */
-    #loginModal .modal-content { background: #232f44; border-radius: 18px; color: #fff;}
-    #loginModal input { background: #172535; color: #fff; border: 1px solid #39495a;}
-    #loginModal .btn { min-width: 120px;}
+    .tm-badge { font-size: .6em; vertical-align: super; color: #65c948; margin-left: 2px; font-weight: bold;}
+    .esg-mini { border-radius: 8px; background: linear-gradient(90deg,#65c948 10%,#00c6ff 90%); color: #fff; font-weight: bold; padding: 3px 10px; margin-left: 16px; font-size: .98em;}
+    .admin-header { background: #182235; padding: 20px 32px 10px 32px; border-bottom: 1px solid #27344a;}
+    .admin-header h3 { color: #fff; font-weight: 600;}
+    .panel-section { margin: 16px 0; }
+    .panel-card { background: #212e45; border-radius: 13px; padding: 30px 28px 20px 28px; margin-bottom: 18px; box-shadow: 0 1px 8px #10182010; }
+    .panel-card .title { color: #89f993; font-weight: 600; font-size: 1.1em;}
+    .panel-card .value { font-size: 2em; font-weight: bold;}
+    .panel-card .note { font-size: .92em; color: #b1d5fd;}
+    .coming-soon { color: #36b6ff; font-size: 1.3em;}
+    .sidebar .nav-link i { margin-right: 7px;}
+    .api-bot { font-size: 1.05em; }
+    .api-bot i { font-size: 1.25em; color: #30f4a3; margin-right: 4px;}
+    .badge-bot {background: #23a8d5; font-size:.9em;}
+    .privacy-sec { color: #56f9a5; font-size: 1em;}
+    .manage-privacy { border: 1px solid #65c948; border-radius: 8px; color: #65c948; padding: 3px 12px; background: none; margin-top: 8px;}
+    .manage-privacy:hover { background: #1d252f;}
+    .back-site { font-size: 1.05em; color: #52b7fc;}
+    .back-site:hover { color: #fff;}
+    .admin-secure { color: #ffc300; font-weight: 600; font-size:1em; margin-left:12px;}
+    @media (max-width: 992px) {
+      .sidebar { min-height: unset; height:auto;}
+    }
   </style>
+  <script>
+    // SENHA DE ACESSO (pode alterar para sua senha segura)
+    const ADMIN_PASS = "AgroBoard2025!";
+    function checkAdmin() {
+      const pass = prompt("Admin password:");
+      if (pass !== ADMIN_PASS) { alert("Access Denied."); window.location = '/'; }
+    }
+    window.onload = checkAdmin;
+  </script>
 </head>
 <body>
-  <!-- LOGIN MODAL -->
-  <div class="modal" id="loginModal" tabindex="-1" style="display:block; background:#06111dE6;" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content shadow">
-        <div class="modal-header border-0">
-          <h5 class="modal-title"><i class="bi bi-lock"></i> Secure Board Login</h5>
-        </div>
-        <div class="modal-body">
-          <label class="mb-2">Enter Access Password</label>
-          <input type="password" class="form-control mb-3" id="adminPassInput" placeholder="Password" autocomplete="off">
-          <div id="loginError" class="text-danger small mb-2" style="display:none;">Invalid password!</div>
-        </div>
-        <div class="modal-footer border-0">
-          <button class="btn btn-success" onclick="checkLogin()">Enter</button>
-        </div>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="sidebar p-3">
+      <div class="brand-bar">
+        <img src="assets/logo-ad5.png" alt="AgroDigital5.0" height="28" class="me-2">
+        AgroDigital5.0<span class="tm-badge">TM</span>
+        <span class="esg-mini ms-2"><img src="assets/seal-esg.svg" alt="ESG" height="16" style="margin-right:2px;">ESG</span>
       </div>
-    </div>
-  </div>
-  <!-- TOP NAV -->
-  <nav class="navbar px-4 py-2 align-items-center">
-    <span class="brand-minimal">
-      <img src="assets/logo-ad5.png" alt="AgroDigital5.0" height="28" style="margin-top:-4px;">
-      AgroDigital5.0 <span class="tm-badge">TM</span>
-      <span class="esg-badge">ESG</span>
-    </span>
-    <span class="ms-auto small">
-      <i class="bi bi-lock"></i> Secure Board Area &nbsp;|&nbsp; <a href="index.html" class="small-link">Back to Site</a>
-    </span>
-  </nav>
-
-  <div class="container-fluid">
-    <div class="row">
-      <!-- SIDEBAR -->
-      <div class="col-12 col-md-3 col-lg-2 sidebar d-flex flex-column">
-        <a href="#" class="nav-link active"><i class="bi bi-speedometer2"></i> Dashboard</a>
-        <a href="#" class="nav-link"><i class="bi bi-graph-up"></i> Analytics/BI</a>
-        <a href="#" class="nav-link"><i class="bi bi-currency-bitcoin"></i> Tokens</a>
-        <a href="#" class="nav-link"><i class="bi bi-award"></i> ESG/Compliance</a>
-        <a href="#" class="nav-link"><i class="bi bi-people"></i> VIP & Investors</a>
-        <a href="#" class="nav-link"><i class="bi bi-terminal"></i> API & Bots</a>
-        <a href="#" class="nav-link"><i class="bi bi-globe"></i> Marketplace</a>
-        <a href="#" class="nav-link"><i class="bi bi-shield-lock"></i> Security & LGPD</a>
+      <ul class="nav flex-column mt-3">
+        <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-bar-chart-line"></i> Analytics/BI</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-currency-bitcoin"></i> Tokens</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-graph-up-arrow"></i> ESG/Compliance</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person-badge"></i> VIP & Investors</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-robot"></i> API & Bots</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-shop"></i> Marketplace</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-shield-lock"></i> Security & LGPD</a></li>
+      </ul>
+    </nav>
+    <!-- Main Panel -->
+    <div class="flex-grow-1">
+      <div class="admin-header d-flex justify-content-between align-items-center">
+        <h3><span class="bi bi-shield-check"></span> Secure Board Area</h3>
+        <a href="index.html" class="back-site"><i class="bi bi-globe"></i> Back to Site</a>
       </div>
-      <!-- MAIN DASHBOARD -->
-      <div class="col-12 col-md-9 col-lg-10 py-4">
-        <div class="row g-4">
-          <!-- KPI CARDS -->
-          <div class="col-md-4">
-            <div class="dashboard-card">
-              <h6>Total Accesses</h6>
-              <div class="display-5" id="totalAccesses">—</div>
-              <div class="text-secondary small">Last 24h: <span id="access24h">—</span></div>
+      <div class="container-fluid">
+        <div class="row panel-section">
+          <div class="col-lg-4 col-md-6">
+            <div class="panel-card">
+              <div class="title">Total Accesses</div>
+              <div class="value" id="access-count">--</div>
+              <div class="note">Last 24h: --</div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="dashboard-card">
-              <h6>Active Investors</h6>
-              <div class="display-5" id="investorCount">—</div>
-              <div class="text-secondary small">VIPs: <span id="vipCount">—</span></div>
+          <div class="col-lg-4 col-md-6">
+            <div class="panel-card">
+              <div class="title">Active Investors</div>
+              <div class="value" id="investor-count">--</div>
+              <div class="note">VIPs: --</div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="dashboard-card">
-              <h6>Top Searched</h6>
-              <div class="display-6" id="topSearch">—</div>
-              <div class="text-secondary small">AI adapts menu automatically</div>
+          <div class="col-lg-4 col-md-6">
+            <div class="panel-card">
+              <div class="title">Top Searched</div>
+              <div class="value" id="top-search">--</div>
+              <div class="note">AI adapts menu automatically</div>
             </div>
           </div>
         </div>
-
-        <!-- BI/CHART PLACEHOLDER -->
-        <div class="dashboard-card mt-3">
-          <h5 class="mb-3">Real-Time Analytics (Coming soon)</h5>
-          <div style="height:180px;background:#25355399;border-radius:12px;text-align:center;line-height:180px;">
-            <i class="bi bi-graph-up-arrow" style="font-size:2.3em;color:#29c17e99;"></i>
-            <span class="ms-3">Board-level market and investor intelligence</span>
+        <div class="panel-section">
+          <div class="panel-card">
+            <div class="coming-soon">Real-Time Analytics (Coming soon)</div>
+            <div class="note mt-2">
+              <span class="bi bi-bar-chart"></span> Board-level market and investor intelligence
+            </div>
           </div>
         </div>
-
-        <!-- QUICK CONFIG / BOT API / SECURITY -->
-        <div class="row">
-          <div class="col-md-6">
-            <div class="dashboard-card">
-              <h6>API/Bot Integrations</h6>
-              <ul class="mb-2">
-                <li>Telegram <i class="bi bi-telegram text-info"></i></li>
-                <li>WhatsApp <i class="bi bi-whatsapp text-success"></i></li>
-                <li>Google Sheets <i class="bi bi-file-earmark-spreadsheet text-warning"></i></li>
+        <div class="row panel-section">
+          <div class="col-lg-6">
+            <div class="panel-card">
+              <div class="title">API/Bot Integrations</div>
+              <ul class="api-bot mt-2">
+                <li><i class="bi bi-telegram"></i>Telegram <span class="badge badge-bot">Active</span></li>
+                <li><i class="bi bi-whatsapp"></i>WhatsApp <span class="badge badge-bot">Active</span></li>
+                <li><i class="bi bi-google"></i>Google Sheets <span class="badge badge-bot">Active</span></li>
               </ul>
-              <button class="btn btn-outline-primary btn-sm">Configure API</button>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="dashboard-card">
-              <h6>Security / LGPD / Privacy</h6>
-              <p class="mb-1"><i class="bi bi-shield-lock"></i> LGPD-compliant. All investor data secure.</p>
-              <button class="btn btn-outline-danger btn-sm">Manage Privacy</button>
+          <div class="col-lg-6">
+            <div class="panel-card">
+              <div class="title privacy-sec"><i class="bi bi-shield-lock"></i> Security / LGPD / Privacy</div>
+              <div class="note">LGPD-compliant. All investor data secure.</div>
+              <button class="manage-privacy">Manage Privacy</button>
             </div>
           </div>
         </div>
-        <!-- END MAIN CONTENT -->
       </div>
     </div>
   </div>
-  <!-- SCRIPTS ESSENCIAIS -->
+  <!-- BOOTSTRAP SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // SENHA DE ACESSO AO PAINEL ADM
-    const ADMIN_PASS = 'AgroBoard2025!';
-    document.getElementById('adminPassInput').addEventListener('keyup', function(e) {
-      if (e.key === 'Enter') checkLogin();
-    });
-    function checkLogin() {
-      var input = document.getElementById('adminPassInput').value;
-      if (input === ADMIN_PASS) {
-        document.getElementById('loginModal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-      } else {
-        document.getElementById('loginError').style.display = 'block';
-        setTimeout(() => document.getElementById('loginError').style.display = 'none', 2000);
-      }
-    }
-    // Bloqueia scroll até login
-    document.body.style.overflow = 'hidden';
-  </script>
 </body>
 </html>
