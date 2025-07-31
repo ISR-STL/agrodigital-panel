@@ -18,6 +18,17 @@
     @media (max-width: 900px) {
       .logo-investtokens-nav { position: static; display:inline-block; left:auto; top:auto; transform:none; margin-left:16px; }
     }
+    /* Estilo extra para botão IA */
+    #gptBtnBoard {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 3000;
+      box-shadow: 0 2px 20px #ffe06666;
+      font-weight: bold;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
   </style>
 </head>
 <body>
@@ -148,5 +159,42 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="app.js"></script>
   <script src="i18n.js"></script>
+
+  <!-- GPT-4o LIVE BOARD BUTTON -->
+  <script>
+    async function queryGPT(prompt) {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer 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"
+        },
+        body: JSON.stringify({
+          model: "gpt-4o",
+          messages: [{role: "user", content: prompt}],
+          max_tokens: 200
+        })
+      });
+      const data = await response.json();
+      return data.choices[0].message.content;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const gptBtn = document.createElement('button');
+      gptBtn.innerText = "Ask Board AI";
+      gptBtn.id = "gptBtnBoard";
+      gptBtn.className = "btn btn-warning btn-lg";
+      gptBtn.onclick = async function() {
+        const question = prompt("Type your question for Board AI (EN/ES/PT/RU/JP/CN):");
+        if (question) {
+          gptBtn.innerText = "Board AI replying…";
+          const resposta = await queryGPT(question);
+          alert("Board AI Response:\n\n" + resposta);
+          gptBtn.innerText = "Ask Board AI";
+        }
+      };
+      document.body.appendChild(gptBtn);
+    });
+  </script>
 </body>
 </html>
