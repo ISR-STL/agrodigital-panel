@@ -8,93 +8,111 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    body { background: #121c2c; color: #fff; }
-    .sidebar { min-height: 100vh; background: #151e2e; }
-    .sidebar .nav-link { color: #adc6e0; }
-    .sidebar .nav-link.active, .sidebar .nav-link:hover { color: #fff; background: #103559; }
-    .admin-header { background: #161f2e; border-bottom: 1px solid #23416a; }
-    .admin-logo { height: 38px; filter: drop-shadow(0 0 5px #ffd70099);}
-    .esg-admin { height: 28px; margin-left: 8px;}
-    .admin-footer { color: #9eb0c6; font-size: .92em; }
-    .user-avatar { width:38px; height:38px; border-radius:50%; object-fit:cover; }
-    .form-control { background: #19283d; color: #fff; border: 1px solid #28447d;}
-    .form-control:focus { background: #19283d; color: #fff; }
-    .stat-box { background: #172338; border-radius: 12px; padding: 18px; text-align:center; }
-    .stat-title { color:#8fd19e;font-size: 1.1em;}
-    .stat-value { color:#ffd700;font-size: 2.3em;font-weight:700;}
-    .btn-primary, .btn-success { border: none; }
+    body { background: #101522; color: #e0e6ef; }
+    .side-menu { min-width: 210px; background: #182038; height: 100vh; position: fixed; top: 0; left: 0; z-index: 2; }
+    .side-menu .nav-link { color: #ccd6f6; font-weight: 500; }
+    .side-menu .nav-link.active, .side-menu .nav-link:hover { background: #274372; color: #fff; border-radius: 8px; }
+    .main-content { margin-left: 220px; padding: 30px 20px; }
+    .logo-admin { display: block; margin: 18px auto 28px auto; }
+    .card { background: #1b2336; border-radius: 18px; box-shadow: 0 4px 18px #0001; border: none;}
+    .footer-admin { color: #7a869a; font-size: .92em; }
+    .input-pass { max-width: 220px; margin: 0 auto 15px auto; }
   </style>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <!-- SIDEBAR EXECUTIVA -->
-      <nav class="col-md-2 d-none d-md-block sidebar py-4">
-        <div class="text-center mb-3">
-          <img src="assets/logo-ad5.png" alt="AgroDigital5.0" class="admin-logo mb-2">
-          <img src="assets/seal-esg.svg" alt="ESG" class="esg-admin">
+  <!-- Sidebar/Menu Lateral -->
+  <div class="side-menu d-flex flex-column align-items-center py-4 shadow-lg">
+    <img src="assets/logo-ad5.png" height="38" class="logo-admin mb-2" alt="AgroDigital5.0">
+    <div class="w-100 text-center mb-4">
+      <span class="badge bg-success">ADMIN</span>
+    </div>
+    <ul class="nav flex-column w-100">
+      <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-bar-chart-line me-2"></i>Analytics & BI</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-robot me-2"></i>AI Campaigns</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-currency-exchange me-2"></i>Token Sales</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-patch-check me-2"></i>BscScan & Contracts</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-shield-check me-2"></i>Security & Governance</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i>Telegram & WhatsApp</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person-lines-fill me-2"></i>Leads & Investors</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+      <li class="nav-item mt-4"><a class="nav-link text-danger" href="index.html"><i class="bi bi-door-open me-2"></i>Exit</a></li>
+    </ul>
+    <div class="mt-auto pt-4 footer-admin w-100 text-center">
+      Board: AJ. & IA Cael.<br>
+      <span class="text-secondary">©️ 2025 AgroDigital5.0™</span>
+    </div>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <!-- Login Simples para Board -->
+      <div id="adminLogin" class="card p-4 mx-auto" style="max-width:360px; margin-top:60px;">
+        <h3 class="mb-4 text-center">Restricted Access</h3>
+        <input type="password" class="form-control input-pass mb-2" id="adminPass" placeholder="Access Password">
+        <button class="btn btn-primary w-100" onclick="loginAdmin()">Enter Panel</button>
+        <div class="mt-3 text-danger text-center d-none" id="loginError">Incorrect password.</div>
+        <div class="mt-3 text-secondary small text-center">Contact Board if you have access issues.</div>
+      </div>
+      <!-- Área interna após login -->
+      <div id="panelContent" class="d-none">
+        <div class="row">
+          <div class="col-lg-9">
+            <div class="card p-4 mb-3">
+              <h4>Executive Board Dashboard</h4>
+              <p>Welcome, Board! Here you control all core operations, campaign automations, BI, analytics, and contracts.</p>
+              <ul>
+                <li>Track all investor and lead access in real time (to be automated via BI/API).</li>
+                <li>Automate token campaigns, update BscScan, and monitor governance with one click.</li>
+                <li>Manage Telegram/WhatsApp bots and set new digital strategies.</li>
+                <li>Full history, location, and action logs of investors for market intelligence.</li>
+              </ul>
+              <span class="badge bg-info mt-2">Next level: BI/AI automation</span>
+            </div>
+            <div class="card p-4">
+              <h5>Smart Contracts & Tokens</h5>
+              <p>All your token addresses, ABIs, and contract links are managed here. Fast integration with BscScan and full audit control.</p>
+              <ul>
+                <li>SoByenToken: <b>0x9EA22b56062F5a8e870FFdEd967987A5a5eDF8d8</b></li>
+                <li>CornToken: <b>0x3BaB93f95697eCc8673dffE21897325A33a74858</b></li>
+                <li>AgroDigitalToken: <b>0x5903917b626b20700f896d080F379b6B28E4bDf6</b></li>
+              </ul>
+              <a href="https://bscscan.com/" target="_blank" class="btn btn-outline-warning mt-2"><i class="bi bi-link-45deg"></i> BscScan Explorer</a>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="card p-4">
+              <h5>Quick BI/Analytics</h5>
+              <div class="text-center py-2">
+                <i class="bi bi-bar-chart-line" style="font-size:2em;"></i>
+                <p class="mt-2">Total visits:<br><b id="bi-visits">...</b></p>
+                <p>Live Investors:<br><b id="bi-investors">...</b></p>
+              </div>
+              <hr>
+              <div class="small text-secondary">Upgrade to enable full predictive analytics, country tracking and client journey mapping (API ready).</div>
+            </div>
+          </div>
         </div>
-        <ul class="nav flex-column">
-          <li class="nav-item"><a class="nav-link active" href="#dashboard"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="#tokens"><i class="bi bi-currency-bitcoin me-2"></i>Tokens</a></li>
-          <li class="nav-item"><a class="nav-link" href="#campaigns"><i class="bi bi-megaphone me-2"></i>Campaigns</a></li>
-          <li class="nav-item"><a class="nav-link" href="#users"><i class="bi bi-people me-2"></i>Users</a></li>
-          <li class="nav-item"><a class="nav-link" href="#analytics"><i class="bi bi-bar-chart-line me-2"></i>Analytics</a></li>
-          <li class="nav-item"><a class="nav-link" href="#bscscan"><i class="bi bi-shield-lock me-2"></i>BscScan & Contracts</a></li>
-          <li class="nav-item"><a class="nav-link" href="#settings"><i class="bi bi-gear me-2"></i>Settings</a></li>
-        </ul>
-        <div class="text-center mt-5 pt-5">
-          <img src="assets/logo-investtoken.svg" alt="InvestTokens" height="32">
-        </div>
-      </nav>
-      <!-- MAIN PANEL -->
-      <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
-        <!-- HEADER -->
-        <div class="d-flex justify-content-between align-items-center py-3 admin-header">
-          <div>
-            <h3 class="mb-0">Admin Board – AgroDigital5.0™</h3>
-            <small class="text-muted">Advanced, secure and global management</small>
-          </div>
-          <div class="d-flex align-items-center">
-            <img src="assets/avatar-admin.png" alt="Admin" class="user-avatar me-2">
-            <span>Board: AJ & IA Cael</span>
-          </div>
-        </div>
-        <!-- MAIN CONTENT -->
-        <div id="dashboard" class="mt-4">
-          <div class="row g-3">
-            <div class="col-md-3">
-              <div class="stat-box">
-                <div class="stat-title">Active Users</div>
-                <div class="stat-value">14</div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="stat-box">
-                <div class="stat-title">Active Tokens</div>
-                <div class="stat-value">3</div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="stat-box">
-                <div class="stat-title">Sales (Last 24h)</div>
-                <div class="stat-value">$23,800</div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="stat-box">
-                <div class="stat-title">New Leads</div>
-                <div class="stat-value">47</div>
-              </div>
-            </div>
-          </div>
-          <!-- BI, Analytics, LGPD Notice, Quick Actions -->
-          <div class="mt-5">
-            <h5>Quick Actions</h5>
-            <button class="btn btn-success me-2 mb-2">Launch New Token</button>
-            <button class="btn btn-primary me-2 mb-2">Send Campaign</button>
-            <button class="btn btn-outline-info me-2 mb-2">Integrate API</button>
-            <button class="btn btn-outline-secondary mb-2">Analytics Report</button>
-          </div>
-          <div class="mt-4 alert alert-info">
-            <i class="bi bi-shield-lock"></i> All data is LG
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS ESSENCIAIS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Senha fixa para exemplo; mude para integração real futuramente
+    const PASS = "board2025";
+    function loginAdmin() {
+      const inp = document.getElementById('adminPass');
+      const error = document.getElementById('loginError');
+      if (inp.value === PASS) {
+        document.getElementById('adminLogin').classList.add('d-none');
+        document.getElementById('panelContent').classList.remove('d-none');
+      } else {
+        error.classList.remove('d-none');
+      }
+    }
+  </script>
+</body>
+</html>
