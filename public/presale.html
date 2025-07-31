@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Pré-venda – AgroDigital5.0™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #14213a; color: #fff; min-height:100vh;}
+    .presale-card { background: #1b2438; border-radius: 12px; padding: 32px 22px; margin-bottom:30px; box-shadow:0 2px 32px #0003;}
+    .progress-bar { background: linear-gradient(90deg,#00c6ff 10%,#65c948 100%);}
+    .btn-buy { font-size:1.15em; font-weight:700;}
+    .wallet-ctas button { margin-right:12px;}
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="mb-3">Pré-venda de Tokens</h2>
+    <div class="presale-card">
+      <div class="row align-items-center">
+        <div class="col-md-7">
+          <h4 class="mb-2">Captação Global Aberta</h4>
+          <div class="mb-2">
+            <span class="badge bg-success">Lote 1</span>
+            <span class="badge bg-warning text-dark">Ativo</span>
+          </div>
+          <p>Invista na revolução AgroDigital. Garantia de transparência, liquidez e automação.<br>
+          <b>Meta Inicial:</b> US$ 2.000.000<br>
+          <b>Tokens:</b> SoByen, Corn, AgroDigitalToken<br>
+          <b>Moedas aceitas:</b> BNB, USDT, ETH, Bitcoin</p>
+        </div>
+        <div class="col-md-5">
+          <div>
+            <b>Status da Captação</b>
+            <div class="progress mb-2" style="height:18px;">
+              <div class="progress-bar" role="progressbar" style="width:62%;">US$ 1.240.000</div>
+            </div>
+            <div class="mb-3" style="font-size:1.1em;">
+              6.200.000 de 10.000.000 tokens vendidos
+            </div>
+            <div class="wallet-ctas mb-2">
+              <button class="btn btn-warning btn-buy" onclick="connectWallet()">Comprar via MetaMask</button>
+              <button class="btn btn-outline-info btn-buy" onclick="window.open('https://pay.pix/','_blank')">Comprar via Pix</button>
+              <button class="btn btn-outline-success btn-buy" onclick="window.open('https://binance.com/','_blank')">Pagar via Binance/USDT</button>
+            </div>
+            <small class="text-secondary">Após comprar, o saldo é liberado automaticamente. Dúvidas? Consulte suporte IA.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Funil de Investidores -->
+    <div class="presale-card">
+      <h5>Funil de Captação</h5>
+      <ol class="list-group list-group-numbered mb-2">
+        <li class="list-group-item bg-dark text-white">1. Cadastro de investidor</li>
+        <li class="list-group-item bg-dark text-white">2. Conexão carteira e pagamento</li>
+        <li class="list-group-item bg-dark text-white">3. Confirmação automática</li>
+        <li class="list-group-item bg-dark text-white">4. Liberação de tokens</li>
+        <li class="list-group-item bg-dark text-white">5. Acompanhamento pelo painel (Dashboard)</li>
+      </ol>
+      <button class="btn btn-primary" onclick="window.location='login.html'">Entrar/Cadastrar</button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+  <script>
+    function connectWallet(){
+      if (window.ethereum) {
+        window.ethereum.request({ method: 'eth_requestAccounts' }).then(()=>{
+          let web3 = new Web3(window.ethereum);
+          web3.eth.getAccounts().then(accounts=>{
+            alert('Carteira conectada: '+accounts[0]);
+          });
+        });
+      } else {
+        alert('Instale a MetaMask para comprar!');
+      }
+    }
+  </script>
+</body>
+</html>
