@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard & Smart Contracts – AgroDigital5.0™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body { background: #171e2d; color: #fff; }
+    .dashboard-section { background:#222d42;border-radius:16px;box-shadow:0 2px 16px #0001;padding:32px;margin-bottom:28px }
+    .token-badge { font-size:1em; margin-right:7px; }
+    .token-link { color:#0ef; font-weight:600; }
+    .bsc-card { background:#212d3b;border-radius:12px;padding:20px;margin-bottom:16px; }
+    .abi-box { background:#181e28;border-radius:8px;padding:13px;margin-top:7px; }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="mb-4 text-info"><i class="bi bi-graph-up"></i> Global BI Dashboard & Smart Contracts</h2>
+    <!-- Metrics Panel -->
+    <div class="dashboard-section">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="bsc-card text-center">
+            <h6>Total Investors</h6>
+            <span class="display-6" id="investorCount">1,247</span>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="bsc-card text-center">
+            <h6>Tokens Sold</h6>
+            <span class="display-6" id="tokensSold">5,684,000</span>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="bsc-card text-center">
+            <h6>Market Cap (USD)</h6>
+            <span class="display-6" id="marketCap">$9,800,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- BscScan Contracts -->
+    <div class="dashboard-section">
+      <h4 class="mb-3">Official Smart Contracts (BscScan)</h4>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="bsc-card">
+            <span class="token-badge badge bg-success">SoByenToken</span>
+            <a href="https://bscscan.com/token/0x9EA22b56062F5a8e870FFdEd967987A5a5eDF8d8" target="_blank" class="token-link">
+              View on BscScan <i class="bi bi-box-arrow-up-right"></i>
+            </a>
+            <div class="abi-box small mt-2">
+              <b>Address:</b> <br>0x9EA22b56062F5a8e870FFdEd967987A5a5eDF8d8
+              <br><b>ABI:</b> <span style="color:#0ef">[Paste ABI here or auto-import]</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="bsc-card">
+            <span class="token-badge badge bg-warning text-dark">CornToken</span>
+            <a href="https://bscscan.com/token/0x3BaB93f95697eCc8673dffE21897325A33a74858" target="_blank" class="token-link">
+              View on BscScan <i class="bi bi-box-arrow-up-right"></i>
+            </a>
+            <div class="abi-box small mt-2">
+              <b>Address:</b> <br>0x3BaB93f95697eCc8673dffE21897325A33a74858
+              <br><b>ABI:</b> <span style="color:#0ef">[Paste ABI here or auto-import]</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="bsc-card">
+            <span class="token-badge badge bg-primary">AgroDigitalToken</span>
+            <a href="https://bscscan.com/token/0x5903917b626b20700f896d080F379b6B28E4bDf6" target="_blank" class="token-link">
+              View on BscScan <i class="bi bi-box-arrow-up-right"></i>
+            </a>
+            <div class="abi-box small mt-2">
+              <b>Address:</b> <br>0x5903917b626b20700f896d080F379b6B28E4bDf6
+              <br><b>ABI:</b> <span style="color:#0ef">[Paste ABI here or auto-import]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-end mt-3">
+        <button class="btn btn-outline-success btn-sm" onclick="window.location.href='index.html'"><i class="bi bi-arrow-left"></i> Return to Main Board</button>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="text-center small mt-5 text-secondary">Board: AJ. & IA Cael. – 2025</footer>
+  </div>
+</body>
+</html>
