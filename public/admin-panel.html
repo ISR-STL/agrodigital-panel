@@ -3,192 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <title>AgroDigital5.0™ – Admin Panel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#002233">
-  <link rel="manifest" href="manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css" rel="stylesheet">
-  <meta name="description" content="Admin dashboard for AgroDigital5.0™ – TM.">
+  <style>
+    body { background: #111d2b; color: #e3e3e3; }
+    .navbar { background: #07111e !important; }
+    .sidebar {
+      min-height: 100vh; background: #192a38; padding-top: 2rem;
+      box-shadow: 2px 0 20px 0 #0002;
+    }
+    .sidebar .nav-link { color: #b7c3cc; }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover {
+      background: #232f44; color: #fff; border-radius: 10px;
+    }
+    .dashboard-card {
+      background: #232f44;
+      color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 24px #0002;
+      padding: 2rem 2.5rem 1.2rem 2.5rem;
+      margin-bottom: 2rem;
+      min-height: 180px;
+    }
+    .brand-minimal { font-weight: 600; letter-spacing: 1px; }
+    .tm-badge { font-size: .55em; color: #9bd484; vertical-align: super; }
+    .esg-badge { font-size: .6em; color: #27d07e; margin-left: 6px; vertical-align: super;}
+    .small-link { color: #8ec1f7; text-decoration: underline; font-size: 0.95em;}
+  </style>
 </head>
-<body style="min-height:100vh; background: #0d1c2b;">
-  <script>
-    // Ultra Secure Admin Login (Senha + preparação para FaceID futuro)
-    const ADMIN_PASS = "SuaSenhaUltraForteAqui!"; // ALTERE para sua senha master!
-    const TM_ADMIN_KEY = "adm-agrodigital-tm";
-
-    function showLogin() {
-      document.body.innerHTML = `
-        <div class="d-flex align-items-center justify-content-center" style="height:100vh;background:#001A33;">
-          <div class="card shadow-lg p-4" style="max-width:340px;width:100%;">
-            <h4 class="mb-3 text-center text-primary">Admin Access – AgroDigital5.0™</h4>
-            <input type="password" id="adminPass" class="form-control mb-2" placeholder="Enter admin password">
-            <button class="btn btn-success w-100 mb-2" onclick="adminLogin()"><i class='bi bi-shield-lock'></i> Enter</button>
-            <button class="btn btn-outline-info w-100" onclick="alert('Em breve: login biométrico e FaceID™!')"><i class='bi bi-person-bounding-box'></i> FaceID™</button>
-            <div class="mt-3 small text-center text-secondary">All actions monitored. TM™ Protection enabled.</div>
-          </div>
-        </div>`;
-    }
-
-    function adminLogin() {
-      const val = document.getElementById('adminPass').value;
-      if (val === ADMIN_PASS) {
-        sessionStorage.setItem(TM_ADMIN_KEY, "1");
-        location.reload();
-      } else {
-        alert("Access Denied!");
-      }
-    }
-
-    // Execução: Só libera se logado na sessão
-    if (!sessionStorage.getItem(TM_ADMIN_KEY)) {
-      showLogin();
-      throw new Error("Not authenticated"); // Para impedir execução do resto da página!
-    }
-  </script>
-
-  <!-- NAVBAR ADM EXECUTIVO -->
-  <nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between align-items-center">
-    <span class="navbar-brand mb-0 h1">AgroDigital5.0™ <span class="badge bg-warning">Admin</span> <span class="badge bg-secondary">TM</span></span>
-    <div>
-      <button class="btn btn-link p-0 me-2" onclick="changeLang('en')" title="English"><span class="fi fi-us fis" style="font-size:1.4em;"></span></button>
-      <button class="btn btn-link p-0 me-2" onclick="changeLang('pt')" title="Português"><span class="fi fi-br fis" style="font-size:1.4em;"></span></button>
-      <button class="btn btn-link p-0 me-2" onclick="changeLang('es')" title="Español"><span class="fi fi-es fis" style="font-size:1.4em;"></span></button>
-      <button class="btn btn-outline-danger btn-sm" onclick="logoutAdmin()"><i class="bi bi-power"></i> Logout</button>
-    </div>
+<body>
+  <!-- TOP NAV -->
+  <nav class="navbar px-4 py-2 align-items-center">
+    <span class="brand-minimal">
+      <img src="assets/logo-ad5.png" alt="AgroDigital5.0" height="28" style="margin-top:-4px;">
+      AgroDigital5.0 <span class="tm-badge">TM</span>
+      <span class="esg-badge">ESG</span>
+    </span>
+    <span class="ms-auto small">
+      <i class="bi bi-lock"></i> Secure Board Area &nbsp;|&nbsp; <a href="index.html" class="small-link">Back to Site</a>
+    </span>
   </nav>
 
-  <main class="container py-4">
-    <h2 class="mb-4 text-primary"><i class="bi bi-speedometer"></i> Executive Dashboard</h2>
-    <div class="row g-3 mb-4">
-      <div class="col-md-4">
-        <div class="card text-bg-primary mb-3 shadow">
-          <div class="card-body">
-            <h5 class="card-title">Total Tokens Sold</h5>
-            <p class="card-text h3" id="totalTokensSold">0</p>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- SIDEBAR -->
+      <div class="col-12 col-md-3 col-lg-2 sidebar d-flex flex-column">
+        <a href="#" class="nav-link active"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a href="#" class="nav-link"><i class="bi bi-graph-up"></i> Analytics/BI</a>
+        <a href="#" class="nav-link"><i class="bi bi-currency-bitcoin"></i> Tokens</a>
+        <a href="#" class="nav-link"><i class="bi bi-award"></i> ESG/Compliance</a>
+        <a href="#" class="nav-link"><i class="bi bi-people"></i> VIP & Investors</a>
+        <a href="#" class="nav-link"><i class="bi bi-terminal"></i> API & Bots</a>
+        <a href="#" class="nav-link"><i class="bi bi-globe"></i> Marketplace</a>
+        <a href="#" class="nav-link"><i class="bi bi-shield-lock"></i> Security & LGPD</a>
+      </div>
+
+      <!-- MAIN DASHBOARD -->
+      <div class="col-12 col-md-9 col-lg-10 py-4">
+        <div class="row g-4">
+          <!-- KPI CARDS -->
+          <div class="col-md-4">
+            <div class="dashboard-card">
+              <h6>Total Accesses</h6>
+              <div class="display-5" id="totalAccesses">—</div>
+              <div class="text-secondary small">Last 24h: <span id="access24h">—</span></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="dashboard-card">
+              <h6>Active Investors</h6>
+              <div class="display-5" id="investorCount">—</div>
+              <div class="text-secondary small">VIPs: <span id="vipCount">—</span></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="dashboard-card">
+              <h6>Top Searched</h6>
+              <div class="display-6" id="topSearch">—</div>
+              <div class="text-secondary small">AI adapts menu automatically</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card text-bg-success mb-3 shadow">
-          <div class="card-body">
-            <h5 class="card-title">Marketplace Revenue</h5>
-            <p class="card-text h3" id="marketplaceRevenue">$0.00</p>
+
+        <!-- BI/CHART PLACEHOLDER -->
+        <div class="dashboard-card mt-3">
+          <h5 class="mb-3">Real-Time Analytics (Coming soon)</h5>
+          <div style="height:180px;background:#25355399;border-radius:12px;text-align:center;line-height:180px;">
+            <i class="bi bi-graph-up-arrow" style="font-size:2.3em;color:#29c17e99;"></i>
+            <span class="ms-3">Board-level market and investor intelligence</span>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card text-bg-warning mb-3 shadow">
-          <div class="card-body">
-            <h5 class="card-title">Active Partners</h5>
-            <p class="card-text h3" id="activePartners">0</p>
+
+        <!-- QUICK CONFIG / BOT API / SECURITY -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="dashboard-card">
+              <h6>API/Bot Integrations</h6>
+              <ul class="mb-2">
+                <li>Telegram <i class="bi bi-telegram text-info"></i></li>
+                <li>WhatsApp <i class="bi bi-whatsapp text-success"></i></li>
+                <li>Google Sheets <i class="bi bi-file-earmark-spreadsheet text-warning"></i></li>
+              </ul>
+              <button class="btn btn-outline-primary btn-sm">Configure API</button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="dashboard-card">
+              <h6>Security / LGPD / Privacy</h6>
+              <p class="mb-1"><i class="bi bi-shield-lock"></i> LGPD-compliant. All investor data secure.</p>
+              <button class="btn btn-outline-danger btn-sm">Manage Privacy</button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Quick Actions -->
-    <section class="mb-4">
-      <div class="d-flex justify-content-between mb-2">
-        <h4><i class="bi bi-rocket"></i> Quick Board Actions</h4>
-        <button class="btn btn-outline-danger btn-sm" onclick="if(confirm('Clear all dashboard data?')){clearDashboard();}"><i class="bi bi-x-octagon"></i> Reset All</button>
-      </div>
-      <div class="row g-3">
-        <div class="col-6 col-md-3">
-          <button class="btn btn-outline-primary w-100" onclick="openAddTokenModal()"><i class="bi bi-plus-lg"></i> Add Token</button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="btn btn-outline-success w-100" onclick="location.href='marketplace.html'"><i class="bi bi-people"></i> Marketplace</button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="btn btn-outline-info w-100" onclick="openAdminIA()"><i class="bi bi-robot"></i> Open AI Board</button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="btn btn-outline-secondary w-100" onclick="alert('Em breve: Analytics global, exportação PDF e BI avançado!')"><i class="bi bi-graph-up"></i> Analytics Pro</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-4">
-      <h4><i class="bi bi-list-ul"></i> Offers & Tokens</h4>
-      <table class="table table-striped table-dark table-bordered" id="offersTable">
-        <thead>
-          <tr>
-            <th>Token</th>
-            <th>Price</th>
-            <th>Available</th>
-            <th>Update</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Offers will be dynamically populated here -->
-        </tbody>
-      </table>
-      <button class="btn btn-outline-primary" onclick="openAddTokenModal()"><i class="bi bi-plus"></i> Add Token</button>
-    </section>
-
-    <section>
-      <h4><i class="bi bi-people"></i> Partners & Investors</h4>
-      <div id="partnersList" class="mb-3"></div>
-    </section>
-
-    <section>
-      <h4><i class="bi bi-chat-left-text"></i> Cael AI Console</h4>
-      <button class="btn btn-dark" onclick="toggleAdminIA()"><i class="bi bi-robot"></i> Open AI Board</button>
-      <div id="adminIABox" class="card p-2 mt-2" style="display:none; width:350px;">
-        <input type="text" id="adminIACommand" class="form-control mb-2" placeholder="Ask admin AI...">
-        <button class="btn btn-success w-100" onclick="sendAdminIACommand()"><i class="bi bi-send"></i> Send</button>
-        <div id="adminIAResponse" class="mt-2 small text-muted"></div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Modal Add Token -->
-  <div class="modal fade" id="addTokenModal" tabindex="-1" aria-labelledby="addTokenModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content bg-dark text-light">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addTokenModalLabel">Add New Token</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <input type="text" id="newTokenName" class="form-control mb-2" placeholder="Token Name">
-          <input type="number" id="newTokenPrice" class="form-control mb-2" placeholder="Token Price">
-          <input type="number" id="newTokenAvailable" class="form-control mb-2" placeholder="Available Units">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="addToken()">Add Token</button>
-        </div>
+        <!-- END MAIN CONTENT -->
       </div>
     </div>
   </div>
-
-  <footer class="text-center mt-5 mb-2 small">
-    <hr>
-    <span>©️ 2025 AgroDigital5.0™ – Admin Panel. All Rights Reserved. <span class="badge bg-warning text-dark">TM</span></span>
-  </footer>
-
   <!-- SCRIPTS ESSENCIAIS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="app.js"></script>
-  <script src="cael-inteligencia.js"></script>
-  <script src="i18n.js"></script>
-  <script>
-    function logoutAdmin() {
-      sessionStorage.removeItem(TM_ADMIN_KEY);
-      location.href="index.html";
-    }
-    function clearDashboard() {
-      localStorage.clear();
-      location.reload();
-    }
-    // IA Board Extra
-    function openAdminIA() {
-      toggleAdminIA();
-      document.getElementById('adminIABox').scrollIntoView({behavior:'smooth'});
-    }
-  </script>
 </body>
 </html>
