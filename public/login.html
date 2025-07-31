@@ -1,55 +1,68 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login - AgroDigital5.0™</title>
+  <title>Login | AgroDigital5.0™</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #eef3f9;}
-    .login-box { max-width:400px; margin:70px auto; background:#fff; padding:2.5rem 2rem; border-radius:16px; box-shadow:0 4px 28px #0002;}
-    .btn-wallet { background:#f6c343; border:none; color:#222; font-weight:600; }
-    .btn-wallet:hover { background:#fad96e; }
-    .divider { text-align:center; margin:1.5rem 0 1rem; position:relative;}
-    .divider:before, .divider:after { content:""; display:block; position:absolute; height:1px; background:#ccc; width:40%; top:50%;}
-    .divider:before { left:0; }
-    .divider:after { right:0; }
+    body { background: #101521; color:#fff; }
+    .login-card { max-width:380px; margin:8vh auto; box-shadow:0 2px 16px #0096c740; border-radius:12px; background:#1d2637; padding:38px 28px 28px 28px; }
+    .brand { font-size:1.8em; font-weight:600; letter-spacing:.05em;}
+    .tm-badge { font-size:0.6em; vertical-align:super; color:#95a5a6; font-weight:600;}
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 </head>
 <body>
-  <div class="login-box text-center">
-    <img src="assets/logo-ad5.png" alt="AgroDigital5.0" height="46" class="mb-3">
-    <h4 class="mb-4">Acesse sua conta</h4>
+  <div class="login-card">
+    <div class="mb-4 text-center brand">
+      AgroDigital5.0 <span class="tm-badge">TM</span>
+    </div>
     <form id="loginForm">
-      <input type="email" class="form-control mb-3" placeholder="Seu e-mail (opcional)">
-      <input type="password" class="form-control mb-3" placeholder="Senha (opcional)">
-      <button type="submit" class="btn btn-primary w-100">Entrar</button>
+      <div class="mb-3">
+        <label for="user" class="form-label">User</label>
+        <input type="text" class="form-control" id="user" required autocomplete="username">
+      </div>
+      <div class="mb-3">
+        <label for="pass" class="form-label">Password</label>
+        <input type="password" class="form-control" id="pass" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-success w-100 mb-2">Login</button>
+      <button type="button" class="btn btn-outline-primary w-100" onclick="connectMetaMask()">Connect Wallet</button>
     </form>
-    <div class="divider">ou</div>
-    <button class="btn btn-wallet w-100 mb-2" id="connectWalletBtn"><i class="bi bi-wallet2"></i> Entrar com MetaMask</button>
-    <button class="btn btn-outline-secondary w-100 mb-2" onclick="alert('Em breve!')"><i class="bi bi-google"></i> Entrar com Google</button>
-    <button class="btn btn-outline-success w-100" onclick="alert('Em breve!')"><i class="bi bi-telegram"></i> Entrar com Telegram</button>
-    <div class="mt-3 small">
-      Não tem conta? <a href="#" onclick="alert('Cadastro será feito ao conectar a wallet!')">Cadastre-se</a>
+    <div class="text-center mt-3">
+      <small>Powered by <b>Cael.AI</b> | <a href="#">Privacy Policy</a></small>
     </div>
   </div>
   <script>
-    // Conecta MetaMask e simula login
-    document.getElementById('connectWalletBtn').onclick = async function() {
-      if (!window.ethereum) return alert('MetaMask não detectada!');
-      const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      await provider.send("eth_requestAccounts", []);
-      const address = await provider.getSigner().getAddress();
-      localStorage.setItem('wallet', address);
-      // Redireciona para painel
-      window.location = "investor-panel.html";
-    };
-    // Login fake (só para testar, depois integrar backend)
-    document.getElementById('loginForm').onsubmit = function(e){
+    // Exemplo de credenciais (você pode customizar para multi-admin)
+    const ADMINS = [
+      {user: "board", pass: "board2025"}, 
+      {user: "fabro", pass: "fabro2025"}
+    ];
+    // Login básico
+    document.getElementById("loginForm").onsubmit = function(e){
       e.preventDefault();
-      // Normalmente você validaria backend
-      window.location = "investor-panel.html";
+      let u = document.getElementById("user").value.trim().toLowerCase();
+      let p = document.getElementById("pass").value;
+      let valid = ADMINS.some(x=>x.user===u && x.pass===p);
+      if(valid){
+        sessionStorage.setItem("user", u); // persiste login
+        window.location.href = (u === "board" || u === "fabro") ? "admin-panel.html" : "investor-panel.html";
+      }else{
+        alert("Invalid login.");
+      }
+    };
+    // Login com carteira (simples para demo)
+    function connectMetaMask(){
+      if(window.ethereum){
+        window.ethereum.request({ method: 'eth_requestAccounts' }).then(accounts=>{
+          sessionStorage.setItem("user", accounts[0]);
+          window.location.href = "investor-panel.html";
+        });
+      }else{
+        alert("Install MetaMask to connect your wallet.");
+      }
     }
   </script>
 </body>
