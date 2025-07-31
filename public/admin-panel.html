@@ -7,9 +7,49 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .side-menu { width:220px; min-height:100vh; position:fixed; top:0; left:0; z-index:8;}
+    body { background: #f6f9fa; }
+    .side-menu { width:220px; min-height:100vh; position:fixed; top:0; left:0; z-index:8; background: #171f2a; color: #fff; box-shadow: 0 0 18px #0a172466; }
     .main-content { margin-left:220px; min-height:100vh;}
+    .logo-admin { display:block; margin:auto; margin-bottom:30px; }
+    .nav-link { color:#b9cdf1; font-weight:500; margin-bottom:8px; transition:.2s; }
+    .nav-link.active, .nav-link:hover { color: #fff; background: #0e1632; border-radius:6px; }
+    .footer-admin { color: #b9cdf1;}
+    .admin-title { font-weight:700; color:#171f2a; letter-spacing:.03em;}
+    .admin-alert { background: #ebf7e8; border-left: 5px solid #65c948; color: #262c2f; }
+    .admin-login-box { max-width:320px; margin:60px auto 0 auto; background:#fff; border-radius:13px; box-shadow:0 6px 24px #14344a0a; padding:32px 28px; }
+    .admin-login-box label { font-weight:600;}
+    .admin-login-box input { margin-bottom:16px;}
   </style>
+  <script>
+    // Simples controle de acesso por senha para board
+    const ADMIN_PASS = "agrodigital5board"; // Troque para senha segura!
+    window.onload = function() {
+      if (!sessionStorage.getItem("adminAuthed")) {
+        document.body.innerHTML = `
+          <div class="admin-login-box shadow">
+            <h4 class="mb-3 text-center admin-title">Board Access</h4>
+            <form id="adminLoginForm">
+              <label for="admPass">Password</label>
+              <input type="password" id="admPass" class="form-control" placeholder="Enter admin password" autocomplete="off" required>
+              <button type="submit" class="btn btn-primary w-100 mt-2">Enter Panel</button>
+              <div id="loginMsg" class="text-danger mt-2 small"></div>
+              <div class="text-muted mt-4" style="font-size:.93em;">FaceID, 2FA & AI coming soon.</div>
+            </form>
+          </div>
+        `;
+        document.getElementById('adminLoginForm').onsubmit = function(e) {
+          e.preventDefault();
+          let p = document.getElementById('admPass').value;
+          if (p === ADMIN_PASS) {
+            sessionStorage.setItem("adminAuthed","1");
+            window.location.reload();
+          } else {
+            document.getElementById('loginMsg').innerText = "Incorrect password. Try again.";
+          }
+        };
+      }
+    };
+  </script>
 </head>
 <body>
   <div class="side-menu p-3">
@@ -29,11 +69,12 @@
     </div>
   </div>
   <div class="main-content p-4">
-    <h2>Welcome, Board</h2>
+    <h2 class="admin-title">Welcome, Board</h2>
     <p>Your global investment dashboard is ready.</p>
-    <div class="alert alert-info">
+    <div class="alert admin-alert">
       <b>Security:</b> Admin access protected by password. FaceID & 2FA available soon.<br>
-      <b>Usage:</b> Track, manage, and launch your global strategies.
+      <b>Usage:</b> Track, manage, and launch your global strategies.<br>
+      <b>Analytics:</b> See access logs, user activity, and real-time insights (coming up).
     </div>
   </div>
 </body>
