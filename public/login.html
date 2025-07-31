@@ -6,102 +6,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #101820; color:#fff;}
-    .card { background: #171f2b; border-radius: 14px;}
-    .form-label { color: #c7d3e2;}
-    .lang-btn { border:none; background:transparent; color:#b6cbff; margin:0 4px;}
-    .lang-btn.active { color:#fff; font-weight:bold;}
+    body { background: #111a28; color: #fff; min-height:100vh;}
+    .login-box { max-width:370px; margin:8vh auto; background: #192231; border-radius:18px; box-shadow:0 4px 28px #0003;}
+    .form-label, .form-check-label { color:#bee0ff;}
+    .form-control, .form-select { background:#131b27; color:#fff; border-radius:9px; border:1px solid #244269;}
+    .btn-primary { background:#00c6ff; border:none;}
+    .btn-primary:hover { background:#65c948;}
+    .login-logo { margin-bottom:20px; }
+    .text-link { color:#4dc2ef; text-decoration:underline; cursor:pointer;}
+    .lang-btn { font-size:1.1em; }
+    @media (max-width:600px){ .login-box{margin:3vh auto;} }
   </style>
 </head>
-<body class="d-flex justify-content-center align-items-center" style="min-height:100vh">
-  <div class="card p-4 shadow" style="min-width:320px;max-width:370px;">
-    <div class="text-center mb-2">
-      <img src="assets/logo-ad5.png" height="40">
-      <div class="fw-bold mt-2" style="font-size:1.3em;">AgroDigital5.0™</div>
-      <small class="text-info">Investor Access</small>
+<body>
+  <div class="login-box p-4">
+    <div class="text-center login-logo">
+      <img src="assets/logo-ad5.png" height="38" alt="AgroDigital5.0">
+      <div style="font-weight:700;font-size:1.4em;margin-top:8px;">AgroDigital5.0™</div>
+      <div class="small text-info mb-1">Acesso Executivo Global</div>
     </div>
-    <div id="loginView">
-      <form id="loginForm" autocomplete="off">
-        <div class="mb-3">
-          <label for="loginEmail" class="form-label">E-mail</label>
-          <input type="email" class="form-control" id="loginEmail" required>
-        </div>
-        <div class="mb-3">
-          <label for="loginPass" class="form-label">Password</label>
-          <input type="password" class="form-control" id="loginPass" required>
-        </div>
-        <button type="submit" class="btn btn-success w-100 mb-2">Login</button>
-        <button type="button" class="btn btn-outline-info w-100" onclick="showRegister()">Register</button>
-      </form>
-    </div>
-    <div id="registerView" style="display:none">
-      <form id="registerForm" autocomplete="off">
-        <div class="mb-2">
-          <label class="form-label">Name</label>
-          <input type="text" class="form-control" id="regName" required>
-        </div>
-        <div class="mb-2">
-          <label class="form-label">E-mail</label>
-          <input type="email" class="form-control" id="regEmail" required>
-        </div>
-        <div class="mb-2">
-          <label class="form-label">Phone (WhatsApp)</label>
-          <input type="text" class="form-control" id="regPhone" required>
-        </div>
-        <div class="mb-2">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-control" id="regPass" required>
-        </div>
-        <button type="submit" class="btn btn-primary w-100 mb-2">Register</button>
-        <button type="button" class="btn btn-outline-light w-100" onclick="showLogin()">Back to Login</button>
-      </form>
-    </div>
-    <div class="text-center mt-3">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('pt')">PT</button>
-      <button class="lang-btn" onclick="setLang('es')">ES</button>
+    <form id="loginForm">
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail ou Usuário</label>
+        <input type="email" class="form-control" id="email" autocomplete="username" required>
+      </div>
+      <div class="mb-2">
+        <label for="password" class="form-label">Senha</label>
+        <input type="password" class="form-control" id="password" autocomplete="current-password" required>
+      </div>
+      <div class="mb-2 form-check">
+        <input type="checkbox" class="form-check-input" id="rememberMe">
+        <label class="form-check-label" for="rememberMe">Lembrar de mim</label>
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mb-2">Entrar</button>
+      <button type="button" class="btn btn-outline-info w-100 mb-2" onclick="loginWithWallet()">Conectar com Wallet</button>
+      <div class="text-end">
+        <span class="text-link" onclick="showRecovery()">Esqueceu a senha?</span>
+      </div>
+      <div class="text-center mt-3">
+        <span class="text-link" onclick="showRegister()">Não tem conta? Cadastre-se</span>
+      </div>
+      <div class="text-center mt-3">
+        <button class="btn btn-link lang-btn" onclick="changeLang('en')" type="button">EN</button>
+        <button class="btn btn-link lang-btn" onclick="changeLang('pt')" type="button">PT</button>
+        <button class="btn btn-link lang-btn" onclick="changeLang('es')" type="button">ES</button>
+      </div>
+    </form>
+    <form id="registerForm" style="display:none;">
+      <div class="mb-3">
+        <label for="regName" class="form-label">Nome Completo</label>
+        <input type="text" class="form-control" id="regName" required>
+      </div>
+      <div class="mb-3">
+        <label for="regEmail" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="regEmail" required>
+      </div>
+      <div class="mb-3">
+        <label for="regPassword" class="form-label">Senha</label>
+        <input type="password" class="form-control" id="regPassword" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100 mb-2">Criar Conta</button>
+      <button type="button" class="btn btn-link w-100" onclick="showLogin()">Já possui conta? Entrar</button>
+    </form>
+    <form id="recoveryForm" style="display:none;">
+      <div class="mb-3">
+        <label for="recoveryEmail" class="form-label">Seu E-mail</label>
+        <input type="email" class="form-control" id="recoveryEmail" required>
+      </div>
+      <button type="submit" class="btn btn-warning w-100 mb-2">Recuperar Senha</button>
+      <button type="button" class="btn btn-link w-100" onclick="showLogin()">Voltar</button>
+    </form>
+    <div class="text-center small text-secondary mt-4">
+      &copy; 2025 AgroDigital5.0™ | Powered by IA Cael
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Simulação de login/register simples (salva no localStorage)
-    function showRegister() {
-      document.getElementById('loginView').style.display = 'none';
-      document.getElementById('registerView').style.display = 'block';
-    }
-    function showLogin() {
-      document.getElementById('registerView').style.display = 'none';
-      document.getElementById('loginView').style.display = 'block';
-    }
+    // Alternância entre telas
+    function showRegister(){ document.getElementById('loginForm').style.display='none'; document.getElementById('registerForm').style.display='block'; document.getElementById('recoveryForm').style.display='none'; }
+    function showLogin(){ document.getElementById('loginForm').style.display='block'; document.getElementById('registerForm').style.display='none'; document.getElementById('recoveryForm').style.display='none'; }
+    function showRecovery(){ document.getElementById('loginForm').style.display='none'; document.getElementById('registerForm').style.display='none'; document.getElementById('recoveryForm').style.display='block'; }
+    function changeLang(lang){ alert('Multi-idioma plugado: '+lang.toUpperCase()+' (integração i18n+GPT via backend/API, pronto para plugar)'); }
+    function loginWithWallet(){ alert('Integração MetaMask ou WalletConnect: plug & play, chame web3/metamask aqui.'); }
 
-    document.getElementById('registerForm').onsubmit = function(e) {
+    // Forms demo (plug API)
+    document.getElementById('loginForm').onsubmit = function(e){
       e.preventDefault();
-      let user = {
-        name: document.getElementById('regName').value,
-        email: document.getElementById('regEmail').value,
-        phone: document.getElementById('regPhone').value,
-        pass: document.getElementById('regPass').value
-      };
-      localStorage.setItem('user', JSON.stringify(user));
-      alert('Registered! Please login.');
+      // Plugar backend/Autenticação real aqui!
+      window.location.href = 'painel-admin.html';
+    };
+    document.getElementById('registerForm').onsubmit = function(e){
+      e.preventDefault();
+      alert('Conta criada! Plugue backend/API de registro real.');
       showLogin();
-    }
-
-    document.getElementById('loginForm').onsubmit = function(e) {
+    };
+    document.getElementById('recoveryForm').onsubmit = function(e){
       e.preventDefault();
-      let user = JSON.parse(localStorage.getItem('user')||'{}');
-      if (user && user.email === document.getElementById('loginEmail').value && user.pass === document.getElementById('loginPass').value) {
-        window.location.href = 'painel-investidor.html';
-      } else {
-        alert('Invalid credentials!');
-      }
-    }
-
-    // Multilíngue (demo, texto fixo – expansão com i18next depois)
-    function setLang(lang){
-      document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-      // Aqui podemos plugar textos via i18next.
-    }
+      alert('Recuperação enviada! Plugue backend real.');
+      showLogin();
+    };
   </script>
 </body>
 </html>
