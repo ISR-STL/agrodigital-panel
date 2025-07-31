@@ -9,17 +9,48 @@
   <link href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Mini TM */
+    .tm-badge {
+      font-size: 0.6em;
+      vertical-align: super;
+      color: #95a5a6;
+      margin-left: 2px;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+    .navbar-brand { font-weight: 700;}
+    .logo-secondary {
+      filter: drop-shadow(0 0 8px #ffd70066);
+      background: #1a2536;
+      border-radius: 16px;
+      padding: 3px 7px;
+    }
+    .esg-mini {
+      border-radius: 7px;
+      background: linear-gradient(90deg,#65c948 10%,#00c6ff 90%);
+      box-shadow: 0 1px 8px 0 #65c94822;
+      padding: 2px 5px;
+      font-size: .85em;
+      font-weight: bold;
+      color: #fff;
+      margin-left: 7px;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body>
   <!-- NAVBAR EXECUTIVA -->
-  <nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between align-items-center">
+  <nav class="navbar navbar-dark bg-dark px-3 d-flex justify-content-between align-items-center position-relative">
     <div class="d-flex align-items-center">
+      <!-- Logo principal -->
       <img src="assets/logo-ad5.png" alt="AgroDigital5.0" height="32" class="me-2">
-      <span class="navbar-brand mb-0 h1">
-        AgroDigital5.0<sup style="font-size:0.65em;vertical-align:top;">TM</sup>
+      <span class="navbar-brand mb-0 h1 d-flex align-items-center">
+        AgroDigital5.0
+        <span class="tm-badge">TM</span>
       </span>
-      <span class="ms-3" id="esgSeal">
-        <img src="assets/seal-esg.png" alt="ESG Seal" height="26" title="Sustainability Focus">
+      <span class="ms-2 esg-mini" title="Sustainability Board">
+        <img src="assets/seal-esg.svg" alt="ESG Seal" height="20" style="margin-top:-2px;"> ESG
       </span>
     </div>
     <div>
@@ -32,17 +63,20 @@
       <button class="btn btn-link p-0 me-1" onclick="changeLang('cn')" title="Chinese"><span class="fi fi-cn fis" style="font-size:1.5em;"></span></button>
       <span class="badge bg-primary" id="currentLang">EN</span>
     </div>
-    <!-- BOTÃO STEALTH ADMIN (canto superior esquerdo, só Board conhece) -->
-    <a href="admin-panel.html" id="adminStealth" class="position-absolute" style="left:8px;top:7px;z-index:2;opacity:.7;" title="Private Admin"><i class="bi bi-lock"></i></a>
+    <!-- BOTÃO STEALTH ADMIN -->
+    <a href="admin-panel.html" id="adminStealth"
+       class="position-absolute" style="left:8px;top:7px;z-index:3;opacity:.75;" title="Private Admin">
+      <i class="bi bi-lock"></i>
+    </a>
   </nav>
 
   <!-- LOGO SECUNDÁRIO (InvestTokens) -->
-  <div class="position-absolute" style="top:19px; right:25px; z-index:1;">
-    <img src="assets/logo-investtoken.png" alt="InvestTokens" height="32" title="InvestTokens">
+  <div class="position-absolute" style="top:19px; right:25px; z-index:2;">
+    <img src="assets/logo-investtoken.svg" alt="InvestTokens" height="32" title="InvestTokens" class="logo-secondary">
   </div>
 
-  <!-- MENUS MULTINÍVEL -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <!-- MENUS MULTINÍVEL EXECUTIVO -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm mt-1">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBoard" aria-controls="navbarBoard" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -112,7 +146,7 @@
         <div class="card shadow-sm p-4">
           <h4 class="mb-3" id="esgTitle">Sustainability Board</h4>
           <p id="esgDesc">ESG impact in every investment. Responsible, global and innovative.</p>
-          <img src="assets/seal-esg.png" height="36" alt="ESG Seal" class="mt-2">
+          <img src="assets/seal-esg.svg" height="36" alt="ESG Seal" class="mt-2">
         </div>
       </div>
     </div>
