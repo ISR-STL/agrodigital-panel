@@ -1,76 +1,75 @@
-// ==== Multi-idioma (EN/PT/ES) AgroDigital 5.0™ ====
+// i18n.js – Minimalista, expansível, preparado para API
+const LANGS = ['en', 'pt', 'es', 'ja', 'cn', 'ru'];
 
 const translations = {
   en: {
-    mainTitle: "Welcome to AgroDigital5.0™",
-    mainDesc: "Secure, Global & ESG Certified Token Sales",
-    tokenSaleTitle: "Buy Tokens",
-    walletBtn: "Connect Wallet",
-    buyTokenBtn: "Buy",
-    donateNFTBtn: "Donate & Get NFT",
-    metricsTitle: "Live Metrics",
-    esgTitle: "ESG Impact",
-    esgDesc: "Automatic donation to green causes for every sale.",
-    governanceTitle: "Governance",
-    governanceDesc: "On-chain DAO, voting, and real-time auditing.",
-    partnersTitle: "Partners & VIP",
-    partnersDesc: "VIP area and exclusive perks for major investors.",
-    bscscanBtn: "Verify on BscScan"
+    mainTitle: "Global ESG Investment Board",
+    mainDesc: "Invest with trust. Earn with impact.",
+    tokenSaleTitle: "Available Tokens",
+    esgTitle: "Sustainability Board",
+    esgDesc: "ESG impact in every investment. Responsible, global and innovative.",
+    currentLang: "EN"
   },
   pt: {
-    mainTitle: "Bem-vindo à AgroDigital5.0™",
-    mainDesc: "Vendas de tokens seguras, globais e ESG certificadas",
-    tokenSaleTitle: "Comprar Tokens",
-    walletBtn: "Conectar Carteira",
-    buyTokenBtn: "Comprar",
-    donateNFTBtn: "Doar & Receber NFT",
-    metricsTitle: "Métricas em Tempo Real",
-    esgTitle: "Impacto ESG",
-    esgDesc: "Doação automática para causas verdes a cada venda.",
-    governanceTitle: "Governança",
-    governanceDesc: "DAO on-chain, votação e auditoria em tempo real.",
-    partnersTitle: "Parceiros & VIP",
-    partnersDesc: "Área VIP e benefícios exclusivos para grandes investidores.",
-    bscscanBtn: "Verificar na BscScan"
+    mainTitle: "Conselho Global de Investimentos ESG",
+    mainDesc: "Invista com confiança. Ganhe com impacto.",
+    tokenSaleTitle: "Tokens Disponíveis",
+    esgTitle: "Conselho de Sustentabilidade",
+    esgDesc: "Impacto ESG em cada investimento. Responsável, global e inovador.",
+    currentLang: "PT"
   },
   es: {
-    mainTitle: "Bienvenido a AgroDigital5.0™",
-    mainDesc: "Ventas de tokens seguras, globales y certificadas ESG",
-    tokenSaleTitle: "Comprar Tokens",
-    walletBtn: "Conectar Cartera",
-    buyTokenBtn: "Comprar",
-    donateNFTBtn: "Donar y Recibir NFT",
-    metricsTitle: "Métricas en Vivo",
-    esgTitle: "Impacto ESG",
-    esgDesc: "Donación automática a causas verdes en cada venta.",
-    governanceTitle: "Gobernanza",
-    governanceDesc: "DAO on-chain, votación y auditoría en tiempo real.",
-    partnersTitle: "Socios & VIP",
-    partnersDesc: "Área VIP y beneficios exclusivos para grandes inversores.",
-    bscscanBtn: "Verificar en BscScan"
+    mainTitle: "Junta Global de Inversiones ESG",
+    mainDesc: "Invierte con confianza. Gana con impacto.",
+    tokenSaleTitle: "Tokens Disponibles",
+    esgTitle: "Consejo de Sostenibilidad",
+    esgDesc: "Impacto ESG en cada inversión. Responsable, global e innovador.",
+    currentLang: "ES"
+  },
+  ja: {
+    mainTitle: "グローバルESG投資ボード",
+    mainDesc: "信頼して投資し、インパクトで稼ぐ。",
+    tokenSaleTitle: "利用可能なトークン",
+    esgTitle: "サステナビリティ委員会",
+    esgDesc: "すべての投資でESGの影響。責任感、グローバル、革新的。",
+    currentLang: "JA"
+  },
+  cn: {
+    mainTitle: "全球ESG投资委员会",
+    mainDesc: "信任投资，收获影响力。",
+    tokenSaleTitle: "可用代币",
+    esgTitle: "可持续发展委员会",
+    esgDesc: "每项投资均具备ESG影响。负责、全球、创新。",
+    currentLang: "CN"
+  },
+  ru: {
+    mainTitle: "Глобальный ESG инвестиционный совет",
+    mainDesc: "Инвестируйте с доверием. Зарабатывайте с воздействием.",
+    tokenSaleTitle: "Доступные токены",
+    esgTitle: "Совет по устойчивому развитию",
+    esgDesc: "ESG-эффект в каждом инвестиции. Ответственно, глобально, инновационно.",
+    currentLang: "RU"
   }
 };
 
-// Define o idioma (EN como padrão) e salva no localStorage
-function setLang(lang) {
-  const t = translations[lang] || translations['en'];
-  for (const key in t) {
-    const el = document.getElementById(key);
-    if (el) el.innerText = t[key];
-  }
-  if (document.getElementById("currentLang")) {
-    document.getElementById("currentLang").innerText = lang.toUpperCase();
-  }
+let currentLang = 'en';
+
+function changeLang(lang) {
+  if (!LANGS.includes(lang)) lang = 'en';
+  currentLang = lang;
+  document.getElementById('mainTitle').innerText = translations[lang].mainTitle;
+  document.getElementById('mainDesc').innerText = translations[lang].mainDesc;
+  document.getElementById('tokenSaleTitle').innerText = translations[lang].tokenSaleTitle;
+  document.getElementById('esgTitle').innerText = translations[lang].esgTitle;
+  document.getElementById('esgDesc').innerText = translations[lang].esgDesc;
+  document.getElementById('currentLang').innerText = translations[lang].currentLang;
+  // Opcional: salvar preferencia no localStorage
   localStorage.setItem('lang', lang);
 }
 
-// Troca idioma pelo botão
-function changeLang(lang) {
-  setLang(lang);
-}
-
-// Carrega idioma ao abrir página (sempre EN por padrão)
-document.addEventListener('DOMContentLoaded', () => {
-  let lang = localStorage.getItem('lang') || 'en';
-  setLang(lang);
+// On load, set idioma default
+window.addEventListener('DOMContentLoaded', function () {
+  let savedLang = localStorage.getItem('lang');
+  if (!LANGS.includes(savedLang)) savedLang = 'en';
+  changeLang(savedLang);
 });
