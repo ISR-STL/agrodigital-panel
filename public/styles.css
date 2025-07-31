@@ -1,18 +1,154 @@
-footer {
-  background: #fff !important;
-  color: #222 !important;
-  border-top: 2px solid #09c2e6;
-  box-shadow: none !important;
-  padding: 22px 0 16px 0 !important;
-  margin-top: 40px;
-  font-size: 1.05em;
-  letter-spacing: .1px;
-  text-align: center;
+/* ====== RESET & BASE ====== */
+body {
+  background: #101522;
+  color: #e0e6ef;
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+  letter-spacing: .02em;
+  min-height: 100vh;
+}
+a { color: #23b2fd; text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3, h4, h5 { font-weight: 700; color: #fff; }
+hr { border-top: 1.5px solid #234; opacity: 0.35; margin: 18px 0; }
+
+/* ====== NAVBAR EXECUTIVA ====== */
+.navbar {
+  min-height: 62px;
+  border-bottom: 1px solid #18203866;
+}
+.navbar-dark {
+  background: #181d2c !important;
+}
+.navbar .navbar-brand {
+  font-size: 1.34em;
+  letter-spacing: .05em;
+  color: #fff !important;
+  font-weight: 800;
 }
 .tm-badge {
-  font-size: 0.7em;
-  vertical-align: super;
-  color: #002233;
-  font-weight: 700;
+  font-size: 0.66em;
+  color: #95a5a6;
+  font-weight: 600;
   margin-left: 2px;
+  vertical-align: super;
+  letter-spacing: 0;
 }
+.logo-secondary {
+  background: #1a2536;
+  border-radius: 16px;
+  padding: 3px 7px;
+  filter: drop-shadow(0 0 7px #ffd70055);
+}
+.esg-mini {
+  border-radius: 7px;
+  background: linear-gradient(90deg,#65c948 10%,#00c6ff 90%);
+  box-shadow: 0 1px 8px 0 #65c94822;
+  padding: 2px 5px;
+  font-size: .91em;
+  font-weight: bold;
+  color: #fff;
+  margin-left: 8px;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+}
+.esg-mini img { margin-right: 5px; }
+#currentLang { font-size: 1em; padding: 0 9px; border-radius: 8px; margin-left: 6px;}
+.btn-link { color: #fff; }
+.btn-link:hover { color: #22b2fd; background: #222a4033; }
+.navbar-toggler { border: none; background: none; }
+.navbar-toggler:focus { box-shadow: none; }
+
+/* ====== LOGO INVESTTOKEN ====== */
+.logo-secondary {
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 0 3px 16px #ffd70044;
+  transition: box-shadow .23s;
+}
+.logo-secondary:hover { box-shadow: 0 5px 30px #ffd70099; }
+
+/* ====== MENU MULTINÍVEL ====== */
+.navbar-expand-lg.bg-primary {
+  background: linear-gradient(90deg,#2062af 10%,#13c2ad 85%)!important;
+}
+.navbar-nav .nav-link {
+  font-weight: 600;
+  color: #f1f7ff !important;
+  letter-spacing: .02em;
+  padding: 7px 16px;
+}
+.navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
+  background: #13c2ad;
+  color: #fff !important;
+  border-radius: 10px;
+  box-shadow: 0 3px 13px #13c2ad33;
+}
+
+/* ====== CARD PAINEL ====== */
+.card {
+  background: #19213a;
+  border-radius: 19px;
+  border: none;
+  box-shadow: 0 4px 19px #161d2c26;
+}
+.card h4, .card h5 { color: #8be67e; }
+.card .badge, .list-group-item .badge { font-weight: 700; letter-spacing: .02em; }
+.list-group-item {
+  background: transparent;
+  border: 1px solid #234 !important;
+  color: #fff !important;
+  font-size: 1.09em;
+}
+.list-group-item .badge { font-size: .97em; }
+
+/* ====== ALERTA LGPD ====== */
+.alert-info {
+  background: #112233;
+  color: #c5e1fa;
+  border: none;
+  font-size: .98em;
+  box-shadow: 0 3px 11px #00336612;
+}
+
+/* ====== FOOTER ====== */
+footer {
+  color: #888fa0;
+  font-size: 1em;
+  margin-top: 38px;
+  letter-spacing: .02em;
+  padding-bottom: 18px;
+}
+footer hr { margin-bottom: 6px; }
+
+/* ====== PAINEL ADMIN ====== */
+.side-menu {
+  background: #182038;
+  min-width: 210px;
+  border-right: 1.5px solid #234a;
+}
+.side-menu .nav-link { color: #ccd6f6; font-weight: 500;}
+.side-menu .nav-link.active, .side-menu .nav-link:hover {
+  background: #274372;
+  color: #fff !important;
+  border-radius: 8px;
+}
+.logo-admin {
+  display: block;
+  margin: 18px auto 28px auto;
+}
+.main-content { margin-left: 220px; padding: 30px 20px;}
+.footer-admin { color: #7a869a; font-size: .92em; }
+
+/* ====== RESPONSIVO ====== */
+@media (max-width:991px) {
+  .main-content { margin-left: 0; }
+  .side-menu { position:relative; min-width:100vw; height:auto; border-right:none;}
+}
+@media (max-width: 600px) {
+  .navbar-brand { font-size:1em;}
+  .logo-secondary { height:28px !important;}
+  .side-menu, .main-content { padding:12px 2vw;}
+  .card, .alert-info { padding: 10px 8px;}
+}
+
