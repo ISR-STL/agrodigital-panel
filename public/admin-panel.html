@@ -2,151 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AgroDigital5.0™ | Board Admin Panel</title>
+  <title>Board Admin – AgroDigital5.0™</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- BOOTSTRAP & ICONS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="admin-style.css">
+  <link rel="stylesheet" href="styles.css">
   <style>
-    body {
-      background: #151e28;
-      color: #d1e3f6;
-    }
-    .sidebar {
-      min-height: 100vh;
-      background: #192331;
-      color: #87b0de;
-      padding: 0;
-      border-right: 1px solid #27344a;
-    }
-    .sidebar a, .sidebar .nav-link { color: #87b0de; font-weight: 500;}
-    .sidebar .nav-link.active, .sidebar .nav-link:hover { color: #fff; background: #22314b;}
-    .brand-bar {
-      background: #101820;
-      padding: 10px 24px;
-      font-size: 1.2em;
-      font-weight: bold;
-      letter-spacing: 1px;
-      color: #fff;
-      border-bottom: 1px solid #27344a;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .tm-badge { font-size: .6em; vertical-align: super; color: #65c948; margin-left: 2px; font-weight: bold;}
-    .esg-mini { border-radius: 8px; background: linear-gradient(90deg,#65c948 10%,#00c6ff 90%); color: #fff; font-weight: bold; padding: 3px 10px; margin-left: 16px; font-size: .98em;}
-    .admin-header { background: #182235; padding: 20px 32px 10px 32px; border-bottom: 1px solid #27344a;}
-    .admin-header h3 { color: #fff; font-weight: 600;}
-    .panel-section { margin: 16px 0; }
-    .panel-card { background: #212e45; border-radius: 13px; padding: 30px 28px 20px 28px; margin-bottom: 18px; box-shadow: 0 1px 8px #10182010; }
-    .panel-card .title { color: #89f993; font-weight: 600; font-size: 1.1em;}
-    .panel-card .value { font-size: 2em; font-weight: bold;}
-    .panel-card .note { font-size: .92em; color: #b1d5fd;}
-    .coming-soon { color: #36b6ff; font-size: 1.3em;}
-    .sidebar .nav-link i { margin-right: 7px;}
-    .api-bot { font-size: 1.05em; }
-    .api-bot i { font-size: 1.25em; color: #30f4a3; margin-right: 4px;}
-    .badge-bot {background: #23a8d5; font-size:.9em;}
-    .privacy-sec { color: #56f9a5; font-size: 1em;}
-    .manage-privacy { border: 1px solid #65c948; border-radius: 8px; color: #65c948; padding: 3px 12px; background: none; margin-top: 8px;}
-    .manage-privacy:hover { background: #1d252f;}
-    .back-site { font-size: 1.05em; color: #52b7fc;}
-    .back-site:hover { color: #fff;}
-    .admin-secure { color: #ffc300; font-weight: 600; font-size:1em; margin-left:12px;}
-    @media (max-width: 992px) {
-      .sidebar { min-height: unset; height:auto;}
-    }
+    body { background: #161e2d; color: #fff; }
+    .admin-card { max-width:400px;margin:auto;margin-top:8vh;background:#232e45;border-radius:16px;box-shadow:0 4px 32px #00000022 }
+    .admin-logo { display:block;margin:auto;margin-bottom:10px;height:48px }
+    .btn-board { background:linear-gradient(90deg,#65c948 10%,#00c6ff 90%);color:#fff;font-weight:600 }
+    .admin-panel { max-width:900px;margin:auto;margin-top:6vh; }
+    .admin-section { background:#232e45; border-radius:16px; margin-bottom:24px; padding:32px; box-shadow:0 2px 12px #0002 }
   </style>
-  <script>
-    // SENHA DE ACESSO (pode alterar para sua senha segura)
-    const ADMIN_PASS = "AgroBoard2025!";
-    function checkAdmin() {
-      const pass = prompt("Admin password:");
-      if (pass !== ADMIN_PASS) { alert("Access Denied."); window.location = '/'; }
-    }
-    window.onload = checkAdmin;
-  </script>
 </head>
 <body>
-  <div class="d-flex">
-    <!-- Sidebar -->
-    <nav class="sidebar p-3">
-      <div class="brand-bar">
-        <img src="assets/logo-ad5.png" alt="AgroDigital5.0" height="28" class="me-2">
-        AgroDigital5.0<span class="tm-badge">TM</span>
-        <span class="esg-mini ms-2"><img src="assets/seal-esg.svg" alt="ESG" height="16" style="margin-right:2px;">ESG</span>
-      </div>
-      <ul class="nav flex-column mt-3">
-        <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-bar-chart-line"></i> Analytics/BI</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-currency-bitcoin"></i> Tokens</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-graph-up-arrow"></i> ESG/Compliance</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person-badge"></i> VIP & Investors</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-robot"></i> API & Bots</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-shop"></i> Marketplace</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-shield-lock"></i> Security & LGPD</a></li>
-      </ul>
-    </nav>
-    <!-- Main Panel -->
-    <div class="flex-grow-1">
-      <div class="admin-header d-flex justify-content-between align-items-center">
-        <h3><span class="bi bi-shield-check"></span> Secure Board Area</h3>
-        <a href="index.html" class="back-site"><i class="bi bi-globe"></i> Back to Site</a>
-      </div>
-      <div class="container-fluid">
-        <div class="row panel-section">
-          <div class="col-lg-4 col-md-6">
-            <div class="panel-card">
-              <div class="title">Total Accesses</div>
-              <div class="value" id="access-count">--</div>
-              <div class="note">Last 24h: --</div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="panel-card">
-              <div class="title">Active Investors</div>
-              <div class="value" id="investor-count">--</div>
-              <div class="note">VIPs: --</div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="panel-card">
-              <div class="title">Top Searched</div>
-              <div class="value" id="top-search">--</div>
-              <div class="note">AI adapts menu automatically</div>
-            </div>
-          </div>
-        </div>
-        <div class="panel-section">
-          <div class="panel-card">
-            <div class="coming-soon">Real-Time Analytics (Coming soon)</div>
-            <div class="note mt-2">
-              <span class="bi bi-bar-chart"></span> Board-level market and investor intelligence
-            </div>
-          </div>
-        </div>
-        <div class="row panel-section">
-          <div class="col-lg-6">
-            <div class="panel-card">
-              <div class="title">API/Bot Integrations</div>
-              <ul class="api-bot mt-2">
-                <li><i class="bi bi-telegram"></i>Telegram <span class="badge badge-bot">Active</span></li>
-                <li><i class="bi bi-whatsapp"></i>WhatsApp <span class="badge badge-bot">Active</span></li>
-                <li><i class="bi bi-google"></i>Google Sheets <span class="badge badge-bot">Active</span></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="panel-card">
-              <div class="title privacy-sec"><i class="bi bi-shield-lock"></i> Security / LGPD / Privacy</div>
-              <div class="note">LGPD-compliant. All investor data secure.</div>
-              <button class="manage-privacy">Manage Privacy</button>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div id="loginArea" class="admin-card p-4 mt-5 shadow">
+    <img src="assets/logo-ad5.png" alt="AgroDigital5.0" class="admin-logo">
+    <h4 class="text-center mb-3">Board Admin Access</h4>
+    <div class="mb-2">
+      <input type="password" id="adminPass" class="form-control" placeholder="Board password">
+    </div>
+    <button class="btn btn-board w-100" onclick="loginAdmin()">Access</button>
+    <div id="loginError" class="text-danger text-center small mt-2" style="display:none;"></div>
+  </div>
+  <div id="panelArea" class="admin-panel" style="display:none;">
+    <h3>AgroDigital5.0™ Board Panel <span class="badge bg-success">SECURE</span></h3>
+    <div class="admin-section">
+      <h5>Campaign Control</h5>
+      <p>Here you can activate token sales, manage campaigns, approve funds, or trigger instant actions on the platform (auto AI/BI ready).</p>
+      <button class="btn btn-outline-info" onclick="alert('Soon: Connect to BI/Telegram/WhatsApp/AI!')">Launch Campaigns</button>
+    </div>
+    <div class="admin-section">
+      <h5>Live Access Log <span class="badge bg-warning">Beta</span></h5>
+      <ul id="accessLog" class="small"></ul>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-secondary btn-sm" onclick="logoutAdmin()">Logout</button>
     </div>
   </div>
-  <!-- BOOTSTRAP SCRIPTS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Senha temporária padrão (troque para uma secreta depois)
+    const BOARD_PASSWORD = "AJCAEL2025";
+    function loginAdmin() {
+      const pass = document.getElementById("adminPass").value;
+      if (pass === BOARD_PASSWORD) {
+        document.getElementById("loginArea").style.display = "none";
+        document.getElementById("panelArea").style.display = "block";
+        addLog('Admin access granted: '+(new Date()).toLocaleString());
+      } else {
+        document.getElementById("loginError").style.display = "block";
+        document.getElementById("loginError").innerText = "Invalid password.";
+        addLog('Failed login: '+(new Date()).toLocaleString());
+      }
+    }
+    function logoutAdmin() {
+      document.getElementById("loginArea").style.display = "block";
+      document.getElementById("panelArea").style.display = "none";
+      document.getElementById("adminPass").value = "";
+    }
+    function addLog(txt){
+      let el = document.createElement('li');
+      el.innerText = txt;
+      document.getElementById("accessLog").appendChild(el);
+    }
+  </script>
 </body>
 </html>
