@@ -1,4 +1,3 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,62 +6,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #101521; color:#fff; }
-    .login-card { max-width:380px; margin:8vh auto; box-shadow:0 2px 16px #0096c740; border-radius:12px; background:#1d2637; padding:38px 28px 28px 28px; }
-    .brand { font-size:1.8em; font-weight:600; letter-spacing:.05em;}
-    .tm-badge { font-size:0.6em; vertical-align:super; color:#95a5a6; font-weight:600;}
+    body { background: #101820; color:#fff;}
+    .card { background: #171f2b; border-radius: 14px;}
+    .form-label { color: #c7d3e2;}
+    .lang-btn { border:none; background:transparent; color:#b6cbff; margin:0 4px;}
+    .lang-btn.active { color:#fff; font-weight:bold;}
   </style>
 </head>
-<body>
-  <div class="login-card">
-    <div class="mb-4 text-center brand">
-      AgroDigital5.0 <span class="tm-badge">TM</span>
+<body class="d-flex justify-content-center align-items-center" style="min-height:100vh">
+  <div class="card p-4 shadow" style="min-width:320px;max-width:370px;">
+    <div class="text-center mb-2">
+      <img src="assets/logo-ad5.png" height="40">
+      <div class="fw-bold mt-2" style="font-size:1.3em;">AgroDigital5.0™</div>
+      <small class="text-info">Investor Access</small>
     </div>
-    <form id="loginForm">
-      <div class="mb-3">
-        <label for="user" class="form-label">User</label>
-        <input type="text" class="form-control" id="user" required autocomplete="username">
-      </div>
-      <div class="mb-3">
-        <label for="pass" class="form-label">Password</label>
-        <input type="password" class="form-control" id="pass" required autocomplete="current-password">
-      </div>
-      <button type="submit" class="btn btn-success w-100 mb-2">Login</button>
-      <button type="button" class="btn btn-outline-primary w-100" onclick="connectMetaMask()">Connect Wallet</button>
-    </form>
+    <div id="loginView">
+      <form id="loginForm" autocomplete="off">
+        <div class="mb-3">
+          <label for="loginEmail" class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="loginEmail" required>
+        </div>
+        <div class="mb-3">
+          <label for="loginPass" class="form-label">Password</label>
+          <input type="password" class="form-control" id="loginPass" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100 mb-2">Login</button>
+        <button type="button" class="btn btn-outline-info w-100" onclick="showRegister()">Register</button>
+      </form>
+    </div>
+    <div id="registerView" style="display:none">
+      <form id="registerForm" autocomplete="off">
+        <div class="mb-2">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-control" id="regName" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="regEmail" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Phone (WhatsApp)</label>
+          <input type="text" class="form-control" id="regPhone" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" id="regPass" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-2">Register</button>
+        <button type="button" class="btn btn-outline-light w-100" onclick="showLogin()">Back to Login</button>
+      </form>
+    </div>
     <div class="text-center mt-3">
-      <small>Powered by <b>Cael.AI</b> | <a href="#">Privacy Policy</a></small>
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
     </div>
   </div>
   <script>
-    // Exemplo de credenciais (você pode customizar para multi-admin)
-    const ADMINS = [
-      {user: "board", pass: "board2025"}, 
-      {user: "fabro", pass: "fabro2025"}
-    ];
-    // Login básico
-    document.getElementById("loginForm").onsubmit = function(e){
+    // Simulação de login/register simples (salva no localStorage)
+    function showRegister() {
+      document.getElementById('loginView').style.display = 'none';
+      document.getElementById('registerView').style.display = 'block';
+    }
+    function showLogin() {
+      document.getElementById('registerView').style.display = 'none';
+      document.getElementById('loginView').style.display = 'block';
+    }
+
+    document.getElementById('registerForm').onsubmit = function(e) {
       e.preventDefault();
-      let u = document.getElementById("user").value.trim().toLowerCase();
-      let p = document.getElementById("pass").value;
-      let valid = ADMINS.some(x=>x.user===u && x.pass===p);
-      if(valid){
-        sessionStorage.setItem("user", u); // persiste login
-        window.location.href = (u === "board" || u === "fabro") ? "admin-panel.html" : "investor-panel.html";
-      }else{
-        alert("Invalid login.");
+      let user = {
+        name: document.getElementById('regName').value,
+        email: document.getElementById('regEmail').value,
+        phone: document.getElementById('regPhone').value,
+        pass: document.getElementById('regPass').value
+      };
+      localStorage.setItem('user', JSON.stringify(user));
+      alert('Registered! Please login.');
+      showLogin();
+    }
+
+    document.getElementById('loginForm').onsubmit = function(e) {
+      e.preventDefault();
+      let user = JSON.parse(localStorage.getItem('user')||'{}');
+      if (user && user.email === document.getElementById('loginEmail').value && user.pass === document.getElementById('loginPass').value) {
+        window.location.href = 'painel-investidor.html';
+      } else {
+        alert('Invalid credentials!');
       }
-    };
-    // Login com carteira (simples para demo)
-    function connectMetaMask(){
-      if(window.ethereum){
-        window.ethereum.request({ method: 'eth_requestAccounts' }).then(accounts=>{
-          sessionStorage.setItem("user", accounts[0]);
-          window.location.href = "investor-panel.html";
-        });
-      }else{
-        alert("Install MetaMask to connect your wallet.");
-      }
+    }
+
+    // Multilíngue (demo, texto fixo – expansão com i18next depois)
+    function setLang(lang){
+      document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+      // Aqui podemos plugar textos via i18next.
     }
   </script>
 </body>
