@@ -1,37 +1,39 @@
-// app.js
-// AgroDigital5.0 – Board Automations & Investor Experience
-
-// ======== Internationalization
-window.changeLang = function (lang) {
-  setLang(lang);
-  document.getElementById("currentLang").innerText = lang.toUpperCase();
-};
-
-// ======== MetaMask Integration
-window.connectWallet = async function() {
-  if (typeof window.ethereum === 'undefined') {
-    alert('MetaMask or compatible wallet not found. Please install.');
-    return;
+// ---- Idioma Automático + Troca Manual ----
+const langs = ['en','pt','es','ru','ja','cn'];
+const langNames = {en:'EN',pt:'PT',es:'ES',ru:'RU',ja:'JA',cn:'CN'};
+function setLang(lang) {
+  localStorage.setItem('lang', lang);
+  document.getElementById('currentLang').innerText = langNames[lang]||'EN';
+  window.i18n && window.i18n(lang); // suporte ao i18n.js
+  document.documentElement.lang = lang;
+}
+function changeLang(lang) { setLang(lang); location.reload(); }
+window.onload = () => {
+  let saved = localStorage.getItem('lang');
+  if (!saved) {
+    let userLang = (navigator.language||'en').slice(0,2);
+    saved = langs.includes(userLang) ? userLang : 'en';
   }
-  try {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    alert('Wallet connected: ' + accounts[0]);
-    // Futuro: exibir endereço no painel, liberar funções VIP, etc.
-  } catch (err) {
-    alert('Wallet connection denied.');
+  setLang(saved);
+};
+
+// ---- Wallet Connect (placeholder) ----
+function connectWallet() {
+  alert("Coming soon: Connect your wallet (MetaMask, WalletConnect, etc)");
+}
+
+// ---- Stealth Admin (proteção extra) ----
+document.getElementById('adminStealth').onclick = function(e){
+  e.preventDefault();
+  let pass = prompt("Enter Admin Password:");
+  if (pass === 'board2025') { window.location = this.href; }
+  else alert('Access denied.');
+};
+
+// ---- Menu ativo visual ----
+document.querySelectorAll('.nav-link').forEach(el=>{
+  el.onclick = function() {
+    document.querySelectorAll('.nav-link').forEach(e=>e.classList.remove('active'));
+    this.classList.add('active');
   }
-};
-
-// ======== BscScan Direct Link (Tokens & Contracts)
-window.openBscScan = function(address) {
-  window.open('https://bscscan.com/address/' + address, '_blank');
-};
-
-// ======== Stealth Admin Button
-document.addEventListener("DOMContentLoaded", function () {
-  // Foco automático no botão de admin (acessível só pra Board)
-  document.getElementById("adminStealth").addEventListener("click", function(e){
-    // Futuro: autenticação, FaceID, etc
-    // Por enquanto, só redireciona
-  });
 });
