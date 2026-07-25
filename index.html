@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Painel AgroDigital para leitura e análise de arquivos CSV e JSON.">
+  <title>AgroDigital | Painel de Leituras</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">AGRODIGITAL 5.0</span>
+      <h1>Painel Universal de Leituras</h1>
+      <p>Importe CSV ou JSON, filtre os dados e transforme registros brutos em indicadores operacionais.</p>
+    </div>
+    <span id="status" class="status">Aguardando arquivo</span>
+  </header>
+
+  <main class="container">
+    <section class="card uploader">
+      <div>
+        <h2>Fonte de dados</h2>
+        <p>O painel identifica automaticamente colunas numéricas e cria indicadores e gráficos.</p>
+      </div>
+      <div class="actions">
+        <label class="button primary" for="fileInput">Selecionar arquivo</label>
+        <input id="fileInput" type="file" accept=".csv,.json,text/csv,application/json" hidden>
+        <button id="sampleButton" class="button secondary" type="button">Carregar exemplo</button>
+        <button id="exportButton" class="button secondary" type="button" disabled>Exportar filtrado</button>
+      </div>
+    </section>
+
+    <section class="filters card">
+      <div>
+        <label for="searchInput">Busca</label>
+        <input id="searchInput" type="search" placeholder="Pesquisar em todas as colunas" disabled>
+      </div>
+      <div>
+        <label for="categorySelect">Agrupar por</label>
+        <select id="categorySelect" disabled></select>
+      </div>
+      <div>
+        <label for="metricSelect">Métrica</label>
+        <select id="metricSelect" disabled></select>
+      </div>
+    </section>
+
+    <section class="kpis" aria-label="Indicadores principais">
+      <article class="card kpi"><span>Registros</span><strong id="kpiRows">0</strong></article>
+      <article class="card kpi"><span>Colunas</span><strong id="kpiColumns">0</strong></article>
+      <article class="card kpi"><span>Soma da métrica</span><strong id="kpiSum">—</strong></article>
+      <article class="card kpi"><span>Média da métrica</span><strong id="kpiAverage">—</strong></article>
+    </section>
+
+    <section class="grid">
+      <article class="card chart-card">
+        <div class="section-heading"><h2>Distribuição por categoria</h2><span id="chartCaption">Sem dados</span></div>
+        <canvas id="mainChart" aria-label="Gráfico dos dados carregados"></canvas>
+      </article>
+      <article class="card insights">
+        <div class="section-heading"><h2>Leitura rápida</h2></div>
+        <ul id="insightList"><li>Carregue um arquivo para iniciar a análise.</li></ul>
+      </article>
+    </section>
+
+    <section class="card table-card">
+      <div class="section-heading"><h2>Dados tratados</h2><span id="tableCount">0 registros</span></div>
+      <div class="table-wrap"><table><thead id="tableHead"></thead><tbody id="tableBody"></tbody></table></div>
+    </section>
+  </main>
+
+  <footer>AgroDigital 5.0 • Dados claros para decisões melhores.</footer>
+</body>
+</html>
